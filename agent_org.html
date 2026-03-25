@@ -986,10 +986,10 @@
 
             <!-- Filter Bar -->
             <div class="filter-bar">
-                <select class="filter-select">
-                    <option>全部狀態</option>
-                    <option>正常</option>
-                    <option>停權</option>
+                <select class="filter-select" id="type-filter">
+                    <option value="all">全部類型</option>
+                    <option value="agent">代理</option>
+                    <option value="member">會員</option>
                 </select>
                 <div class="search-wrap">
                     <i class="fas fa-search"></i>
@@ -1545,7 +1545,7 @@
     //  L6 = 第 4 層代理（最深，無下級）
     // ═══════════════════════════════════════════
     const TREE = {
-        id: 'leozdfl', label: 'leozdfl', icon: 'fa-users-cog',  // L2
+        id: 'leozdfl', label: 'leozdfl', icon: 'fa-users-cog', active: true,  // L2
         children: [
 
             // ──────────── leodl3 代理線 ────────────
