@@ -300,6 +300,32 @@
         }
         .tree-panel-header i { color: var(--primary); font-size: 13px; }
 
+        .tree-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+        .tree-actions button {
+            background: rgba(56,189,248,0.08); /* subtle background */
+            border: 1px solid var(--border);
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .tree-actions button:hover {
+            background: var(--primary-dim);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
         .tree-scroll {
             flex: 1;
             overflow-y: auto;
@@ -972,6 +998,9 @@
             <div class="tree-panel-header">
                 <i class="fas fa-network-wired"></i>
                 <span>代理組織架構</span>
+                <div class="tree-actions">
+                    <button id="btn-tree-toggle">全部展開</button>
+                </div>
             </div>
             <div class="tree-scroll" id="agent-tree">
                 <!-- Injected by JS -->
@@ -2129,6 +2158,24 @@
             document.body.style.userSelect = '';
         });
     }
+
+    /* ───── TREE ACTIONS ───── */
+    document.getElementById('btn-tree-toggle').addEventListener('click', () => {
+        const anyCollapsed = document.querySelector('.t-children.collapsed');
+        const btn = document.getElementById('btn-tree-toggle');
+        
+        if (anyCollapsed) {
+            // Expand all
+            document.querySelectorAll('.t-children').forEach(el => el.classList.remove('collapsed'));
+            document.querySelectorAll('.t-toggle').forEach(el => el.classList.add('open'));
+            btn.textContent = '全部收起';
+        } else {
+            // Collapse all
+            document.querySelectorAll('.t-children').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.t-toggle').forEach(el => el.classList.remove('open'));
+            btn.textContent = '全部展開';
+        }
+    });
 
     /* ───── INIT ───── */
     initResizer();
