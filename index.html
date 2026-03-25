@@ -12,6 +12,18 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Mode Tabs -->
+        <div class="mode-tabs">
+            <div class="mode-tab active" id="btn-mode-breadcrumb">
+                <i class="fas fa-route"></i> 麵包屑
+            </div>
+            <div class="mode-tab" id="btn-mode-tree">
+                <i class="fas fa-sitemap"></i> 樹狀圖
+            </div>
+        </div>
+
+        <!-- Mode Content: Breadcrumb (Existing UI) -->
+        <div id="view-mode-breadcrumb">
         <!-- Top Header Card -->
         <div class="header-card">
             <nav class="breadcrumb" id="breadcrumb">
@@ -255,6 +267,229 @@
                         <button class="page-num active">1</button>
                         <button class="page-num">2</button>
                         <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of view-mode-breadcrumb -->
+
+    <!-- Mode Content: Tree View -->
+        <div id="view-mode-tree" style="display: none;">
+            <div class="tree-layout">
+                <!-- Left Sidebar: Tree Navigation -->
+                <div class="tree-sidebar">
+                    <div class="tree-sidebar-header">
+                        <i class="fas fa-th-large"></i> 組織架構
+                    </div>
+                    <div class="tree-container">
+                        <div class="tree-node root-node">
+                            <div class="node-header">
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                                <i class="fas fa-users-cog"></i> <span>leozdfl</span>
+                            </div>
+                            <div class="node-children">
+                                <!-- Level 2: leodl3 (Active Branch) -->
+                                <div class="tree-node active">
+                                    <div class="node-header">
+                                        <i class="fas fa-chevron-down toggle-icon"></i>
+                                        <i class="fas fa-user-friends"></i> <span>leodl3</span>
+                                    </div>
+                                    <div class="node-children">
+                                        <!-- Level 3 subordinates of leodl3 -->
+                                        <div class="tree-node">
+                                            <div class="node-header">
+                                                <i class="fas fa-chevron-down toggle-icon"></i>
+                                                <i class="fas fa-user-tie"></i> <span>subagent001</span>
+                                            </div>
+                                            <div class="node-children">
+                                                <!-- Level 4 subordinates -->
+                                                <div class="tree-node">
+                                                    <div class="node-header">
+                                                        <i class="fas fa-chevron-down toggle-icon"></i>
+                                                        <i class="fas fa-user-tag"></i> <span>subagent001-1</span>
+                                                    </div>
+                                                    <div class="node-children">
+                                                        <!-- Level 5 subordinates -->
+                                                        <div class="tree-node">
+                                                            <div class="node-header">
+                                                                <i class="fas fa-chevron-down toggle-icon"></i>
+                                                                <i class="fas fa-user-check"></i> <span>subagent001-1-A</span>
+                                                            </div>
+                                                            <div class="node-children">
+                                                                <!-- Level 6 subordinates -->
+                                                                <div class="tree-node">
+                                                                    <div class="node-header">
+                                                                        <span class="toggle-placeholder"></span>
+                                                                        <i class="fas fa-user-tag"></i> <span>subagent001-1-A-Z</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tree-node">
+                                                            <div class="node-header">
+                                                                <span class="toggle-placeholder"></span>
+                                                                <i class="fas fa-user-check"></i> <span>subagent001-1-B</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tree-node">
+                                                    <div class="node-header">
+                                                        <span class="toggle-placeholder"></span>
+                                                        <i class="fas fa-user-tag"></i> <span>subagent001-2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tree-node">
+                                            <div class="node-header">
+                                                <span class="toggle-placeholder"></span>
+                                                <i class="fas fa-user"></i> <span>subagent002</span>
+                                            </div>
+                                        </div>
+                                        <div class="tree-node">
+                                            <div class="node-header">
+                                                <span class="toggle-placeholder"></span>
+                                                <i class="fas fa-user"></i> <span>subagent003</span>
+                                            </div>
+                                        </div>
+                                        <div class="tree-node">
+                                            <div class="node-header">
+                                                <span class="toggle-placeholder"></span>
+                                                <i class="fas fa-user"></i> <span>subagent004</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Level 2 Clients (Siblings to leodl3) -->
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <span class="toggle-placeholder"></span>
+                                        <i class="fas fa-user"></i> <span>leodl-a</span>
+                                    </div>
+                                </div>
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <span class="toggle-placeholder"></span>
+                                        <i class="fas fa-user"></i> <span>leodl-b</span>
+                                    </div>
+                                </div>
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <span class="toggle-placeholder"></span>
+                                        <i class="fas fa-user"></i> <span>leodl-c</span>
+                                    </div>
+                                </div>
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <span class="toggle-placeholder"></span>
+                                        <i class="fas fa-user"></i> <span>leodl-d</span>
+                                    </div>
+                                </div>
+                                <div class="tree-node">
+                                    <div class="node-header">
+                                        <span class="toggle-placeholder"></span>
+                                        <i class="fas fa-user"></i> <span>leodl-e</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content: Account Detail -->
+                <div class="tree-detail">
+                    <div class="detail-header">
+                        <div class="account-info">
+                            <span class="account-name">leodl3</span>
+                            <span class="uid-tag">UID: 948271</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-tabs">
+                        <div class="detail-tab active">下級組織</div>
+                        <div class="detail-tab">直屬會員</div>
+                    </div>
+
+                    <div class="detail-list-container">
+                        <div class="detail-list-header">
+                            <span class="col-account">帳號</span>
+                            <span class="col-balance">當前額度</span>
+                            <span class="col-ratio">比例</span>
+                        </div>
+                        <div class="detail-list-body">
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_1</span>
+                                </div>
+                                <div class="item-balance highlight-green">1,240.00</div>
+                                <div class="item-ratio">41%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_2</span>
+                                </div>
+                                <div class="item-balance highlight-green">5,820.50</div>
+                                <div class="item-ratio">38%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_3</span>
+                                </div>
+                                <div class="item-balance highlight-green">9,110.00</div>
+                                <div class="item-ratio">45%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_4</span>
+                                </div>
+                                <div class="item-balance highlight-green">450.00</div>
+                                <div class="item-ratio">20%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_5</span>
+                                </div>
+                                <div class="item-balance highlight-green">22,400.00</div>
+                                <div class="item-ratio">50%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_6</span>
+                                </div>
+                                <div class="item-balance highlight-green">1,240.00</div>
+                                <div class="item-ratio">41%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_7</span>
+                                </div>
+                                <div class="item-balance highlight-green">7,300.25</div>
+                                <div class="item-ratio">33%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_8</span>
+                                </div>
+                                <div class="item-balance highlight-green">12,050.00</div>
+                                <div class="item-ratio">44%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_9</span>
+                                </div>
+                                <div class="item-balance highlight-green">3,200.00</div>
+                                <div class="item-ratio">25%</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="item-account">
+                                    <span>sub_item_10</span>
+                                </div>
+                                <div class="item-balance highlight-green">6,620.10</div>
+                                <div class="item-ratio">41%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,101 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialOrgCount = document.getElementById('tab-count-org').textContent;
     const initialMembersCount = document.getElementById('tab-count-members').textContent;
 
+    // View Mode Switching (Breadcrumb vs Tree)
+    const btnModeBreadcrumb = document.getElementById('btn-mode-breadcrumb');
+    const btnModeTree = document.getElementById('btn-mode-tree');
+    const viewModeBreadcrumb = document.getElementById('view-mode-breadcrumb');
+    const viewModeTree = document.getElementById('view-mode-tree');
+
+    if (btnModeBreadcrumb && btnModeTree) {
+        btnModeBreadcrumb.addEventListener('click', () => {
+            btnModeBreadcrumb.classList.add('active');
+            btnModeTree.classList.remove('active');
+            viewModeBreadcrumb.style.display = 'block';
+            viewModeTree.style.display = 'none';
+        });
+
+        btnModeTree.addEventListener('click', () => {
+            btnModeTree.classList.add('active');
+            btnModeBreadcrumb.classList.remove('active');
+            viewModeBreadcrumb.style.display = 'none';
+            viewModeTree.style.display = 'block';
+        });
+    }
+
+    // Tree View Logic (Selection and Toggle)
+    document.addEventListener('click', (e) => {
+        // Toggle Expand/Collapse
+        if (e.target.classList.contains('toggle-icon')) {
+            const node = e.target.closest('.tree-node');
+            const children = node.querySelector('.node-children');
+            if (children) {
+                const isHidden = children.style.display === 'none';
+                children.style.display = isHidden ? 'block' : 'none';
+                e.target.classList.toggle('fa-chevron-right', !isHidden);
+                e.target.classList.toggle('fa-chevron-down', isHidden);
+            }
+            return; // Don't trigger selection if only toggling
+        }
+
+        // Select node
+        const nodeHeader = e.target.closest('.node-header');
+        if (nodeHeader) {
+            document.querySelectorAll('.tree-node').forEach(node => node.classList.remove('active'));
+            nodeHeader.parentElement.classList.add('active');
+
+            // Update Right Side Info
+            const accountName = nodeHeader.querySelector('span').textContent;
+            const detailAccount = document.querySelector('.tree-detail .account-name');
+            const detailUid = document.querySelector('.tree-detail .uid-tag');
+            
+            if (detailAccount) detailAccount.textContent = accountName;
+            if (detailUid) detailUid.textContent = `UID: ${Math.floor(Math.random() * 899999) + 100000}`;
+            
+            // Sync table data with actual hierarchy children
+            const listBody = document.querySelector('.detail-list-body');
+            const nodeChildrenDiv = nodeHeader.parentElement.querySelector('.node-children');
+            let mockRows = '';
+
+            if (nodeChildrenDiv) {
+                // Get direct child tree-nodes
+                const subNodes = Array.from(nodeChildrenDiv.children).filter(child => child.classList.contains('tree-node'));
+                subNodes.forEach(sub => {
+                    const subName = sub.querySelector('.node-header span').textContent;
+                    const balance = (Math.random() * 50000 + 1000).toFixed(2);
+                    const ratio = Math.floor(Math.random() * 30 + 15);
+                    mockRows += `
+                        <div class="detail-item">
+                            <div class="item-account">
+                                <span>${subName}</span>
+                            </div>
+                            <div class="item-balance highlight-green">${parseFloat(balance).toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+                            <div class="item-ratio">${ratio}%</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (!mockRows) {
+                mockRows = '<div style="padding: 100px 20px; text-align: center; color: var(--text-muted); opacity: 0.6;">無下級組織數據</div>';
+            }
+            
+            if (listBody) {
+                listBody.innerHTML = mockRows;
+                listBody.style.opacity = '0.4';
+                setTimeout(() => listBody.style.opacity = '1', 80);
+            }
+        }
+    });
+
+    // Detail Tab Selection
+    document.querySelectorAll('.detail-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            tab.parentElement.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
+
     function renderBreadcrumbs() {
         breadcrumbContainer.innerHTML = '';
         
