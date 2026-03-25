@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leozdfl - 後台管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Header Card -->
+        <div class="header-card">
+            <nav class="breadcrumb" id="breadcrumb">
+                <span class="breadcrumb-item current">leozdfl <span class="admin-badge">總代理</span></span>
+            </nav>
+        </div>
+
+        <!-- Main Content Card -->
+        <div class="content-card">
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" id="tab-org">
+                    下級代理 <span class="count" id="tab-count-org">(6)</span>
+                </div>
+                <div class="tab" id="tab-members">
+                    直屬會員 <span class="count" id="tab-count-members">(10)</span>
+                </div>
+            </div>
+
+            <!-- Organization Table -->
+            <div class="table-container" id="tab-content-org">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>賬號</th>
+                            <th>當前額度 <i class="fas fa-sort"></i></th>
+                            <th>佔成比</th>
+                            <th>有效投注比</th>
+                            <th>開戶時間 <i class="fas fa-sort"></i></th>
+                            <th>最後登入時間 <i class="fas fa-sort"></i></th>
+                            <th>狀態</th>
+                            <th class="actions-header">進入下級</th>
+                        </tr>
+                    </thead>
+                    <tbody id="org-table-body">
+                        <!-- Type 1: High Level Regional Agents -->
+                        <tr>
+                            <td>master_region_asia <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">158,206.50</td>
+                            <td>35.00%</td>
+                            <td>1.20%</td>
+                            <td class="date-time">2023-01-15<br>10:00:00</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>09:12:45</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (15)</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>top_vip_partner_01 <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">92,440.00</td>
+                            <td>25.00%</td>
+                            <td>1.00%</td>
+                            <td class="date-time">2023-05-20<br>14:30:00</td>
+                            <td class="date-time highlight-blue">2024-03-23<br>20:45:11</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (8)</button>
+                            </td>
+                        </tr>
+                        <!-- Type 2: Local Developing Agents -->
+                        <tr>
+                            <td>sub_agent_local_tw <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">12,500.00</td>
+                            <td>15.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-02-10<br>11:15:30</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>15:22:01</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (2)</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>new_growth_partner <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">5,000.00</td>
+                            <td>10.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-15<br>09:00:00</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>11:30:55</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (0)</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>regional_manager_asia <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">45,120.00</td>
+                            <td>20.00%</td>
+                            <td>0.80%</td>
+                            <td class="date-time">2023-11-10<br>15:20:00</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>08:12:44</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (5)</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>partner_global_lite <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">8,900.25</td>
+                            <td>12.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-02-01<br>12:45:30</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>19:11:00</td>
+                            <td><span class="status-pill status-normal">正常</span></td>
+                            <td class="actions">
+                                <button class="btn-primary">進入下級 (1)</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Members Table -->
+            <div class="table-container" id="tab-content-members" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>賬號</th>
+                            <th style="text-align: right;">當前額度 <i class="fas fa-sort"></i></th>
+                            <th>佔成比</th>
+                            <th>有效投注比</th>
+                            <th>開戶時間 <i class="fas fa-sort"></i></th>
+                            <th>最後登入時間 <i class="fas fa-sort"></i></th>
+                            <th>狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-table-body">
+                        <!-- 10 New Member Data Entries -->
+                        <tr>
+                            <td>vip_player_001 <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">150,230.50</td>
+                            <td>35.00%</td>
+                            <td>1.20%</td>
+                            <td class="date-time">2023-12-01<br>09:22:15</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>09:45:12</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>playmaker_88 <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">42,800.00</td>
+                            <td>25.00%</td>
+                            <td>1.00%</td>
+                            <td class="date-time">2024-01-15<br>14:30:45</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>08:22:30</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>lucky_star_777 <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">12,450.25</td>
+                            <td>15.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-02-10<br>11:15:20</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>22:10:05</td>
+                            <td><span class="status-pill status-normal">離線</span></td>
+                        </tr>
+                        <tr>
+                            <td>winner_takes_all <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">5,600.00</td>
+                            <td>10.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-01<br>16:45:00</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>10:02:11</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>casual_gamer_x <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">1,250.75</td>
+                            <td>10.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-12<br>20:10:33</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>01:15:40</td>
+                            <td><span class="status-pill status-normal">離線</span></td>
+                        </tr>
+                        <tr>
+                            <td>high_roller_pro <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">320,500.00</td>
+                            <td>40.00%</td>
+                            <td>1.50%</td>
+                            <td class="date-time">2023-10-25<br>18:30:11</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>10:05:00</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>new_user_march <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">800.00</td>
+                            <td>10.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-15<br>10:00:00</td>
+                            <td class="date-time highlight-blue">2024-03-24<br>15:30:22</td>
+                            <td><span class="status-pill status-normal">離線</span></td>
+                        </tr>
+                        <tr>
+                            <td>bet_master_99 <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">28,400.50</td>
+                            <td>20.00%</td>
+                            <td>0.80%</td>
+                            <td class="date-time">2023-11-12<br>22:15:40</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>07:11:00</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>active_player_one <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">3,200.00</td>
+                            <td>10.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-24<br>08:45:12</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>09:59:59</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                        <tr>
+                            <td>night_owl_gamer <i class="fas fa-cog settings-icon" title="設定"></i></td>
+                            <td class="balance">15,700.00</td>
+                            <td>15.00%</td>
+                            <td>0.50%</td>
+                            <td class="date-time">2024-03-25<br>03:20:11</td>
+                            <td class="date-time highlight-blue">2024-03-25<br>03:20:11</td>
+                            <td><span class="status-pill status-normal">在線</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination Bar -->
+            <div class="pagination-bar">
+                <div class="pagination-info">
+                    共 <span id="total-count">16</span> 筆
+                </div>
+                <div class="pagination-controls">
+                    <div class="page-size-selector" id="page-size-toggle">
+                        <span id="current-page-size">20 筆/頁</span>
+                        <i class="fas fa-chevron-down"></i>
+                        <div class="page-size-dropdown" id="page-size-menu">
+                            <div class="page-size-option active">20 筆/頁</div>
+                            <div class="page-size-option">50 筆/頁</div>
+                            <div class="page-size-option">100 筆/頁</div>
+                        </div>
+                    </div>
+                    <div class="page-nav">
+                        <button class="nav-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-num active">1</button>
+                        <button class="page-num">2</button>
+                        <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="settings-dropdown" class="settings-dropdown" style="display: none;">
+        <ul>
+            <li>編輯賬戶</li>
+            <li>重設密碼</li>
+            <li>清除密碼錯誤次數 <span class="highlight-red">(目前5次)</span></li>
+            <li>轉賬</li>
+            <li class="logout">登出會員</li>
+        </ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
