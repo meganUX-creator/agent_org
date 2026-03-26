@@ -398,27 +398,6 @@
             flex-wrap: wrap;
         }
 
-        .filter-select {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: var(--font);
-            cursor: pointer;
-            transition: var(--transition);
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%237a9cc0'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 14px;
-            padding-right: 32px;
-            min-width: 110px;
-        }
-        .filter-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-dim); }
-
         .search-wrap {
             flex: 1;
             position: relative;
@@ -1087,12 +1066,6 @@
         }
 
         @media (max-width: 480px) {
-            .filter-select {
-                min-width: auto;
-                font-size: 12px;
-                padding: 6px 10px;
-            }
-            
             .search-input {
                 padding: 6px 10px 6px 32px;
                 font-size: 12px;
@@ -1299,16 +1272,11 @@
 
             <!-- Filter Bar -->
             <div class="filter-bar">
-                <select class="filter-select" id="type-filter">
-                    <option value="all">全部類型</option>
-                    <option value="agent">代理</option>
-                    <option value="member">會員</option>
-                </select>
                 <div class="search-wrap">
                     <i class="fas fa-search"></i>
                     <input type="text" class="search-input" id="search-input" placeholder="輸入帳號或ID進行搜尋...">
                 </div>
-                <button class="btn-search" id="btn-search">篩選</button>
+                <button class="btn-search" id="btn-search">搜尋</button>
                 <div class="spacer"></div>
                 <button class="btn-add" id="btn-open-add"><i class="fas fa-plus-circle"></i><span id="btn-add-label">新增代理</span></button>
             </div>
