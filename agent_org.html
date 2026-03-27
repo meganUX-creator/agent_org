@@ -1192,6 +1192,19 @@
             <span>代理組織管理</span>
         </div>
     </div>
+    
+    <!-- Global Search Row -->
+    <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0;">
+        <select class="filter-select" id="global-type-filter" style="min-width: 80px; padding: 6px 12px; padding-right: 28px;">
+            <option value="agent">代理</option>
+            <option value="member">會員</option>
+        </select>
+        <div class="search-wrap" style="width: 300px; max-width: 100%;">
+            <i class="fas fa-search" style="left: 10px;"></i>
+            <input type="text" class="search-input" id="global-search-input" placeholder="全局搜尋..." style="padding-left: 32px;">
+        </div>
+        <button class="btn-search" id="btn-global-search">搜尋</button>
+    </div>
 
     <!-- Content: tree + right panel -->
     <div class="content-area">
@@ -1205,6 +1218,7 @@
                     <button id="btn-tree-toggle">全部展開</button>
                 </div>
             </div>
+
             <div class="tree-scroll" id="agent-tree">
                 <!-- Injected by JS -->
             </div>
@@ -1216,29 +1230,26 @@
         <!-- Right Panel -->
         <div class="right-panel">
 
-            <!-- Filter Bar -->
-            <div class="filter-bar">
-                <select class="filter-select" id="type-filter">
-                    <option value="agent">代理</option>
-                    <option value="member">會員</option>
-                </select>
-                <div class="search-wrap">
-                    <i class="fas fa-search"></i>
-                    <input type="text" class="search-input" id="search-input" placeholder="輸入帳號或ID進行搜尋...">
-                </div>
-                <button class="btn-search" id="btn-search">搜尋</button>
-                <div class="spacer"></div>
-                <button class="btn-add" id="btn-open-add"><i class="fas fa-plus-circle"></i><span id="btn-add-label">新增代理</span></button>
-            </div>
-
             <!-- Data Tabs -->
-            <div class="data-tabs">
+            <div class="data-tabs" style="border-bottom: none;">
                 <div class="data-tab active" id="tab-agents" data-tab="agents">
                     直屬代理 <span class="tab-count" id="count-agents">4</span>
                 </div>
                 <div class="data-tab" id="tab-members" data-tab="members">
                     直屬會員 <span class="tab-count orange" id="count-members">16</span>
                 </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar" style="border-top: 1px solid var(--border);">
+                <!-- 針對該列表層級搜索 -->
+                <div class="search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="search-input" placeholder="輸入帳號或ID進行快搜...">
+                </div>
+                <button class="btn-search" id="btn-search">搜尋</button>
+                <div class="spacer"></div>
+                <button class="btn-add" id="btn-open-add"><i class="fas fa-plus-circle"></i><span id="btn-add-label">新增代理</span></button>
             </div>
 
             <!-- Table -->
@@ -2074,7 +2085,12 @@
         return wrap;
     }
 
+    let isGlobalSearchMode = false;
+    let globalSearchResults = null;
+
     function selectNode(id) {
+        isGlobalSearchMode = false;
+        globalSearchResults = null;
         currentSelectedId = id;
         document.querySelectorAll('.t-header').forEach(h => h.classList.remove('active-node'));
         const target = document.querySelector(`[data-id="${id}"] > .t-header`);
@@ -2083,6 +2099,9 @@
         // Update top bar title to show current selected agent
         const titleEl = document.querySelector('.topbar-title span');
         if (titleEl) titleEl.textContent = `組織架構 - ${id}`;
+        
+        const globalSearchInput = document.getElementById('global-search-input');
+        if (globalSearchInput) globalSearchInput.value = '';
         
         renderTable();
     }
@@ -2097,8 +2116,19 @@
         const area = document.getElementById('table-area');
         if (!area) return; // Guard for early calls
         
-        const currentAgents = getSubAgentsFor(currentSelectedId);
-        const currentMembers = getMembersFor(currentSelectedId);
+        let currentAgents = [];
+        let currentMembers = [];
+
+        if (isGlobalSearchMode) {
+            if (activeTab === 'agents') {
+                currentAgents = globalSearchResults || [];
+            } else {
+                currentMembers = globalSearchResults || [];
+            }
+        } else {
+            currentAgents = getSubAgentsFor(currentSelectedId);
+            currentMembers = getMembersFor(currentSelectedId);
+        }
         
         const isAgents = activeTab === 'agents';
         const data = isAgents ? currentAgents : currentMembers;
@@ -2211,6 +2241,75 @@
     document.getElementById('btn-search').addEventListener('click', renderTable);
     document.getElementById('search-input').addEventListener('keydown', e => {
         if (e.key === 'Enter') renderTable();
+    });
+
+    /* ───── GLOBAL SEARCH ───── */
+    document.getElementById('btn-global-search').addEventListener('click', function() {
+        const query = document.getElementById('global-search-input').value.trim().toLowerCase();
+        const type = document.getElementById('global-type-filter').value;
+        
+        if (!query) {
+            if (isGlobalSearchMode) {
+                // If it was global mode, clearing it goes back to tree node mode
+                selectNode(currentSelectedId);
+            }
+            return;
+        }
+
+        isGlobalSearchMode = true;
+        
+        // Ensure the correct tab is active for the search type
+        document.querySelectorAll('.data-tab').forEach(t => t.classList.remove('active'));
+        const targetTab = type === 'agent' ? document.getElementById('tab-agents') : document.getElementById('tab-members');
+        if (targetTab) targetTab.classList.add('active');
+        activeTab = type === 'agent' ? 'agents' : 'members';
+
+        // Clear sub-table search so we see what we searched for globally
+        document.getElementById('search-input').value = '';
+
+        // Update Topbar Title
+        const titleEl = document.querySelector('.topbar-title span');
+        if (titleEl) titleEl.textContent = `全局搜尋結果 - ${query}`;
+        
+        // Scenario 2: No data
+        if (query === 'none' || query === '無' || query === 'null' || query === '0') {
+            globalSearchResults = [];
+        } else {
+            // Scenario 1: Has data
+            globalSearchResults = [
+                {
+                    id: query,
+                    name: type === 'agent' ? '全局代理測試' : '全局會員測試',
+                    parentAgent: 'vipagent01',
+                    topAgent: 'leozdfl',
+                    balance: '8,888.880',
+                    ratio: '45%',
+                    window: '市場A',
+                    openTime: '2026-01-01\n10:00:00',
+                    lastLogin: '2026-03-27\n10:00:00',
+                    status: 'normal'
+                },
+                {
+                    id: query + '02',
+                    name: type === 'agent' ? '代理測試號2' : '會員測試號2',
+                    parentAgent: 'regional02',
+                    topAgent: 'leozdfl',
+                    balance: '1,234.560',
+                    ratio: '40%',
+                    window: '平臺預設',
+                    openTime: '2026-02-15\n14:30:00',
+                    lastLogin: '2026-03-26\n18:20:00',
+                    status: 'suspended'
+                }
+            ];
+        }
+        
+        // Render with new global data
+        renderTable();
+    });
+
+    document.getElementById('global-search-input').addEventListener('keydown', e => {
+        if (e.key === 'Enter') document.getElementById('btn-global-search').click();
     });
 
     /* ───── CONTEXT MENU ───── */
