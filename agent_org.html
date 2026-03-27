@@ -682,7 +682,6 @@
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
             z-index: 10000;
             display: none; align-items: center; justify-content: center;
             animation: fadeIn 0.2s ease;
@@ -1537,7 +1536,7 @@
             <div id="step-1-content" class="step-content active">
                 <div class="form-group-add">
                     <label><span>*</span>上級帳號</label>
-                    <input type="text" value="agent001" readonly>
+                    <input type="text" id="add-agent-parent" value="agent001" readonly>
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>登入帳號</label>
@@ -1661,7 +1660,7 @@
 
             <!-- Step 1 Content -->
             <div id="step-member-1-content" class="step-content active">
-                <div class="form-group-add"><label><span>*</span>上級帳號</label><input type="text" value="agent001" readonly></div>
+                <div class="form-group-add"><label><span>*</span>上級帳號</label><input type="text" id="add-member-parent" value="agent001" readonly></div>
                 <div class="form-group-add">
                     <label><span>*</span>登入帳號</label>
                     <input type="text" placeholder="請輸入登入帳號" id="add-member-id">
@@ -1712,7 +1711,7 @@
                 <div class="confirm-hint-box">請確認以下資訊，點選"確認新增"完成建立</div>
                 <div class="summary-box">
                     <div class="summary-title">基本資訊</div>
-                    <div class="summary-item"><div class="summary-label">上級帳號</div><div class="summary-value">agent001</div></div>
+                    <div class="summary-item"><div class="summary-label">上級帳號</div><div class="summary-value" id="summ-member-parent">agent001</div></div>
                     <div class="summary-sep"></div>
                     <div class="summary-grid">
                         <div class="summary-item"><div class="summary-label">登入帳號</div><div class="summary-value" id="summ-member-id">ddd</div></div>
@@ -2416,6 +2415,15 @@
     window.openAddModal = function(type) {
         currentSteps[type] = 1;
         updateStepUI(type);
+        
+        if (type === 'agent') {
+            document.getElementById('add-agent-parent').value = currentSelectedId;
+            document.getElementById('summ-parent').textContent = currentSelectedId;
+        } else {
+            document.getElementById('add-member-parent').value = currentSelectedId;
+            document.getElementById('summ-member-parent').textContent = currentSelectedId;
+        }
+
         document.getElementById(`add-${type}-modal`).classList.add('open');
     };
     window.closeAddModal = function(type) {
