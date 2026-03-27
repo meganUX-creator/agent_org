@@ -1194,7 +1194,7 @@
     </div>
     
     <!-- Global Search Row -->
-    <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0;">
+    <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; align-items: center;">
         <select class="filter-select" id="global-type-filter" style="min-width: 80px; padding: 6px 12px; padding-right: 28px;">
             <option value="agent">代理</option>
             <option value="member">會員</option>
@@ -1204,6 +1204,10 @@
             <input type="text" class="search-input" id="global-search-input" placeholder="全局搜尋..." style="padding-left: 32px;">
         </div>
         <button class="btn-search" id="btn-global-search">搜尋</button>
+        <div class="spacer" style="flex:1;"></div>
+        <button class="btn-add" onclick="openAddTypeModal()">
+            <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增</span>
+        </button>
     </div>
 
     <!-- Content: tree + right panel -->
@@ -1231,25 +1235,13 @@
         <div class="right-panel">
 
             <!-- Data Tabs -->
-            <div class="data-tabs" style="border-bottom: none;">
+            <div class="data-tabs">
                 <div class="data-tab active" id="tab-agents" data-tab="agents">
                     直屬代理 <span class="tab-count" id="count-agents">4</span>
                 </div>
                 <div class="data-tab" id="tab-members" data-tab="members">
                     直屬會員 <span class="tab-count orange" id="count-members">16</span>
                 </div>
-            </div>
-
-            <!-- Filter Bar -->
-            <div class="filter-bar" style="border-top: 1px solid var(--border);">
-                <!-- 針對該列表層級搜索 -->
-                <div class="search-wrap">
-                    <i class="fas fa-search"></i>
-                    <input type="text" class="search-input" id="search-input" placeholder="輸入帳號或ID進行快搜...">
-                </div>
-                <button class="btn-search" id="btn-search">搜尋</button>
-                <div class="spacer"></div>
-                <button class="btn-add" id="btn-open-add"><i class="fas fa-plus-circle"></i><span id="btn-add-label">新增代理</span></button>
             </div>
 
             <!-- Table -->
@@ -1280,6 +1272,7 @@
 <!-- Context / Settings Menu -->
 <div class="ctx-menu" id="ctx-menu">
     <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶</div>
+    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下級</div>
     <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重設密碼</div>
     <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密碼錯誤次數 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
     <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>轉帳</div>
@@ -1289,6 +1282,28 @@
 
 <!-- Toast Container -->
 <div class="toast-container" id="toast-container"></div>
+
+<!-- ═══════════ ADD TYPE SELECT MODAL ═══════════ -->
+<div class="modal-overlay" id="add-type-modal">
+    <div class="modal-card" style="width: 340px; text-align: center;">
+        <div class="modal-header">
+            <span>選擇新增類型</span>
+            <button class="modal-close" onclick="closeAddTypeModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body" style="padding: 30px;">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, #38bdf8, #2563eb); box-shadow: 0 4px 14px rgba(56,189,248,0.3);" onclick="selectAddType('agent')">
+                    <i class="fas fa-user-tie" style="margin-right:8px; font-size: 18px;"></i>
+                    新增直屬代理
+                </button>
+                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); box-shadow: none;" onclick="selectAddType('member')" onmouseover="this.style.background='var(--bg-body)'" onmouseout="this.style.background='var(--bg-card)'">
+                    <i class="fas fa-user" style="margin-right:8px; font-size: 18px; color: var(--text-muted);"></i>
+                    新增直屬會員
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ═══════════ EDIT AGENT MODAL ═══════════ -->
 <div class="modal-overlay" id="edit-agent-modal">
@@ -2131,9 +2146,7 @@
         }
         
         const isAgents = activeTab === 'agents';
-        const data = isAgents ? currentAgents : currentMembers;
-        const query = (document.getElementById('search-input').value || '').toLowerCase();
-        const filtered = query ? data.filter(r => r.id.toLowerCase().includes(query)) : data;
+        const filtered = isAgents ? currentAgents : currentMembers;
 
         const countAgentsEl = document.getElementById('count-agents');
         const countMembersEl = document.getElementById('count-members');
@@ -2233,15 +2246,10 @@
             tab.classList.add('active');
             activeTab = tab.dataset.tab;
             renderTable();
-            syncAddBtnLabel();
         });
     });
 
-    /* ───── SEARCH ───── */
-    document.getElementById('btn-search').addEventListener('click', renderTable);
-    document.getElementById('search-input').addEventListener('keydown', e => {
-        if (e.key === 'Enter') renderTable();
-    });
+
 
     /* ───── GLOBAL SEARCH ───── */
     document.getElementById('btn-global-search').addEventListener('click', function() {
@@ -2263,9 +2271,6 @@
         const targetTab = type === 'agent' ? document.getElementById('tab-agents') : document.getElementById('tab-members');
         if (targetTab) targetTab.classList.add('active');
         activeTab = type === 'agent' ? 'agents' : 'members';
-
-        // Clear sub-table search so we see what we searched for globally
-        document.getElementById('search-input').value = '';
 
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
@@ -2324,15 +2329,18 @@
         const logoutItem = document.getElementById('ctx-logout');
         const logoutSep = document.getElementById('ctx-logout-sep');
         const editItem = document.getElementById('ctx-edit-item');
+        const addSubItem = document.getElementById('ctx-add-sub');
 
         if (activeTab === 'members') {
             if (logoutItem) logoutItem.style.display = 'flex';
             if (logoutSep) logoutSep.style.display = 'block';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯會員`;
+            if (addSubItem) addSubItem.style.display = 'none';
         } else {
             if (logoutItem) logoutItem.style.display = 'none';
             if (logoutSep) logoutSep.style.display = 'none';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶`;
+            if (addSubItem) addSubItem.style.display = 'flex';
         }
 
         ctxMenu.classList.add('open');
@@ -2511,16 +2519,18 @@
     /* ───── ADD ACCOUNT (AGENT/MEMBER) MODAL LOGIC ───── */
     let currentSteps = { agent: 1, member: 1 };
     
-    window.openAddModal = function(type) {
+    window.openAddModal = function(type, forcedParentId = null) {
         currentSteps[type] = 1;
         updateStepUI(type);
         
+        const parentId = forcedParentId || currentSelectedId;
+        
         if (type === 'agent') {
-            document.getElementById('add-agent-parent').value = currentSelectedId;
-            document.getElementById('summ-parent').textContent = currentSelectedId;
+            document.getElementById('add-agent-parent').value = parentId;
+            document.getElementById('summ-parent').textContent = parentId;
         } else {
-            document.getElementById('add-member-parent').value = currentSelectedId;
-            document.getElementById('summ-member-parent').textContent = currentSelectedId;
+            document.getElementById('add-member-parent').value = parentId;
+            document.getElementById('summ-member-parent').textContent = parentId;
         }
 
         document.getElementById(`add-${type}-modal`).classList.add('open');
@@ -2529,6 +2539,26 @@
         document.getElementById(`add-${type}-modal`).classList.remove('open');
     };
     
+    window.openAddTypeModal = function(forcedParentId = null) {
+        const modal = document.getElementById('add-type-modal');
+        modal.dataset.parentId = forcedParentId || '';
+        modal.classList.add('open');
+    };
+    window.closeAddTypeModal = function() {
+        document.getElementById('add-type-modal').classList.remove('open');
+    };
+    window.selectAddType = function(type) {
+        const modal = document.getElementById('add-type-modal');
+        const pid = modal.dataset.parentId || null;
+        closeAddTypeModal();
+        openAddModal(type, pid);
+    };
+
+    window.openAddSubFromCtx = function() {
+        ctxMenu.classList.remove('open');
+        openAddTypeModal(lastClickedId);
+    };
+
     // Maintain old function for legacy or simplicity
     window.openAddAgentModal = () => openAddModal('agent');
     window.closeAddAgentModal = () => closeAddModal('agent');
@@ -2625,17 +2655,6 @@
             icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
     };
-
-    // Attach to the "新增" button
-    document.getElementById('btn-open-add').addEventListener('click', () => {
-        openAddModal(activeTab === 'members' ? 'member' : 'agent');
-    });
-
-    // Sync button label with active tab
-    function syncAddBtnLabel() {
-        const label = document.getElementById('btn-add-label');
-        label.textContent = activeTab === 'members' ? '新增會員' : '新增代理';
-    }
 
     /* ───── CLEAR ERRORS ───── */
     window.clearPwdErrors = function() {
