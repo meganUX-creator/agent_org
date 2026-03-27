@@ -1273,6 +1273,7 @@
 <div class="ctx-menu" id="ctx-menu">
     <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶</div>
     <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下級</div>
+    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增會員</div>
     <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重設密碼</div>
     <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密碼錯誤次數 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
     <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>轉帳</div>
@@ -2330,17 +2331,20 @@
         const logoutSep = document.getElementById('ctx-logout-sep');
         const editItem = document.getElementById('ctx-edit-item');
         const addSubItem = document.getElementById('ctx-add-sub');
+        const addMemberItem = document.getElementById('ctx-add-member');
 
         if (activeTab === 'members') {
             if (logoutItem) logoutItem.style.display = 'flex';
             if (logoutSep) logoutSep.style.display = 'block';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯會員`;
             if (addSubItem) addSubItem.style.display = 'none';
+            if (addMemberItem) addMemberItem.style.display = 'flex';
         } else {
             if (logoutItem) logoutItem.style.display = 'none';
             if (logoutSep) logoutSep.style.display = 'none';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶`;
             if (addSubItem) addSubItem.style.display = 'flex';
+            if (addMemberItem) addMemberItem.style.display = 'none';
         }
 
         ctxMenu.classList.add('open');
@@ -2556,7 +2560,12 @@
 
     window.openAddSubFromCtx = function() {
         ctxMenu.classList.remove('open');
-        openAddTypeModal(lastClickedId);
+        openAddModal('agent', lastClickedId);
+    };
+
+    window.openAddMemberFromCtx = function() {
+        ctxMenu.classList.remove('open');
+        openAddModal('member');
     };
 
     // Maintain old function for legacy or simplicity
