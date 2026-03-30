@@ -1,5 +1,7 @@
 pages:
   stage: deploy
+  tags:
+    - gitlab-runner  # 必須跟截圖中的藍色標籤一模一樣
   script:
     - mkdir public
     - cp -r * public/
@@ -7,4 +9,4 @@ pages:
     paths:
       - public
   only:
-    - main  # 如果你的預設分支是 master，請改成 master
+    - main  # 確認你的分支是 main 還是 master
