@@ -2527,7 +2527,8 @@
         currentSteps[type] = 1;
         updateStepUI(type);
         
-        const parentId = forcedParentId || currentSelectedId;
+        // Fix the default parent to 'leozdfl' so it doesn't follow the tree selection
+        const parentId = forcedParentId || 'leozdfl';
         
         if (type === 'agent') {
             document.getElementById('add-agent-parent').value = parentId;
@@ -2565,7 +2566,7 @@
 
     window.openAddMemberFromCtx = function() {
         ctxMenu.classList.remove('open');
-        openAddModal('member');
+        openAddModal('member', lastClickedId);
     };
 
     // Maintain old function for legacy or simplicity
