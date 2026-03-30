@@ -98,6 +98,9 @@
             flex: 1;
             overflow-y: auto;
             padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* better for mini mode */
         }
         .sidebar-nav::-webkit-scrollbar { width: 4px; }
         .sidebar-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
@@ -106,6 +109,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            width: 100%;
             padding: 11px 20px;
             cursor: pointer;
             color: var(--text-sub);
@@ -122,6 +126,10 @@
             opacity: 0.75;
             transition: var(--transition);
         }
+        .nav-item span {
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
         .nav-item:hover {
             color: var(--text-main);
             background: rgba(56,189,248,0.05);
@@ -133,6 +141,23 @@
             border-left-color: var(--primary);
         }
         .nav-item.active i { color: var(--primary); opacity: 1; }
+        .global-sidebar.expanded .nav-item span {
+            display: flex;
+        }
+        .global-sidebar.expanded .nav-item {
+            justify-content: flex-start;
+            padding: 12px 20px;
+        }
+        .global-sidebar.expanded .nav-item.active {
+            background: var(--primary-dim);
+            color: var(--primary);
+            width: 100%; height: auto;
+            border-radius: 0;
+            margin: 1px 0;
+            box-shadow: none;
+            border-left: 3px solid var(--primary);
+        }
+        .global-sidebar.expanded .nav-item.active i { color: var(--primary); }
 
         .sidebar-footer {
             border-top: 1px solid var(--border);
@@ -215,31 +240,52 @@
             cursor: pointer;
             transition: var(--transition);
             margin-top: 4px;
-            padding: 4px;
         }
         .logout-link:hover { color: #fff; }
         .logout-link i { font-size: 16px; }
 
         /* ────────── MAIN WRAPPER ────────── */
         .main-wrapper {
-            margin-left: var(--sidebar-w);
             flex: 1;
             display: flex;
             flex-direction: column;
             height: 100vh;
             overflow: hidden;
+            margin-left: 240px; /* Default Desktop */
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        /* When Sidebar is Hidden, margin-left matches Tree Width (approx 260px) if not using full push */
+        /* But for simplicity, we'll use a fixed margin strategy in JS */
 
         /* ────────── TOP BAR ────────── */
         .topbar {
             background: var(--bg-header);
             border-bottom: 1px solid var(--border);
-            padding: 14px 28px;
+            padding: 14px 24px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             flex-shrink: 0;
+            z-index: 50;
         }
+        .topbar-hamburger {
+            display: flex;
+            align-items: center; justify-content: center;
+            width: 40px; height: 40px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 18px;
+            transition: var(--transition);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+        }
+        .topbar-hamburger:hover {
+            background: var(--primary-dim);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
         .topbar-title {
             display: flex; align-items: center; gap: 10px;
             font-size: 16px; font-weight: 600; color: var(--text-main);
@@ -608,6 +654,110 @@
         }
         .status-suspended::before { background: var(--accent-red); }
 
+        /* Sticky Columns */
+        .sticky-column {
+            position: sticky !important;
+            z-index: 20 !important;
+        }
+        table.data-table thead th.sticky-column {
+            z-index: 30 !important;
+            background: var(--bg-header);
+        }
+        table.data-table tbody td.sticky-column {
+            background: #111e33; /* match var(--bg-card) */
+        }
+        table.data-table tbody tr:hover td.sticky-column {
+            background: #162541; /* match hover row color */
+        }
+        
+        .sticky-col-1 { 
+            left: 0; 
+            min-width: 140px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+        .sticky-col-2 { 
+            left: 140px; 
+            min-width: 100px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* Mobile Tree Bar */
+        .mobile-tree-bar {
+            display: none; /* Controlled by Media Query AND JS */
+            background: var(--bg-header);
+            width: 100%;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 45;
+        }
+        .mobile-tree-bar.visible {
+            display: block !important;
+        }
+        .mobile-tree-bar:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .mt-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #fff;
+        }
+        .mt-chevron {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+            color: var(--text-dim);
+            order: 4; /* put at the end after info */
+        }
+        .mt-chevron.open {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+        .mt-icon-box {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.08); /* Inactive: dark/greyish */
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .mt-icon-box i { color: var(--text-sub); transition: color 0.3s; }
+        
+        .mt-icon-box.active {
+            background: #0ea5e9; /* Active: Cyan/Blue */
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .mt-icon-box.active i { color: #000; }
+        
+        .mt-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        .mt-info-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .mt-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .mt-value {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+            color: #fff;
+        }
+
         /* Action cell */
         .action-cell {
             display: flex; align-items: center; justify-content: flex-end; gap: 8px;
@@ -858,150 +1008,84 @@
             position: relative;
         }
 
-        .mobile-header {
-            display: none;
-        }
+        .mobile-header { display: none !important; }
 
         /* ────────── RESPONSIVE DESIGN ────────── */
-        @media (max-width: 1024px) {
-            :root {
-                --sidebar-w: 0px;
-                --tree-w: 100%;
-            }
-            
+        
+        /* 1. Tablet/Mobile Tier: Hide Sidebar at 1300px */
+        /* 1. Tablet/Medium Tier: Hide Sidebar at 1500px to give room to Tree */
+        @media (max-width: 1500px) {
             .global-sidebar {
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
                 z-index: 1001;
             }
-            
             .global-sidebar.mobile-open {
                 transform: translateX(0);
+                box-shadow: 10px 0 30px rgba(0,0,0,0.5);
             }
-            
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
+            .main-wrapper { 
+                margin-left: 0 !important; 
             }
-            
-            .mobile-overlay.active {
-                display: block;
-            }
-            
-            .mobile-header {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                background: var(--bg-header);
-                padding: 12px 16px;
-                border-bottom: 1px solid var(--border);
-                position: sticky;
-                top: 0;
-                z-index: 100;
-            }
-            
-            .hamburger-btn {
-                background: none;
-                border: none;
-                color: var(--text-main);
-                font-size: 18px;
-                cursor: pointer;
-                padding: 8px;
-                border-radius: 6px;
-                transition: var(--transition);
-            }
-            
-            .hamburger-btn:hover {
-                background: var(--primary-dim);
-                color: var(--primary);
-            }
-            
-            .mobile-logo {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-weight: 700;
-                font-size: 16px;
-                color: var(--text-main);
-            }
-            
-            .main-wrapper {
-                margin-left: 0;
-            }
-            
-            .topbar {
-                display: none;
-            }
-            
+            /* When Sidebar is Hidden, Tree remains visible. 
+               When Sidebar is shown via JS, we'll collapse Tree. */
+        }
+
+        /* 2. Smaller Tier: Tree Collapse at 1100px */
+        @media (max-width: 1100px) {
             .content-area {
                 flex-direction: column;
             }
-            
             .tree-panel {
-                width: 100%;
+                width: 100% !important;
+                min-width: 0 !important; /* Fix: Prevent ghost gap in mobile */
                 max-width: none;
-                height: 300px;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
+                height: 0;
+                overflow: hidden;
+                border: none !important;
+                transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+                opacity: 0;
+                pointer-events: none;
+                display: flex !important;
             }
-            
+            .tree-panel.mobile-expanded {
+                height: 420px;
+                opacity: 1;
+                pointer-events: auto;
+            }
             .tree-resizer {
                 display: none;
             }
-            
-            .right-panel {
-                flex: 1;
+            .mobile-tree-bar {
+                display: block;
             }
-            
+            /* Shared rules for manual swap on Mac/Tablet resolutions */
+            .tree-panel.in-mobile-mode {
+                width: 0 !important;
+                min-width: 0 !important; /* Fix: Force-override base min-width */
+                max-width: none;
+                height: 0;
+                overflow: hidden;
+                border: none !important;
+                transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+                opacity: 0;
+                pointer-events: none;
+                display: flex !important;
+            }
+            .tree-panel.in-mobile-mode.mobile-expanded {
+                height: 420px;
+                opacity: 1;
+                pointer-events: auto;
+            }
             .filter-bar {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 8px;
             }
-            
             .search-wrap {
                 min-width: auto;
             }
-            
-            .data-tabs {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .table-area {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
             table.data-table {
                 min-width: 800px;
-            }
-            
-            .action-cell {
-                justify-content: center;
-            }
-            
-            .modal-card {
-                width: 95vw;
-                margin: 20px;
-            }
-            
-            .modal-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-group.full {
-                grid-column: span 1;
-            }
-            
-            .preset-group {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1011,32 +1095,26 @@
                 font-size: 12px;
                 padding: 6px 10px;
             }
-            
             .search-input {
                 padding: 6px 10px 6px 32px;
                 font-size: 12px;
             }
-            
             .btn-search, .btn-add {
                 padding: 6px 12px;
                 font-size: 12px;
             }
-            
             .data-tab {
                 padding: 8px 12px;
                 font-size: 12px;
             }
-            
             .pagination-nav {
                 flex-wrap: wrap;
                 gap: 4px;
             }
-            
             .pg-size-select {
                 font-size: 11px;
                 padding: 4px 8px;
             }
-            
             .pg-btn, .pg-num {
                 width: 28px;
                 height: 28px;
@@ -1117,19 +1195,7 @@
 </head>
 <body>
 
-<!-- Mobile Overlay -->
-<div class="mobile-overlay" id="mobile-overlay"></div>
-
-<!-- Mobile Header (visible only on mobile) -->
-<header class="mobile-header">
-    <button class="hamburger-btn" id="hamburger-btn">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="mobile-logo">
-        <i class="fas fa-dice"></i>
-        <span>Casino 後臺</span>
-    </div>
-</header>
+<!-- (Mobile Header removed as requested, using Unified Topbar) -->
 
 <!-- ═══════════ GLOBAL LEFT SIDEBAR ═══════════ -->
 <aside class="global-sidebar">
@@ -1187,6 +1253,9 @@
 
     <!-- Top Bar -->
     <div class="topbar">
+        <button class="topbar-hamburger" id="topbar-hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="topbar-title">
             <i class="fas fa-users-cog"></i>
             <span>代理組織管理</span>
@@ -1233,6 +1302,26 @@
 
         <!-- Right Panel -->
         <div class="right-panel">
+
+            <!-- Mobile Tree Toggle Bar -->
+            <div class="mobile-tree-bar" id="mobile-tree-bar">
+                <div class="mt-content">
+                    <div class="mt-icon-box" id="mt-icon-box">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="mt-info">
+                        <div class="mt-info-stack">
+                            <div class="mt-label">目前節點</div>
+                            <div class="mt-value-wrap">
+                                <span id="mt-current-id">leozdfl</span>
+                                <i class="fas fa-chevron-right mt-sep"></i>
+                                <span id="mt-current-type" style="color:var(--text-sub);opacity:0.8;">直屬類型</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down mt-chevron" id="mt-chevron"></i>
+                </div>
+            </div>
 
             <!-- Data Tabs -->
             <div class="data-tabs">
@@ -2112,10 +2201,21 @@
         const target = document.querySelector(`[data-id="${id}"] > .t-header`);
         if (target) target.classList.add('active-node');
         
-        // Update top bar title to show current selected agent
+        // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
         if (titleEl) titleEl.textContent = `組織架構 - ${id}`;
         
+        // Update Mobile Tree Bar
+        const mtCurrentId = document.getElementById('mt-current-id');
+        const mtCurrentType = document.getElementById('mt-current-type');
+        if (mtCurrentId) {
+            mtCurrentId.textContent = id;
+            if (mtCurrentType) {
+                const isAgents = activeTab === 'agents';
+                mtCurrentType.textContent = isAgents ? '直屬代理' : '直屬會員';
+            }
+        }
+
         const globalSearchInput = document.getElementById('global-search-input');
         if (globalSearchInput) globalSearchInput.value = '';
         
@@ -2166,7 +2266,7 @@
 
             return `
             <tr>
-                <td>
+                <td class="sticky-column sticky-col-1">
                     <div class="cell-account">
                         <span class="acc-name">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
@@ -2174,7 +2274,7 @@
                         </button>
                     </div>
                 </td>
-                <td style="color:var(--text-sub);font-size:13px;">${row.name || '—'}</td>
+                <td class="sticky-column sticky-col-2" style="color:var(--text-sub);font-size:13px;">${row.name || '—'}</td>
                 <td class="cell-balance">${row.balance}</td>
                 <td class="cell-ratio">${row.ratio}</td>
                 ${windowCell}
@@ -2223,8 +2323,8 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>帳號</th>
-                    <th>姓名</th>
+                    <th class="sticky-column sticky-col-1">帳號</th>
+                    <th class="sticky-column sticky-col-2">姓名</th>
                     <th>當前餘額 (CNY) <i class="fas fa-sort sort-icon"></i></th>
                     ${ratioHeader}
                     ${windowHeader}
@@ -2751,23 +2851,108 @@
 
     /* ───── MOBILE MENU ───── */
     const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileOverlay = document.getElementById('mobile-overlay');
+    const topbarHamburger = document.getElementById('topbar-hamburger');
     const globalSidebar = document.querySelector('.global-sidebar');
 
-    function openMobileMenu() {
+    function openMobileMenu(e) {
+        if (e) e.stopPropagation();
+        
+        // Manual Toggle Logic
+        if (globalSidebar.classList.contains('mobile-open')) {
+            closeMobileMenu();
+            return;
+        }
+        
         globalSidebar.classList.add('mobile-open');
-        mobileOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        globalSidebar.classList.add('expanded');
+        
+        // --- SMART DESIGN: SWAP TREE PANEL FOR HORIZONTAL TOP BAR ---
+        if (window.innerWidth <= 1536) { 
+            const treePanel = document.getElementById('tree-panel');
+            const mobileTreeBar = document.getElementById('mobile-tree-bar');
+            
+            if (treePanel) {
+                // Remove all width constraints
+                treePanel.style.width = '0';
+                treePanel.style.minWidth = '0';
+                treePanel.style.border = 'none';
+                treePanel.classList.add('in-mobile-mode'); 
+            }
+            if (mobileTreeBar) {
+                mobileTreeBar.classList.add('visible'); // Force top toggle visible
+            }
+
+            if (window.innerWidth > 1100) {
+                document.querySelector('.main-wrapper').style.marginLeft = '240px';
+            } else {
+                document.body.style.overflow = 'hidden';
+            }
+        } else {
+            document.querySelector('.main-wrapper').style.marginLeft = '240px';
+        }
     }
 
     function closeMobileMenu() {
         globalSidebar.classList.remove('mobile-open');
-        mobileOverlay.classList.remove('active');
+        globalSidebar.classList.remove('expanded');
+        
+        // --- RESTORE SIDE TREE PANEL ---
+        const treePanel = document.getElementById('tree-panel');
+        const mobileTreeBar = document.getElementById('mobile-tree-bar');
+
+        if (window.innerWidth > 1100) {
+            if (treePanel) {
+                treePanel.style.width = ''; 
+                treePanel.style.minWidth = '';
+                treePanel.style.border = '';
+                treePanel.classList.remove('in-mobile-mode');
+                treePanel.classList.remove('mobile-expanded'); 
+            }
+            if (mobileTreeBar) {
+                mobileTreeBar.classList.remove('visible'); 
+            }
+            
+            if (window.innerWidth > 1536) {
+                document.querySelector('.main-wrapper').style.marginLeft = '240px';
+            } else {
+                document.querySelector('.main-wrapper').style.marginLeft = '0';
+            }
+        }
+        
         document.body.style.overflow = '';
     }
 
-    hamburgerBtn.addEventListener('click', openMobileMenu);
-    mobileOverlay.addEventListener('click', closeMobileMenu);
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileMenu);
+    if (topbarHamburger) topbarHamburger.addEventListener('click', openMobileMenu);
+    
+    // Close sidebar when clicking outside (only for overlay modes)
+    window.addEventListener('click', (e) => {
+        if (globalSidebar.classList.contains('expanded') || globalSidebar.classList.contains('mobile-open')) {
+            if (!globalSidebar.contains(e.target) && 
+                !topbarHamburger.contains(e.target) && 
+                !(hamburgerBtn && hamburgerBtn.contains(e.target))) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
+    // Also allow clicking the mini sidebar to expand it as overlay
+    globalSidebar.addEventListener('click', (e) => {
+        if (window.innerWidth <= 1300 && window.innerWidth > 1100 && !globalSidebar.classList.contains('expanded')) {
+            e.stopPropagation();
+            openMobileMenu();
+        }
+    });
+
+    // Close menu when clicking on nav items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (globalSidebar.classList.contains('expanded')) {
+                // Keep the active state but close drawer
+                setTimeout(closeMobileMenu, 150);
+            }
+        });
+    });
 
     // Close menu when clicking on nav items (mobile)
     document.querySelectorAll('.nav-item').forEach(item => {
@@ -2788,6 +2973,20 @@
             }
         }, 250);
     });
+
+    /* ───── MOBILE TREE TOGGLE ───── */
+    const mobileTreeBar = document.getElementById('mobile-tree-bar');
+    const treePanel = document.getElementById('tree-panel');
+    const mtChevron = document.getElementById('mt-chevron');
+    const mtIconBox = document.getElementById('mt-icon-box');
+    
+    if (mobileTreeBar) {
+        mobileTreeBar.addEventListener('click', () => {
+            const isExpanded = treePanel.classList.toggle('mobile-expanded');
+            mtChevron.classList.toggle('open', isExpanded);
+            mtIconBox.classList.toggle('active', isExpanded);
+        });
+    }
 
     /* ───── INIT ───── */
     initResizer();
