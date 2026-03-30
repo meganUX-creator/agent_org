@@ -1049,6 +1049,8 @@
             }
             .tree-panel.mobile-expanded {
                 height: 420px;
+                width: 100% !important;
+                min-width: 100% !important;
                 opacity: 1;
                 pointer-events: auto;
             }
@@ -1061,7 +1063,7 @@
             /* Shared rules for manual swap on Mac/Tablet resolutions */
             .tree-panel.in-mobile-mode {
                 width: 0 !important;
-                min-width: 0 !important; /* Fix: Force-override base min-width */
+                min-width: 0 !important;
                 max-width: none;
                 height: 0;
                 overflow: hidden;
@@ -1073,6 +1075,8 @@
             }
             .tree-panel.in-mobile-mode.mobile-expanded {
                 height: 420px;
+                width: 100% !important;
+                min-width: 100% !important;
                 opacity: 1;
                 pointer-events: auto;
             }
