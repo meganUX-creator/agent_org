@@ -1,11 +1,10 @@
 pages:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - mkdir public
+    - cp -r * public/
   artifacts:
     paths:
       - public
   only:
-    - main  # 或是你的主要分支名稱（如 master）
+    - main  # 如果你的預設分支是 master，請改成 master
