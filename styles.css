@@ -272,6 +272,19 @@ tr:hover {
     background-color: rgba(255, 255, 255, 0.02);
 }
 
+/* Account Link - Clickable Username */
+.account-link {
+    color: var(--primary-blue);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.account-link:hover {
+    color: var(--hover-blue);
+    text-decoration: underline;
+}
+
 /* Level Badges */
 .level-badge {
     display: inline-block;
