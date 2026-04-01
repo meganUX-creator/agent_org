@@ -2458,7 +2458,7 @@
                 </td>
                 <td>
                     <div class="cell-account">
-                         <span style="color:var(--text-sub);font-size:12px;">${row.parentAgent || '—'}</span>
+                         <span class="acc-name" onclick="${row.parentAgent ? `selectNode('${row.parentAgent}')` : ''}" style="${row.parentAgent ? '' : 'color: var(--text-sub); cursor: default;'}">${row.parentAgent || '—'}</span>
                          ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>

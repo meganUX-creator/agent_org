@@ -2278,8 +2278,8 @@
             return `
             <tr>
                 <td class="sticky-column sticky-col-1">
-                    <div class="cell-account">
-                        <span class="acc-name">${row.id}</span>
+                    <div class="cell-account ${isAgents ? 'clickable' : ''}" ${isAgents ? `onclick="selectNode('${row.id}')"` : ''}>
+                        <span class="acc-name" style="${isAgents ? '' : 'color: var(--text-main); cursor: default;'}" onmouseover="${isAgents ? '' : 'this.style.textDecoration=\'none\''}">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
@@ -2291,7 +2291,7 @@
                 ${windowCell}
                 <td>
                     <div class="cell-account">
-                        <span style="color:var(--text-sub);font-size:12px;">${row.parentAgent || '—'}</span>
+                        <span class="acc-name" onclick="${row.parentAgent ? `selectNode('${row.parentAgent}')` : ''}" style="${row.parentAgent ? 'cursor: pointer;' : 'color: var(--text-sub); cursor: default;'}">${row.parentAgent || '—'}</span>
                         ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
