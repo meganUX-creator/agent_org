@@ -78,6 +78,38 @@ body {
     opacity: 1;
 }
 
+/* Page Navigation */
+.page-nav {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.page-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.page-nav-btn:hover {
+    background-color: var(--primary-blue);
+    color: var(--bg-dark);
+    border-color: var(--primary-blue);
+}
+
+.page-nav-btn i {
+    font-size: 14px;
+}
+
 /* Header Card */
 .header-card {
     background-color: var(--card-bg);
