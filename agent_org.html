@@ -599,10 +599,17 @@
             white-space: nowrap;
         }
 
-        .cell-account {
-            display: flex; align-items: center; gap: 8px;
+        .cell-account { display: flex; align-items: center; gap: 8px; }
+        .cell-account .acc-name { 
+            font-weight: 600; font-size: 13px; 
+            color: var(--primary); 
+            cursor: pointer; 
+            transition: var(--transition);
         }
-        .cell-account .acc-name { font-weight: 600; font-size: 13px; }
+        .cell-account .acc-name:hover { 
+            color: #7dd3fc; 
+            text-decoration: underline; 
+        }
         .cell-account .copy-btn {
             background: none; border: none; color: var(--text-dim);
             cursor: pointer; font-size: 11px; padding: 3px 5px;
