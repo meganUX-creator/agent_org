@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>代理線組織管理 - Casino 後臺</title>
+    <title>統計報表 - Casino 後臺</title>
     <meta name="description" content="Casino 代理線組織管理後臺 - 管理代理架構與會員資訊">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -602,7 +602,15 @@
         .cell-account {
             display: flex; align-items: center; gap: 8px;
         }
-        .cell-account .acc-name { font-weight: 600; font-size: 13px; }
+        .cell-account.clickable .acc-name {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .cell-account.clickable .acc-name:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        .cell-account .acc-name { font-weight: 600; font-size: 13px; color: var(--text-main); }
         .cell-account .copy-btn {
             background: none; border: none; color: var(--text-dim);
             cursor: pointer; font-size: 11px; padding: 3px 5px;
@@ -614,6 +622,12 @@
             font-weight: 800;
             font-size: 16px;
             color: #4ade80;
+            font-variant-numeric: tabular-nums;
+        }
+        .cell-balance-danger {
+            font-weight: 800;
+            font-size: 16px;
+            color: #f87171;
             font-variant-numeric: tabular-nums;
         }
 
@@ -1195,6 +1209,190 @@
         .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
         .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        /* New Search Region CSS */
+        .report-filter-panel {
+            padding: 16px 28px;
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .date-badge {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .date-badge:hover {
+            color: var(--text-main);
+            border-color: var(--text-sub);
+        }
+        .date-badge.active {
+            background: rgba(234, 179, 8, 0.1); /* light yellow tint */
+            border-color: #eab308; /* yellow */
+            color: #eab308;
+            font-weight: 600;
+        }
+        .date-range-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0 16px;
+            height: 38px;
+            color: var(--text-main);
+            width: 410px;
+        }
+        .date-range-box .date-text {
+            font-family: var(--font);
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+        .date-range-box .separator {
+            color: var(--text-dim);
+            margin: 0 18px;
+        }
+        .search-group-inline {
+            display: flex;
+            align-items: stretch;
+            height: 38px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+        }
+        .search-group-inline .filter-select {
+            border: none;
+            border-radius: 0;
+            border-right: 1px solid var(--border);
+            background: transparent;
+            height: 100%;
+            padding: 0 12px;
+            color: var(--text-main);
+            outline: none;
+        }
+        .search-group-inline .search-input {
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            height: 100%;
+            padding: 0 14px;
+            width: 200px;
+            color: var(--text-main);
+            outline: none;
+        }
+        .search-group-inline .search-input:focus {
+            background: rgba(255,255,255,0.02);
+        }
+        .btn-query {
+            background: #3b82f6; /* bright blue */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 32px;
+            height: 38px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .btn-query:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+        .btn-export {
+            background: #1e293b;
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 0 20px;
+            height: 38px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+        .btn-export:hover {
+            background: #2d3a4f;
+            color: var(--text-main);
+            border-color: var(--text-sub);
+        }
+        .quick-date-select {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0 12px;
+            height: 38px;
+            color: var(--text-main);
+            font-family: var(--font);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+            min-width: 120px;
+        }
+        .quick-date-select:focus {
+            border-color: var(--primary);
+        }
+
+        /* Capsule Crumb Navigation Styles */
+        .crumb-container {
+            padding: 8px 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 4px;
+        }
+        .crumb-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #3b82f6; /* Blue for links */
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 2px 12px;
+        }
+        .crumb-item:hover span {
+            text-decoration: underline;
+        }
+        .crumb-item.active {
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: default;
+        }
+        .crumb-item.active:hover span {
+            text-decoration: none;
+        }
+        .crumb-separator {
+            width: 1px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(25deg);
+            margin: 0 4px;
+        }
+        .crumb-icon {
+            display: none; /* Hide icons in this style */
+        }
     </style>
 </head>
 <body>
@@ -1214,8 +1412,8 @@
     </div>
     <div class="sidebar-nav">
         <div class="nav-item"><i class="fas fa-home"></i><span>首頁</span></div>
-        <div class="nav-item active" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>組織管理</span></div>
-        <div class="nav-item" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>統計報表</span></div>
+        <div class="nav-item" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>組織管理</span></div>
+        <div class="nav-item active" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>統計報表</span></div>
         <div class="nav-item"><i class="fas fa-user"></i><span>會員管理</span></div>
         <div class="nav-item"><i class="fas fa-wallet"></i><span>資金流向</span></div>
         <div class="nav-item"><i class="fas fa-chart-line"></i><span>業績報表</span></div>
@@ -1261,51 +1459,58 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="topbar-title">
-            <i class="fas fa-users-cog"></i>
-            <span>代理組織管理</span>
+            <i class="fas fa-chart-bar"></i>
+            <span>統計報表</span>
         </div>
     </div>
     
-    <!-- Global Search Row -->
-    <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; align-items: center;">
-        <select class="filter-select" id="global-type-filter" style="min-width: 80px; padding: 6px 12px; padding-right: 28px;">
-            <option value="agent">代理</option>
-            <option value="member">會員</option>
-        </select>
-        <div class="search-wrap" style="width: 300px; max-width: 100%;">
-            <i class="fas fa-search" style="left: 10px;"></i>
-            <input type="text" class="search-input" id="global-search-input" placeholder="全局搜尋..." style="padding-left: 32px;">
+    <!-- Global Search Row / Report Filter Panel -->
+    <div class="report-filter-panel">
+        <div class="filter-row">
+            <!-- Date Range & Quick Selection -->
+            <div class="date-range-box" style="width: auto; min-width: 320px;">
+                <span class="date-text">2024-07-10</span>
+                <span class="separator">→</span>
+                <span class="date-text">2024-07-10</span>
+                <div style="margin-left: 20px;"></div>
+                <i class="far fa-calendar-alt" style="color:#94a3b8; font-size:16px;"></i>
+            </div>
+            <select class="quick-date-select" id="quick-date-select" style="min-width: 100px;">
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="this-week">This Week</option>
+                <option value="last-week">Last Week</option>
+                <option value="this-month">This Month</option>
+                <option value="last-month">Last Month</option>
+            </select>
+
+            <!-- Inline Search Group -->
+            <div class="search-group-inline" style="margin-left: 10px;">
+                <select class="filter-select" id="global-type-filter" style="min-width: 70px;">
+                    <option value="agent">代理</option>
+                    <option value="member">會員</option>
+                </select>
+                <input type="text" class="search-input" id="global-search-input" placeholder="搜尋帳號" style="width: 150px;">
+            </div>
+            
+            <button class="btn-query" id="btn-global-search">查詢</button>
+            
+            <button class="btn-export" title="匯出報表">
+                <i class="fas fa-download" style="font-size: 14px;"></i>
+                <span>下載</span>
+            </button>
         </div>
-        <button class="btn-search" id="btn-global-search">搜尋</button>
-        <div class="spacer" style="flex:1;"></div>
-        <button class="btn-add" onclick="openAddTypeModal()">
-            <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增</span>
-        </button>
+
+        <!-- Crumb Navigation (Moved here) -->
+        <div class="crumb-container" id="crumb-navigation">
+            <!-- Injected by JS -->
+        </div>
     </div>
 
-    <!-- Content: tree + right panel -->
     <div class="content-area">
 
-        <!-- Agent Tree Panel -->
-        <div class="tree-panel" id="tree-panel">
-            <div class="tree-panel-header">
-                <i class="fas fa-network-wired"></i>
-                <span>代理組織架構</span>
-                <div class="tree-actions">
-                    <button id="btn-tree-toggle">全部展開</button>
-                </div>
-            </div>
-
-            <div class="tree-scroll" id="agent-tree">
-                <!-- Injected by JS -->
-            </div>
-        </div>
-
-        <!-- Tree Resizer Handle -->
-        <div class="tree-resizer" id="tree-resizer"></div>
-
-        <!-- Right Panel -->
-        <div class="right-panel">
+    <!-- Right Panel (Occupies full remaining width now) -->
+    <div class="right-panel" style="flex: 1;">
 
             <!-- Mobile Tree Toggle Bar -->
             <div class="mobile-tree-bar" id="mobile-tree-bar">
@@ -2138,96 +2343,46 @@
     updateClock();
     setInterval(updateClock, 60000);
 
-    /* ───── BUILD TREE ───── */
-    function buildTreeNode(node, depth) {
-        const hasChildren = node.children && node.children.length > 0;
-        const wrap = document.createElement('div');
-        wrap.className = 't-node';
-        wrap.dataset.id = node.id;
-
-        const header = document.createElement('div');
-        header.className = 't-header' + (node.active ? ' active-node' : '');
-
-        if (hasChildren) {
-            // Arrow toggle — rotates on expand/collapse
-            const toggle = document.createElement('span');
-            toggle.className = 't-toggle open';
-            toggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            header.appendChild(toggle);
-        } else {
-            // Leaf node: blank fixed-width spacer so icons stay aligned
-            const spacer = document.createElement('span');
-            spacer.className = 't-toggle'; // same width, no icon
-            header.appendChild(spacer);
+    /* ───── BREADCRUMBS NAVIGATION ───── */
+    function getAccountPath(targetId, node = TREE, path = []) {
+        if (node.id === targetId) return [...path, node];
+        if (node.children) {
+            for (const child of node.children) {
+                const result = getAccountPath(targetId, child, [...path, node]);
+                if (result) return result;
+            }
         }
+        return null;
+    }
 
-        const icon = document.createElement('i');
-        icon.className = `fas ${node.icon || 'fa-user'} t-icon`;
-        header.appendChild(icon);
+    function renderBreadcrumbs(id) {
+        const container = document.getElementById('crumb-navigation');
+        if (!container) return;
+        
+        const path = getAccountPath(id);
+        if (!path) return;
 
-        const label = document.createElement('span');
-        label.className = 't-label';
-        label.textContent = node.label;
-        header.appendChild(label);
+        container.innerHTML = '';
+        path.forEach((node, index) => {
+            const item = document.createElement('div');
+            item.className = 'crumb-item' + (index === path.length - 1 ? ' active' : '');
+            item.innerHTML = `<span>${node.label}</span>`;
+            if (index < path.length - 1) {
+                item.onclick = () => selectNode(node.id);
+            }
+            container.appendChild(item);
 
-        wrap.appendChild(header);
-
-        if (hasChildren) {
-            const childWrap = document.createElement('div');
-            // Start collapsed for all nodes except the one marked active
-            childWrap.className = 't-children' + (node.active ? '' : ' collapsed');
-            node.children.forEach(c => childWrap.appendChild(buildTreeNode(c, depth + 1)));
-            wrap.appendChild(childWrap);
-
-            const toggle = header.querySelector('.t-toggle');
-            // Reflect initial collapsed state in toggle icon
-            if (!node.active) toggle.classList.remove('open');
-
-            toggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const collapsed = childWrap.classList.toggle('collapsed');
-                toggle.classList.toggle('open', !collapsed);
-            });
-        }
-
-        header.addEventListener('click', () => selectNode(node.id));
-        return wrap;
+            if (index < path.length - 1) {
+                const sep = document.createElement('div');
+                sep.className = 'crumb-separator';
+                container.appendChild(sep);
+            }
+        });
     }
 
     let isGlobalSearchMode = false;
     let globalSearchResults = null;
 
-    function selectNode(id) {
-        isGlobalSearchMode = false;
-        globalSearchResults = null;
-        currentSelectedId = id;
-        document.querySelectorAll('.t-header').forEach(h => h.classList.remove('active-node'));
-        const target = document.querySelector(`[data-id="${id}"] > .t-header`);
-        if (target) target.classList.add('active-node');
-        
-        // Update Topbar Title
-        const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `組織架構 - ${id}`;
-        
-        // Update Mobile Tree Bar
-        const mtCurrentId = document.getElementById('mt-current-id');
-        const mtCurrentType = document.getElementById('mt-current-type');
-        if (mtCurrentId) {
-            mtCurrentId.textContent = id;
-            if (mtCurrentType) {
-                const isAgents = activeTab === 'agents';
-                mtCurrentType.textContent = isAgents ? '直屬代理' : '直屬會員';
-            }
-        }
-
-        const globalSearchInput = document.getElementById('global-search-input');
-        if (globalSearchInput) globalSearchInput.value = '';
-        
-        renderTable();
-    }
-
-    const treeRoot = document.getElementById('agent-tree');
-    treeRoot.appendChild(buildTreeNode(TREE, 0));
 
     /* ───── RENDER TABLE ───── */
     let activeTab = 'agents';
@@ -2261,61 +2416,59 @@
         if (totalRecordsEl) totalRecordsEl.textContent = filtered.length;
 
         let rowsHTML = filtered.map(row => {
-            const [openDate, openTime] = row.openTime.split('\n');
-            const [loginDate, loginTime] = row.lastLogin.split('\n');
-            const statusLabel = row.status === 'normal' ? '正常' : '停權';
-            const statusClass = row.status === 'normal' ? 'status-normal' : 'status-suspended';
-            
-            const windowCell = isAgents ? '' : `<td><span class="cell-window">${row.window}</span></td>`;
+            // Mock data for the new report columns
+            const totalWinLoss = (Math.random() * 2000 - 1000).toFixed(2);
+            const betCount = Math.floor(Math.random() * 500);
+            const betAmount = (Math.random() * 50000).toFixed(2);
+            const payoutWithPrincipal = (Math.random() * 45000).toFixed(2);
+            const payoutExclPrincipal = (payoutWithPrincipal - betAmount).toFixed(2);
+            const profitBetAmount = (betAmount * 0.95).toFixed(2);
+            const validBet = (betAmount * 0.98).toFixed(2);
+            const validBetRatio = "1.0%";
+            const validBetCommission = (validBet * 0.01).toFixed(2);
+            const ratioPercent = row.ratio || "40%";
+            const ratioWinLoss = (totalWinLoss * 0.4).toFixed(2);
+            const dueCommission = (validBetCommission * 0.5).toFixed(2);
+            const transferIn = (Math.random() * 10000).toFixed(2);
+            const transferOut = (Math.random() * 8000).toFixed(2);
+            const dealerTip = (Math.random() * 200).toFixed(2);
+            const topLevelAmount = (totalWinLoss * 0.1).toFixed(2);
+
+            const isClickable = isAgents;
 
             return `
             <tr>
                 <td class="sticky-column sticky-col-1">
-                    <div class="cell-account">
+                    <div class="cell-account ${isClickable ? 'clickable' : ''}" ${isClickable ? `onclick="selectNode('${row.id}')"` : ''}>
                         <span class="acc-name">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
                 </td>
-                <td class="sticky-column sticky-col-2" style="color:var(--text-sub);font-size:13px;">${row.name || '—'}</td>
-                <td class="cell-balance">${row.balance}</td>
-                <td class="cell-ratio">${row.ratio}</td>
-                ${windowCell}
                 <td>
                     <div class="cell-account">
-                        <span style="color:var(--text-sub);font-size:12px;">${row.parentAgent || '—'}</span>
-                        ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
+                         <span style="color:var(--text-sub);font-size:12px;">${row.parentAgent || '—'}</span>
+                         ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
-                <td>
-                    <div class="cell-account">
-                        <span style="color:var(--accent-purple);font-size:12px;font-weight:600;">${row.topAgent || '—'}</span>
-                        ${row.topAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.topAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
-                    </div>
-                </td>
-                <td>
-                    <div class="cell-datetime">
-                        <div class="dt-date">${openDate}</div>
-                        <div>${openTime}</div>
-                    </div>
-                </td>
-                <td>
-                    <div class="cell-datetime highlight">
-                        <div class="dt-date">${loginDate}</div>
-                        <div>${loginTime}</div>
-                    </div>
-                </td>
-                <td class="center">
-                    <span class="status-pill ${statusClass}">${statusLabel}</span>
-                </td>
-                <td>
-                    <div class="action-cell">
-                        <button class="icon-btn" title="設定" onclick="openCtxMenu(event, '${row.id}')">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                    </div>
-                </td>
+                <td class="${parseFloat(totalWinLoss) >= 0 ? 'cell-balance' : 'cell-balance-danger'}">${totalWinLoss}</td>
+                <td>${betCount}</td>
+                <td>${betAmount}</td>
+                <td>${payoutWithPrincipal}</td>
+                <td>${payoutExclPrincipal}</td>
+                <td>${profitBetAmount}</td>
+                <td>${validBet}</td>
+                <td>${validBetRatio}</td>
+                <td>${validBetRatio}</td>
+                <td>${validBetCommission}</td>
+                <td>${ratioPercent}</td>
+                <td class="${parseFloat(ratioWinLoss) >= 0 ? 'cell-balance' : 'cell-balance-danger'}">${ratioWinLoss}</td>
+                <td>${dueCommission}</td>
+                <td>${transferIn}</td>
+                <td>${transferOut}</td>
+                <td>${dealerTip}</td>
+                <td>${topLevelAmount}</td>
             </tr>`;
         }).join('');
 
@@ -2328,19 +2481,28 @@
             <thead>
                 <tr>
                     <th class="sticky-column sticky-col-1">帳號</th>
-                    <th class="sticky-column sticky-col-2">姓名</th>
-                    <th>當前餘額 (CNY) <i class="fas fa-sort sort-icon"></i></th>
-                    ${ratioHeader}
-                    ${windowHeader}
                     <th>上級代理</th>
-                    <th>總代理</th>
-                    <th>開戶時間 <i class="fas fa-sort sort-icon"></i></th>
-                    <th>最後登入 <i class="fas fa-sort sort-icon"></i></th>
-                    <th class="center">狀態</th>
-                    <th class="right">操作</th>
+                    <th>總輸贏</th>
+                    <th>投注數</th>
+                    <th>投注金額</th>
+                    <th>派彩金額(含本金)</th>
+                    <th>派彩金額(扣除本金)</th>
+                    <th>盈利投注金額</th>
+                    <th>有效投注</th>
+                    <th>有效投注比</th>
+                    <th>有效投注佣金</th>
+                    <th>占成比</th>
+                    <th>佔成盈虧</th>
+                    <th>应得佣金</th>
+                    <th>额度转入金額</th>
+                    <th>额度转出金額</th>
+                    <th>荷官打赏</th>
+                    <th>交上级金額</th>
                 </tr>
             </thead>
-            <tbody>${rowsHTML || `<tr><td colspan="${colCount}" style="text-align:center;padding:40px;color:var(--text-dim);">\u7121\u8cc7\u6599</td></tr>`}</tbody>
+            <tbody>
+                ${rowsHTML || `<tr><td colspan="18" class="center" style="text-align:center;padding:40px;color:var(--text-dim);">暫無資料</td></tr>`}
+            </tbody>
         </table>`;
     }
 
@@ -2356,14 +2518,31 @@
 
 
 
+    window.selectNode = function(id) {
+        if (!id) return;
+        isGlobalSearchMode = false;
+        globalSearchResults = null;
+        currentSelectedId = id;
+        
+        // Update Title
+        const titleEl = document.querySelector('.topbar-title span');
+        if (titleEl) titleEl.textContent = `統計報表 - ${id}`;
+        
+        // Update Breadcrumbs
+        renderBreadcrumbs(id);
+        
+        // Render Table
+        renderTable();
+    };
+
     /* ───── GLOBAL SEARCH ───── */
     document.getElementById('btn-global-search').addEventListener('click', function() {
         const query = document.getElementById('global-search-input').value.trim().toLowerCase();
-        const type = document.getElementById('global-type-filter').value;
+        const typeFilter = document.getElementById('global-type-filter').value;
         
         if (!query) {
             if (isGlobalSearchMode) {
-                // If it was global mode, clearing it goes back to tree node mode
+                isGlobalSearchMode = false;
                 selectNode(currentSelectedId);
             }
             return;
@@ -2371,51 +2550,77 @@
 
         isGlobalSearchMode = true;
         
-        // Ensure the correct tab is active for the search type
-        document.querySelectorAll('.data-tab').forEach(t => t.classList.remove('active'));
-        const targetTab = type === 'agent' ? document.getElementById('tab-agents') : document.getElementById('tab-members');
-        if (targetTab) targetTab.classList.add('active');
-        activeTab = type === 'agent' ? 'agents' : 'members';
+        // 1. Recursive search in the TREE and its members
+        let results = [];
 
-        // Update Topbar Title
-        const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `全局搜尋結果 - ${query}`;
-        
-        // Scenario 2: No data
-        if (query === 'none' || query === '無' || query === 'null' || query === '0') {
-            globalSearchResults = [];
-        } else {
-            // Scenario 1: Has data
-            globalSearchResults = [
-                {
-                    id: query,
-                    name: type === 'agent' ? '全局代理測試' : '全局會員測試',
-                    parentAgent: 'vipagent01',
-                    topAgent: 'leozdfl',
-                    balance: '8,888.880',
-                    ratio: '45%',
-                    window: '市場A',
-                    openTime: '2026-01-01\n10:00:00',
-                    lastLogin: '2026-03-27\n10:00:00',
-                    status: 'normal'
-                },
-                {
-                    id: query + '02',
-                    name: type === 'agent' ? '代理測試號2' : '會員測試號2',
-                    parentAgent: 'regional02',
-                    topAgent: 'leozdfl',
-                    balance: '1,234.560',
-                    ratio: '40%',
-                    window: '平臺預設',
-                    openTime: '2026-02-15\n14:30:00',
-                    lastLogin: '2026-03-26\n18:20:00',
-                    status: 'suspended'
+        function deepSearch(node) {
+            // Check if node itself matches (only if searching for agents)
+            if (typeFilter === 'agent' && node.id.toLowerCase().includes(query)) {
+                // Get fresh data for this agent
+                const data = getSubAgentsFor(findParentId(node.id) || 'leozdfl').find(a => a.id === node.id);
+                if (data) results.push(data);
+                else {
+                    // Fallback to minimal data if not found in sub-agents (e.g. root)
+                    results.push({
+                        id: node.id, name: node.label, parentAgent: findParentId(node.id) || '—',
+                        topAgent: TREE.id, balance: '0.000', ratio: '—', status: 'normal',
+                        openTime: '2026-01-01\n00:00:00', lastLogin: '2026-01-01\n00:00:00'
+                    });
                 }
-            ];
+            }
+            
+            // Check members of this node (always check if searching for members)
+            if (typeFilter === 'member') {
+                const members = getMembersFor(node.id);
+                members.forEach(m => {
+                    if (m.id.toLowerCase().includes(query)) {
+                        results.push(m);
+                    }
+                });
+            }
+
+            // Recurse to children
+            if (node.children) {
+                node.children.forEach(child => deepSearch(child));
+            }
         }
+
+        function findParentId(childId, node = TREE, parent = null) {
+            if (node.id === childId) return parent ? parent.id : null;
+            if (node.children) {
+                for (const child of node.children) {
+                    const res = findParentId(childId, child, node);
+                    if (res) return res;
+                }
+            }
+            return null;
+        }
+
+        deepSearch(TREE);
+        globalSearchResults = results;
         
-        // Render with new global data
+        // Update UI
+        document.querySelectorAll('.data-tab').forEach(t => t.classList.remove('active'));
+        const targetTabId = typeFilter === 'agent' ? 'tab-agents' : 'tab-members';
+        const targetTab = document.getElementById(targetTabId);
+        if (targetTab) targetTab.classList.add('active');
+        activeTab = typeFilter === 'agent' ? 'agents' : 'members';
+
+        const titleEl = document.querySelector('.topbar-title span');
+        if (titleEl) titleEl.textContent = `搜尋報表結果：${query} (${typeFilter === 'agent' ? '代理' : '會員'})`;
+        
         renderTable();
+        
+        // Sync Breadcrumbs with the first result found
+        if (results.length > 0) {
+            const firstResult = results[0];
+            // If it's an agent, show its path. If it's a member, show its parent agent's path.
+            const pathId = typeFilter === 'agent' ? firstResult.id : firstResult.parentAgent;
+            if (pathId) renderBreadcrumbs(pathId);
+        } else {
+            // No results: keep current breadcrumbs or reset
+            renderBreadcrumbs(currentSelectedId);
+        }
     });
 
     document.getElementById('global-search-input').addEventListener('keydown', e => {
@@ -2797,61 +3002,9 @@
         if (confirm('確定要登出嗎？')) alert('已登出');
     });
 
-    /* ───── RESIZE LOGIC ───── */
-    function initResizer() {
-        const resizer = document.getElementById('tree-resizer');
-        const panel = document.getElementById('tree-panel');
-        let isResizing = false;
+    /* ───── TREE ACTIONS (Removed for Breadcrumbs) ───── */
 
-        resizer.addEventListener('mousedown', (e) => {
-            isResizing = true;
-            resizer.classList.add('resizing');
-            document.body.style.cursor = 'col-resize';
-            document.body.style.userSelect = 'none';
-        });
 
-        document.addEventListener('mousemove', (e) => {
-            if (!isResizing) return;
-            
-            // Calculate new width based on mouse position relative to panel start
-            // The panel starts after the global sidebar (var(--sidebar-w) = 220px)
-            const sidebarW = 220;
-            let newWidth = e.clientX - sidebarW;
-            
-            // Constraints
-            if (newWidth < 150) newWidth = 150;
-            if (newWidth > 600) newWidth = 600;
-            
-            panel.style.width = newWidth + 'px';
-            document.documentElement.style.setProperty('--tree-w', newWidth + 'px');
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (!isResizing) return;
-            isResizing = false;
-            resizer.classList.remove('resizing');
-            document.body.style.cursor = '';
-            document.body.style.userSelect = '';
-        });
-    }
-
-    /* ───── TREE ACTIONS ───── */
-    document.getElementById('btn-tree-toggle').addEventListener('click', () => {
-        const anyCollapsed = document.querySelector('.t-children.collapsed');
-        const btn = document.getElementById('btn-tree-toggle');
-        
-        if (anyCollapsed) {
-            // Expand all
-            document.querySelectorAll('.t-children').forEach(el => el.classList.remove('collapsed'));
-            document.querySelectorAll('.t-toggle').forEach(el => el.classList.add('open'));
-            btn.textContent = '全部收起';
-        } else {
-            // Collapse all
-            document.querySelectorAll('.t-children').forEach(el => el.classList.add('collapsed'));
-            document.querySelectorAll('.t-toggle').forEach(el => el.classList.remove('open'));
-            btn.textContent = '全部展開';
-        }
-    });
 
     /* ───── MOBILE MENU ───── */
     const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -2993,7 +3146,6 @@
     }
 
     /* ───── INIT ───── */
-    initResizer();
     selectNode(currentSelectedId);
 })();
 </script>
