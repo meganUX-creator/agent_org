@@ -285,6 +285,13 @@ tr:hover {
     text-decoration: underline;
 }
 
+/* Account Text - Non-clickable (for members) */
+.account-text {
+    color: var(--text-main);
+    font-weight: 500;
+    cursor: default;
+}
+
 /* Level Badges */
 .level-badge {
     display: inline-block;
