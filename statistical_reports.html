@@ -602,22 +602,17 @@
         .cell-account {
             display: flex; align-items: center; gap: 8px;
         }
-        .cell-account.clickable .acc-name {
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--primary);
-        }
-        .cell-account.clickable .acc-name:hover {
-            color: #7dd3fc;
-            text-decoration: underline;
-        }
         .cell-account .acc-name { 
             font-weight: 600; font-size: 13px; 
-            color: var(--primary);
-            cursor: pointer;
+            color: var(--text-main);
+            cursor: default;
             transition: var(--transition);
         }
-        .cell-account .acc-name:hover {
+        .cell-account.clickable .acc-name { 
+            color: var(--primary);
+            cursor: pointer;
+        }
+        .cell-account.clickable .acc-name:hover {
             color: #7dd3fc;
             text-decoration: underline;
         }
@@ -2450,7 +2445,7 @@
             <tr>
                 <td class="sticky-column sticky-col-1">
                     <div class="cell-account ${isClickable ? 'clickable' : ''}" ${isClickable ? `onclick="selectNode('${row.id}')"` : ''}>
-                        <span class="acc-name" style="${isClickable ? '' : 'color: var(--text-main); cursor: default;'}">${row.id}</span>
+                        <span class="acc-name">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
