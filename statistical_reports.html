@@ -1077,7 +1077,10 @@
                 display: none;
             }
             .mobile-tree-bar {
-                display: none;
+                display: none !important;
+            }
+            .mobile-tree-bar.visible {
+                display: none !important;
             }
             /* Shared rules for manual swap on Mac/Tablet resolutions */
             .tree-panel.in-mobile-mode {
@@ -3144,6 +3147,7 @@
     
     if (mobileTreeBar) {
         mobileTreeBar.addEventListener('click', () => {
+            if (!treePanel) return;
             const isExpanded = treePanel.classList.toggle('mobile-expanded');
             mtChevron.classList.toggle('open', isExpanded);
             mtIconBox.classList.toggle('active', isExpanded);
