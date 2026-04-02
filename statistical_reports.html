@@ -2450,7 +2450,7 @@
             <tr>
                 <td class="sticky-column sticky-col-1">
                     <div class="cell-account ${isClickable ? 'clickable' : ''}" ${isClickable ? `onclick="selectNode('${row.id}')"` : ''}>
-                        <span class="acc-name">${row.id}</span>
+                        <span class="acc-name" style="${isAgents ? '' : 'color: var(--text-main); cursor: default;'}">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
