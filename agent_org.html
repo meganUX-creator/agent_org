@@ -2240,6 +2240,29 @@
 
     /* ───── RENDER TABLE ───── */
     let activeTab = 'agents';
+    let sortColumn = null;
+    let sortOrder = 'asc'; // 'asc' or 'desc'
+
+    window.sortBy = function(col) {
+        if (sortColumn === col) {
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortColumn = col;
+            sortOrder = 'asc';
+        }
+        renderTable();
+    };
+
+    function getSortIcon(col) {
+        if (sortColumn !== col) return 'fa-sort';
+        return sortOrder === 'asc' ? 'fa-sort-up' : 'fa-sort-down';
+    }
+
+    function parseNumeric(val) {
+        if (!val) return 0;
+        // handles '276,828.671' or '76%'
+        return parseFloat(val.toString().replace(/,/g, '').replace(/%/g, '')) || 0;
+    }
 
     function renderTable() {
         const area = document.getElementById('table-area');
@@ -2260,7 +2283,24 @@
         }
         
         const isAgents = activeTab === 'agents';
-        const filtered = isAgents ? currentAgents : currentMembers;
+        let filtered = isAgents ? currentAgents : currentMembers;
+
+        // Apply Sorting
+        if (sortColumn) {
+            filtered.sort((a, b) => {
+                let vA = a[sortColumn];
+                let vB = b[sortColumn];
+
+                if (['balance', 'ratio', 'effRatio'].includes(sortColumn)) {
+                    vA = parseNumeric(vA);
+                    vB = parseNumeric(vB);
+                }
+                
+                if (vA < vB) return sortOrder === 'asc' ? -1 : 1;
+                if (vA > vB) return sortOrder === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
 
         const countAgentsEl = document.getElementById('count-agents');
         const countMembersEl = document.getElementById('count-members');
@@ -2331,8 +2371,9 @@
 
         const windowHeader = isAgents ? '' : '<th>盤口</th>';
         const ratioHeader = isAgents 
-            ? '<th>佔成比 <i class="fas fa-sort sort-icon"></i></th><th>有效投注比 <i class="fas fa-sort sort-icon"></i></th>' 
-            : '<th>有效投注比 <i class="fas fa-sort sort-icon"></i></th>';
+            ? `<th style="cursor:pointer" onclick="sortBy('ratio')">佔成比 <i class="fas ${getSortIcon('ratio')} sort-icon" style="${sortColumn === 'ratio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+               <th style="cursor:pointer" onclick="sortBy('effRatio')">有效投注比 <i class="fas ${getSortIcon('effRatio')} sort-icon" style="${sortColumn === 'effRatio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>` 
+            : `<th style="cursor:pointer" onclick="sortBy('ratio')">有效投注比 <i class="fas ${getSortIcon('ratio')} sort-icon" style="${sortColumn === 'ratio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>`;
         const colCount = isAgents ? 11 : 11;
 
         area.innerHTML = `
@@ -2341,13 +2382,13 @@
                 <tr>
                     <th class="sticky-column sticky-col-1">帳號</th>
                     <th class="sticky-column sticky-col-2">姓名</th>
-                    <th>當前餘額 (CNY) <i class="fas fa-sort sort-icon"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('balance')">當前餘額 (CNY) <i class="fas ${getSortIcon('balance')} sort-icon" style="${sortColumn === 'balance' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
                     ${ratioHeader}
                     ${windowHeader}
                     <th>上級代理</th>
                     <th>總代理</th>
-                    <th>開戶時間 <i class="fas fa-sort sort-icon"></i></th>
-                    <th>最後登入 <i class="fas fa-sort sort-icon"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('openTime')">開戶時間 <i class="fas ${getSortIcon('openTime')} sort-icon" style="${sortColumn === 'openTime' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('lastLogin')">最後登入 <i class="fas ${getSortIcon('lastLogin')} sort-icon" style="${sortColumn === 'lastLogin' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
                     <th class="center">狀態</th>
                     <th class="right">操作</th>
                 </tr>

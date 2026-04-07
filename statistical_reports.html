@@ -2468,15 +2468,10 @@
                 <td>${profitBetAmount}</td>
                 <td>${validBet}</td>
                 <td>${validBetRatio}</td>
-                <td>${validBetRatio}</td>
                 <td>${validBetCommission}</td>
-                <td>${ratioPercent}</td>
-                <td class="${parseFloat(ratioWinLoss) >= 0 ? 'cell-balance' : 'cell-balance-danger'}">${ratioWinLoss}</td>
-                <td>${dueCommission}</td>
                 <td>${transferIn}</td>
                 <td>${transferOut}</td>
                 <td>${dealerTip}</td>
-                <td>${topLevelAmount}</td>
             </tr>`;
         }).join('');
 
@@ -2499,17 +2494,13 @@
                     <th>有效投注</th>
                     <th>有效投注比</th>
                     <th>有效投注佣金</th>
-                    <th>占成比</th>
-                    <th>佔成盈虧</th>
-                    <th>应得佣金</th>
                     <th>额度转入金額</th>
                     <th>额度转出金額</th>
                     <th>荷官打赏</th>
-                    <th>交上级金額</th>
                 </tr>
             </thead>
             <tbody>
-                ${rowsHTML || `<tr><td colspan="18" class="center" style="text-align:center;padding:40px;color:var(--text-dim);">暫無資料</td></tr>`}
+                ${rowsHTML || `<tr><td colspan="14" class="center" style="text-align:center;padding:40px;color:var(--text-dim);">暫無資料</td></tr>`}
             </tbody>
         </table>`;
     }
