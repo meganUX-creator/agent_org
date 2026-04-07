@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>統計報表 - Casino 後臺</title>
-    <meta name="description" content="Casino 代理線組織管理後臺 - 管理代理架構與會員資訊">
+    <title>统计报表 - Casino 后台</title>
+    <meta name="description" content="Casino 代理线统计报表后台 - 查看代理与会员的投注数据">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1184,7 +1184,6 @@
             display: block; font-size: 14px; font-weight: 600; color: var(--text-sub);
             margin-bottom: 10px;
         }
-        .form-group-add label span { color: #ef4444; margin-right: 4px; }
         .form-group-add input {
             width: 100%; background: #1e293b; border: 1px solid var(--border);
             border-radius: 8px; padding: 12px 14px; color: var(--text-main);
@@ -1415,17 +1414,17 @@
         </div>
     </div>
     <div class="sidebar-system">
-        <div class="system-title">管理系統</div>
+        <div class="system-title">管理系统</div>
         <div class="system-time" id="sys-time">2026-03-25 16:25:10</div>
     </div>
     <div class="sidebar-nav">
-        <div class="nav-item"><i class="fas fa-home"></i><span>首頁</span></div>
-        <div class="nav-item" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>組織管理</span></div>
-        <div class="nav-item active" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>統計報表</span></div>
-        <div class="nav-item"><i class="fas fa-user"></i><span>會員管理</span></div>
-        <div class="nav-item"><i class="fas fa-wallet"></i><span>資金流向</span></div>
-        <div class="nav-item"><i class="fas fa-chart-line"></i><span>業績報表</span></div>
-        <div class="nav-item"><i class="fas fa-cog"></i><span>系統設定</span></div>
+        <div class="nav-item"><i class="fas fa-home"></i><span>首页</span></div>
+        <div class="nav-item" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>组织管理</span></div>
+        <div class="nav-item active" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>统计报表</span></div>
+        <div class="nav-item"><i class="fas fa-user"></i><span>会员管理</span></div>
+        <div class="nav-item"><i class="fas fa-wallet"></i><span>资金流向</span></div>
+        <div class="nav-item"><i class="fas fa-chart-line"></i><span>业绩报表</span></div>
+        <div class="nav-item"><i class="fas fa-cog"></i><span>系统设定</span></div>
     </div>
     <div class="sidebar-footer">
         <!-- User Profile Mini -->
@@ -1433,7 +1432,7 @@
             <div class="user-avatar-mini">L</div>
             <div class="user-info-mini">
                 <div class="user-name-mini">leozdfl</div>
-                <div class="user-role-mini">超級管理員</div>
+                <div class="user-role-mini">超级管理员</div>
             </div>
             <button class="user-settings-btn"><i class="fas fa-cog"></i></button>
         </div>
@@ -1441,7 +1440,7 @@
         <!-- Balance Card -->
         <div class="balance-card">
             <div class="balance-card-header">
-                <span class="balance-card-title">目前餘額</span>
+                <span class="balance-card-title">目前余额</span>
                 <div class="balance-card-actions">
                     <i class="fas fa-redo-alt"></i>
                     <i class="fas fa-eye"></i>
@@ -1468,7 +1467,7 @@
         </button>
         <div class="topbar-title">
             <i class="fas fa-chart-bar"></i>
-            <span>統計報表</span>
+            <span>统计报表</span>
         </div>
     </div>
     
@@ -1496,12 +1495,12 @@
             <div class="search-group-inline" style="margin-left: 10px;">
                 <select class="filter-select" id="global-type-filter" style="min-width: 70px;">
                     <option value="agent">代理</option>
-                    <option value="member">會員</option>
+                    <option value="member">会员</option>
                 </select>
-                <input type="text" class="search-input" id="global-search-input" placeholder="搜索帳號" style="width: 150px;">
+                <input type="text" class="search-input" id="global-search-input" placeholder="全局搜索..." style="padding-left: 32px;">
             </div>
             
-            <button class="btn-query" id="btn-global-search">搜索</button>
+            <button class="btn-search" id="btn-global-search">搜索</button>
             
             <button class="btn-export" title="匯出報表">
                 <i class="fas fa-download" style="font-size: 14px;"></i>
@@ -1528,11 +1527,11 @@
                     </div>
                     <div class="mt-info">
                         <div class="mt-info-stack">
-                            <div class="mt-label">目前節點</div>
+                            <div class="mt-label">目前节点</div>
                             <div class="mt-value-wrap">
                                 <span id="mt-current-id">leozdfl</span>
                                 <i class="fas fa-chevron-right mt-sep"></i>
-                                <span id="mt-current-type" style="color:var(--text-sub);opacity:0.8;">直屬類型</span>
+                                <span id="mt-current-type" style="color:var(--text-sub);opacity:0.8;">直属类型</span>
                             </div>
                         </div>
                     </div>
@@ -1543,10 +1542,10 @@
             <!-- Data Tabs -->
             <div class="data-tabs">
                 <div class="data-tab active" id="tab-agents" data-tab="agents">
-                    直屬代理 <span class="tab-count" id="count-agents">4</span>
+                    直属代理 <span class="tab-count" id="count-agents">4</span>
                 </div>
                 <div class="data-tab" id="tab-members" data-tab="members">
-                    直屬會員 <span class="tab-count orange" id="count-members">16</span>
+                    直属会员 <span class="tab-count orange" id="count-members">16</span>
                 </div>
             </div>
 
@@ -1557,12 +1556,12 @@
 
             <!-- Pagination -->
             <div class="pagination-row">
-                <div class="pagination-info">共 <b id="total-records">20</b> 筆</div>
+                <div class="pagination-info">共 <b id="total-records">20</b> 笔</div>
                 <div class="pagination-nav">
                     <select class="pg-size-select" id="pg-size">
-                        <option>20 筆/頁</option>
-                        <option>50 筆/頁</option>
-                        <option>100 筆/頁</option>
+                        <option>20 笔/页</option>
+                        <option>50 笔/页</option>
+                        <option>100 笔/页</option>
                     </select>
                     <button class="pg-btn" disabled><i class="fas fa-chevron-left"></i></button>
                     <div class="pg-num active">1</div>
@@ -1577,14 +1576,14 @@
 
 <!-- Context / Settings Menu -->
 <div class="ctx-menu" id="ctx-menu">
-    <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶</div>
-    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下級</div>
-    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增會員</div>
-    <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重設密碼</div>
-    <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密碼錯誤次數 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
-    <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>轉帳</div>
+    <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑帐户</div>
+    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下级</div>
+    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增会员</div>
+    <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重设密码</div>
+    <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密码错误次数 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
+    <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>转账</div>
     <div class="ctx-sep" id="ctx-logout-sep"></div>
-    <div class="ctx-item danger" id="ctx-logout" onclick="openLogoutMemberModal()"><i class="fas fa-power-off" style="margin-right:8px;"></i>登出會員</div>
+    <div class="ctx-item danger" id="ctx-logout" onclick="openLogoutMemberModal()"><i class="fas fa-power-off" style="margin-right:8px;"></i>登出会员</div>
 </div>
 
 <!-- Toast Container -->
@@ -1594,7 +1593,7 @@
 <div class="modal-overlay" id="add-type-modal">
     <div class="modal-card" style="width: 340px; text-align: center;">
         <div class="modal-header">
-            <span>選擇新增類型</span>
+            <span>选择新增类型</span>
             <button class="modal-close" onclick="closeAddTypeModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px;">
@@ -1616,7 +1615,7 @@
 <div class="modal-overlay" id="edit-agent-modal">
     <div class="modal-card">
         <div class="modal-header">
-            <span>編輯帳戶</span>
+            <span>编辑账户</span>
             <button class="modal-close" onclick="closeEditAgentModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
@@ -1633,7 +1632,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--text-sub);border-style:dashed;cursor:default;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-agent-parent').value, event)"></i>
@@ -1648,7 +1647,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--accent-purple);border-style:dashed;cursor:default;font-weight:600;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-agent-top').value, event)"></i>
@@ -1657,10 +1656,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>佔成比</label>
+                    <label>占成比</label>
                     <input type="number" id="edit-agent-ratio" value="41">
-                    <div class="label-hint danger">佔成比範圍0-50%</div>
-                    <div class="label-info">* 新的設定值會於下個週期生效。</div>
+                    <div class="label-hint danger">占成比范围0-50%</div>
+                    <div class="label-info">* 新的设定值会于下个周期生效。</div>
                 </div>
                 <div class="form-group">
                     <label>有效投注比</label>
@@ -1677,30 +1676,30 @@
                 <div class="form-group full" id="agent-status-warn" style="display:none; margin-top: -6px; margin-bottom: 10px;">
                     <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); padding: 10px 14px; border-radius: 8px; color: #f87171; display: flex; align-items: flex-start; gap: 8px; font-size: 12px; font-weight: 600;">
                         <i class="fas fa-exclamation-circle" style="margin-top: 3px;"></i>
-                        <span>注意：該代理的所有下級代理及會員將無法登入遊戲及後臺。</span>
+                        <span>注意：该代理的所有下级代理及会员将无法登录游戏及后台。</span>
                     </div>
                 </div>
-                <div class="form-group"><label>姓名</label><input type="text" id="edit-agent-name" placeholder="請輸入姓名"></div>
-                <div class="form-group"><label>電話</label><input type="text" id="edit-agent-phone" placeholder="請輸入電話"></div>
-                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-agent-email" placeholder="請輸入郵箱"></div>
-                <div class="form-group"><label>QQ</label><input type="text" id="edit-agent-qq" placeholder="請輸入QQ"></div>
-                <div class="form-group"><label>微信</label><input type="text" id="edit-agent-wechat" placeholder="請輸入微信"></div>
-                <div class="form-group"><label>Zalo</label><input type="text" id="edit-agent-zalo" placeholder="請輸入Zalo"></div>
-                <div class="form-group"><label>Facebook</label><input type="text" id="edit-agent-fb" placeholder="請輸入Facebook"></div>
-                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-agent-whatsapp" placeholder="請輸入Whatsapp"></div>
-                <div class="form-group"><label>Line</label><input type="text" id="edit-agent-line" placeholder="請輸入Line"></div>
-                <div class="form-group"><label>Telegram</label><input type="text" id="edit-agent-tg" placeholder="請輸入Telegram"></div>
-                <div class="form-group"><label>Viber</label><input type="text" id="edit-agent-viber" placeholder="請輸入Viber"></div>
+                <div class="form-group"><label>姓名</label><input type="text" id="edit-agent-name" placeholder="请输入姓名"></div>
+                <div class="form-group"><label>电话</label><input type="text" id="edit-agent-phone" placeholder="请输入电话"></div>
+                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-agent-email" placeholder="请输入邮箱"></div>
+                <div class="form-group"><label>QQ</label><input type="text" id="edit-agent-qq" placeholder="请输入QQ"></div>
+                <div class="form-group"><label>微信</label><input type="text" id="edit-agent-wechat" placeholder="请输入微信"></div>
+                <div class="form-group"><label>Zalo</label><input type="text" id="edit-agent-zalo" placeholder="请输入Zalo"></div>
+                <div class="form-group"><label>Facebook</label><input type="text" id="edit-agent-fb" placeholder="请输入Facebook"></div>
+                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-agent-whatsapp" placeholder="请输入Whatsapp"></div>
+                <div class="form-group"><label>Line</label><input type="text" id="edit-agent-line" placeholder="请输入Line"></div>
+                <div class="form-group"><label>Telegram</label><input type="text" id="edit-agent-tg" placeholder="请输入Telegram"></div>
+                <div class="form-group"><label>Viber</label><input type="text" id="edit-agent-viber" placeholder="请输入Viber"></div>
                 <div></div>
                 <div class="form-group full">
                     <label>備註</label>
-                    <textarea id="edit-agent-remarks" placeholder="請輸入備註" rows="3"></textarea>
+                    <textarea id="edit-agent-remarks" placeholder="请输入备注" rows="3"></textarea>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeEditAgentModal()">取消</button>
-            <button class="btn-save" onclick="saveEditAgent()">儲存</button>
+            <button class="btn-save" onclick="saveEditAgent()">保存</button>
         </div>
     </div>
 </div>
@@ -1709,7 +1708,7 @@
 <div class="modal-overlay" id="edit-member-modal">
     <div class="modal-card">
         <div class="modal-header">
-            <span>編輯會員</span>
+            <span>编辑会员</span>
             <button class="modal-close" onclick="closeEditMemberModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
@@ -1725,7 +1724,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--text-sub);border-style:dashed;cursor:default;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-member-parent').value, event)"></i>
@@ -1740,7 +1739,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--accent-purple);border-style:dashed;cursor:default;font-weight:600;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-member-top').value, event)"></i>
@@ -1763,30 +1762,30 @@
                 <div class="form-group full" id="member-status-warn" style="display:none; margin-top: -6px; margin-bottom: 10px;">
                     <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); padding: 10px 14px; border-radius: 8px; color: #f87171; display: flex; align-items: flex-start; gap: 8px; font-size: 12px; font-weight: 600;">
                         <i class="fas fa-exclamation-circle" style="margin-top: 3px;"></i>
-                        <span>注意：該會員將無法登入遊戲及後臺。</span>
+                        <span>注意：该会员将无法登录游戏及后台。</span>
                     </div>
                 </div>
-                <div class="form-group"><label>姓名</label><input type="text" id="edit-member-name" placeholder="請輸入姓名"></div>
-                <div class="form-group"><label>電話</label><input type="text" id="edit-member-phone" placeholder="請輸入電話"></div>
-                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-member-email" placeholder="請輸入郵箱"></div>
-                <div class="form-group"><label>QQ</label><input type="text" id="edit-member-qq" placeholder="請輸入QQ"></div>
-                <div class="form-group"><label>微信</label><input type="text" id="edit-member-wechat" placeholder="請輸入微信"></div>
-                <div class="form-group"><label>Zalo</label><input type="text" id="edit-member-zalo" placeholder="請輸入Zalo"></div>
-                <div class="form-group"><label>Facebook</label><input type="text" id="edit-member-fb" placeholder="請輸入Facebook"></div>
-                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-member-whatsapp" placeholder="請輸入Whatsapp"></div>
-                <div class="form-group"><label>Line</label><input type="text" id="edit-member-line" placeholder="請輸入Line"></div>
-                <div class="form-group"><label>Telegram</label><input type="text" id="edit-member-tg" placeholder="請輸入Telegram"></div>
-                <div class="form-group"><label>Viber</label><input type="text" id="edit-member-viber" placeholder="請輸入Viber"></div>
+                <div class="form-group"><label>姓名</label><input type="text" id="edit-member-name" placeholder="请输入姓名"></div>
+                <div class="form-group"><label>电话</label><input type="text" id="edit-member-phone" placeholder="请输入电话"></div>
+                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-member-email" placeholder="请输入邮箱"></div>
+                <div class="form-group"><label>QQ</label><input type="text" id="edit-member-qq" placeholder="请输入QQ"></div>
+                <div class="form-group"><label>微信</label><input type="text" id="edit-member-wechat" placeholder="请输入微信"></div>
+                <div class="form-group"><label>Zalo</label><input type="text" id="edit-member-zalo" placeholder="请输入Zalo"></div>
+                <div class="form-group"><label>Facebook</label><input type="text" id="edit-member-fb" placeholder="请输入Facebook"></div>
+                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-member-whatsapp" placeholder="请输入Whatsapp"></div>
+                <div class="form-group"><label>Line</label><input type="text" id="edit-member-line" placeholder="请输入Line"></div>
+                <div class="form-group"><label>Telegram</label><input type="text" id="edit-member-tg" placeholder="请输入Telegram"></div>
+                <div class="form-group"><label>Viber</label><input type="text" id="edit-member-viber" placeholder="请输入Viber"></div>
                 <div></div>
                 <div class="form-group full">
                     <label>備註</label>
-                    <textarea id="edit-member-remarks" placeholder="請輸入備註" rows="3"></textarea>
+                    <textarea id="edit-member-remarks" placeholder="请输入备注" rows="3"></textarea>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeEditMemberModal()">取消</button>
-            <button class="btn-save" onclick="saveEditMember()">儲存</button>
+            <button class="btn-save" onclick="saveEditMember()">保存</button>
         </div>
     </div>
 </div>
@@ -1797,14 +1796,14 @@
         <div class="modal-header">
             <div style="display:flex;align-items:center;gap:14px">
                 <div class="pwd-icon-circle"><i class="fas fa-lock"></i></div>
-                <span>重設密碼</span>
+                <span>重设密码</span>
             </div>
             <button class="modal-close" onclick="closePwdModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
             <!-- Account Box -->
             <div class="account-box">
-                <span class="label">帳號</span>
+                <span class="label">账号</span>
                 <span class="value" id="pwd-target-id">leodl3</span>
             </div>
             
@@ -1812,24 +1811,24 @@
             
             <!-- New Pwd -->
             <div class="form-group">
-                <label>新密碼</label>
+                <label>新密码</label>
                 <div class="input-with-icon">
-                    <input type="password" placeholder="請輸入新密碼">
+                    <input type="password" placeholder="请输入新密码">
                     <i class="fas fa-eye eye"></i>
                 </div>
             </div>
             <!-- Confirm Pwd -->
             <div class="form-group">
-                <label>確認新密碼</label>
+                <label>确认新密码</label>
                 <div class="input-with-icon">
-                    <input type="password" placeholder="請再次輸入新密碼">
+                    <input type="password" placeholder="请再次输入新密码">
                     <i class="fas fa-eye eye"></i>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closePwdModal()">取消</button>
-            <button class="btn-save" style="background:#2563eb" onclick="savePwd()">確認重設</button>
+            <button class="btn-save" style="background:#2563eb" onclick="savePwd()">确认重设</button>
         </div>
     </div>
 </div>
@@ -1838,7 +1837,7 @@
 <div class="modal-overlay" id="add-agent-modal">
     <div class="modal-card" style="width:580px; max-height: 90vh;">
         <div class="modal-header">
-            <span>新增直屬代理</span>
+            <span>新增直属代理</span>
             <button class="modal-close" onclick="closeAddAgentModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px 40px;">
@@ -1873,13 +1872,13 @@
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>登入帳號</label>
-                    <input type="text" placeholder="請輸入登入帳號" id="add-agent-id">
+                    <input type="text" placeholder="请输入登录账号" id="add-agent-id">
                     <div class="form-main-hint">2-20位英數字及下劃線</div>
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>登入密碼</label>
                     <div class="input-with-icon">
-                        <input type="password" placeholder="請輸入登入密碼" id="add-agent-pwd">
+                        <input type="password" placeholder="请输入登录密码" id="add-agent-pwd">
                         <i class="fas fa-eye eye" onclick="togglePass('add-agent-pwd')"></i>
                     </div>
                     <div class="form-main-hint">8-16位英數字</div>
@@ -1887,19 +1886,19 @@
                 <div class="form-group-add">
                     <label><span>*</span>確認密碼</label>
                     <div class="input-with-icon">
-                        <input type="password" placeholder="請再次輸入密碼" id="add-agent-confirm">
+                        <input type="password" placeholder="请再次输入密码" id="add-agent-confirm">
                         <i class="fas fa-eye eye" onclick="togglePass('add-agent-confirm')"></i>
                     </div>
                     <div class="form-main-hint" style="color:#ef4444">*密碼需為8-16位英數字</div>
                 </div>
                 <div class="form-group-add">
-                    <label><span>*</span>佔成比</label>
-                    <input type="number" placeholder="請輸入佔成比" id="add-agent-ratio">
-                    <div class="form-main-hint">範圍 0 - 50 %</div>
+                    <label><span>*</span>占成比</label>
+                    <input type="number" placeholder="请输入占成比" id="add-agent-ratio">
+                    <div class="form-main-hint">范围 0 - 50 %</div>
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>有效投注比</label>
-                    <input type="number" placeholder="請輸入有效投注比" id="add-agent-bet">
+                    <input type="number" placeholder="请输入有效投注比" id="add-agent-bet">
                     <div class="form-main-hint">範圍 0 - 1 %</div>
                 </div>
             </div>
@@ -1910,16 +1909,16 @@
                     以下聯絡資訊為選填項
                 </div>
                 <div class="form-grid-2">
-                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="請輸入姓名" id="add-agent-name"></div>
-                    <div class="form-group-add"><label>電話</label><input type="text" placeholder="請輸入電話" id="add-agent-phone"></div>
-                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="請輸入郵箱" id="add-agent-email"></div>
-                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="請輸入QQ" id="add-agent-qq"></div>
-                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="請輸入微信" id="add-agent-wechat"></div>
-                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="請輸入Zalo" id="add-agent-zalo"></div>
-                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="請輸入Facebook" id="add-agent-fb"></div>
-                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="請輸入Whatsapp" id="add-agent-wa"></div>
-                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="請輸入Telegram" id="add-agent-tg"></div>
-                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="請輸入Viber" id="add-agent-viber"></div>
+                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="请输入姓名" id="add-agent-name"></div>
+                    <div class="form-group-add"><label>电话</label><input type="text" placeholder="请输入电话" id="add-agent-phone"></div>
+                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="请输入邮箱" id="add-agent-email"></div>
+                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="请输入QQ" id="add-agent-qq"></div>
+                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="请输入微信" id="add-agent-wechat"></div>
+                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="请输入Zalo" id="add-agent-zalo"></div>
+                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="请输入Facebook" id="add-agent-fb"></div>
+                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="请输入Whatsapp" id="add-agent-wa"></div>
+                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="请输入Telegram" id="add-agent-tg"></div>
+                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="请输入Viber" id="add-agent-viber"></div>
                 </div>
             </div>
 
@@ -1945,7 +1944,7 @@
                             <div class="summary-value" id="summ-pwd">dddds3455aa</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-label">佔成比</div>
+                            <div class="summary-label">占成比</div>
                             <div class="summary-value" id="summ-ratio">2%</div>
                         </div>
                         <div class="summary-item">
@@ -1967,7 +1966,7 @@
 <div class="modal-overlay" id="add-member-modal">
     <div class="modal-card" style="width:580px; max-height: 90vh;">
         <div class="modal-header">
-            <span>新增直屬會員</span>
+            <span>新增直属会员</span>
             <button class="modal-close" onclick="closeAddModal('member')"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px 40px;">
@@ -1993,7 +1992,7 @@
 
             <!-- Step 1 Content -->
             <div id="step-member-1-content" class="step-content active">
-                <div class="form-group-add"><label><span>*</span>上級帳號</label><input type="text" id="add-member-parent" value="agent001" readonly></div>
+                <div class="form-group-add"><label><span>*</span>上级账号</label><input type="text" id="add-member-parent" value="agent001" readonly></div>
                 <div class="form-group-add">
                     <label><span>*</span>登入帳號</label>
                     <input type="text" placeholder="請輸入登入帳號" id="add-member-id">
@@ -2010,7 +2009,7 @@
                 <div class="form-group-add">
                     <label><span>*</span>確認密碼</label>
                     <div class="input-with-icon">
-                        <input type="password" placeholder="請再次輸入密碼" id="add-member-confirm">
+                        <input type="password" placeholder="请再次输入密码" id="add-member-confirm">
                         <i class="fas fa-eye eye" onclick="togglePass('add-member-confirm')"></i>
                     </div>
                     <div class="form-main-hint" style="color:#ef4444">*密碼需為8-16位英數字</div>
@@ -2024,31 +2023,31 @@
 
             <!-- Step 2 Content -->
             <div id="step-member-2-content" class="step-content">
-                <div class="optional-hint-box">以下聯絡資訊為選填項</div>
+                <div class="optional-hint-box">以下联络信息为选填项</div>
                 <div class="form-grid-2">
-                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="請輸入姓名" id="add-member-name"></div>
-                    <div class="form-group-add"><label>電話</label><input type="text" placeholder="請輸入電話" id="add-member-phone"></div>
-                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="請輸入郵箱" id="add-member-email"></div>
-                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="請輸入QQ" id="add-member-qq"></div>
-                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="請輸入微信" id="add-member-wechat"></div>
-                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="請輸入Zalo" id="add-member-zalo"></div>
-                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="請輸入Facebook" id="add-member-fb"></div>
-                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="請輸入Whatsapp" id="add-member-wa"></div>
-                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="請輸入Telegram" id="add-member-tg"></div>
-                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="請輸入Viber" id="add-member-viber"></div>
+                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="请输入姓名" id="add-member-name"></div>
+                    <div class="form-group-add"><label>电话</label><input type="text" placeholder="请输入电话" id="add-member-phone"></div>
+                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="请输入邮箱" id="add-member-email"></div>
+                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="请输入QQ" id="add-member-qq"></div>
+                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="请输入微信" id="add-member-wechat"></div>
+                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="请输入Zalo" id="add-member-zalo"></div>
+                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="请输入Facebook" id="add-member-fb"></div>
+                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="请输入Whatsapp" id="add-member-wa"></div>
+                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="请输入Telegram" id="add-member-tg"></div>
+                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="请输入Viber" id="add-member-viber"></div>
                 </div>
             </div>
 
             <!-- Step 3 Content -->
             <div id="step-member-3-content" class="step-content">
-                <div class="confirm-hint-box">請確認以下資訊，點選"確認新增"完成建立</div>
+                <div class="confirm-hint-box">请确认以下信息，点击"确认新增"完成建立</div>
                 <div class="summary-box">
                     <div class="summary-title">基本資訊</div>
-                    <div class="summary-item"><div class="summary-label">上級帳號</div><div class="summary-value" id="summ-member-parent">agent001</div></div>
+                    <div class="summary-item"><div class="summary-label">上级账号</div><div class="summary-value" id="summ-member-parent">agent001</div></div>
                     <div class="summary-sep"></div>
                     <div class="summary-grid">
-                        <div class="summary-item"><div class="summary-label">登入帳號</div><div class="summary-value" id="summ-member-id">ddd</div></div>
-                        <div class="summary-item"><div class="summary-label">登入密碼</div><div class="summary-value" id="summ-member-pwd">dddds3455aa</div></div>
+                        <div class="summary-item"><div class="summary-label">登录账号</div><div class="summary-value" id="summ-member-id">ddd</div></div>
+                        <div class="summary-item"><div class="summary-label">登录密码</div><div class="summary-value" id="summ-member-pwd">dddds3455aa</div></div>
                         <div class="summary-item"><div class="summary-label">有效投注比</div><div class="summary-value" id="summ-member-bet">1%</div></div>
                     </div>
                 </div>
@@ -2068,14 +2067,14 @@
             <!-- Warning Icon + Title -->
             <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px;">
                 <i class="fas fa-exclamation-triangle" style="font-size:26px;color:#ef4444;"></i>
-                <span style="font-size:22px;font-weight:800;color:var(--text-main);">登出會員</span>
+                <span style="font-size:22px;font-weight:800;color:var(--text-main);">登出会员</span>
             </div>
             <!-- Warning Text -->
             <p style="font-size:15px;line-height:1.75;color:#ef4444;font-weight:600;margin-bottom:8px;">
-                確認後會強制將該會員離開遊戲，若該會員有已下注的注單，依然會做結算動作。
+                确认后会强制将该会员离开游戏，若该会员有已下注的注单，依然会做结算动作。
             </p>
             <!-- Target Account -->
-            <p style="font-size:13px;color:var(--text-dim);margin-top:12px;">目標帳號：<b id="logout-member-target" style="color:var(--text-main);"></b></p>
+            <p style="font-size:13px;color:var(--text-dim);margin-top:12px;">目标账号：<b id="logout-member-target" style="color:var(--text-main);"></b></p>
         </div>
         <div class="modal-footer" style="justify-content:center;gap:16px;padding:20px 36px 28px;border-top:none;">
             <button class="btn-cancel" onclick="closeLogoutMemberModal()"
@@ -2086,7 +2085,7 @@
                        box-shadow:0 4px 14px rgba(220,38,38,0.4);"
                 onmouseover="this.style.background='#b91c1c'"
                 onmouseout="this.style.background='#dc2626'">
-                <i class="fas fa-sign-out-alt" style="margin-right:6px;"></i>確認登出
+                <i class="fas fa-sign-out-alt" style="margin-right:6px;"></i>确认登出
             </button>
         </div>
     </div>
@@ -2096,17 +2095,17 @@
 <div class="modal-overlay" id="transfer-modal">
     <div class="modal-card" style="width:400px">
         <div class="modal-header">
-            <span>轉帳</span>
+            <span>转账</span>
             <button class="modal-close" onclick="closeTransferModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
             <div class="transfer-account-box">
-                <span class="label">轉入帳號</span>
+                <span class="label">转入账号</span>
                 <span class="value" id="transfer-target-id">leodl3</span>
             </div>
             <div class="form-group">
-                <label><span style="color:var(--accent-red)">*</span> 轉帳金額</label>
-                <input type="number" id="transfer-amount" placeholder="請輸入轉帳金額">
+                <label><span style="color:var(--accent-red)">*</span> 转账金额</label>
+                <input type="number" id="transfer-amount" placeholder="请输入转账金额">
                 <div class="preset-group">
                     <button class="btn-preset" onclick="setTransferAmount(1000)">1K</button>
                     <button class="btn-preset" onclick="setTransferAmount(5000)">5K</button>
@@ -2114,11 +2113,11 @@
                     <button class="btn-preset" onclick="setTransferAmount(50000)">50K</button>
                 </div>
             </div>
-            <div class="balance-label">可用額度： 0.00</div>
+            <div class="balance-label">可用额度： 0.00</div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeTransferModal()">取消</button>
-            <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-sub);box-shadow:none" id="btn-confirm-transfer" onclick="confirmTransfer()">確認轉帳</button>
+            <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-sub);box-shadow:none" id="btn-confirm-transfer" onclick="confirmTransfer()">确认转账</button>
         </div>
     </div>
 </div>
@@ -2129,14 +2128,14 @@
         <div style="font-size: 50px; color: #10b981; margin-bottom: 20px;">
             <i class="fas fa-check-circle"></i>
         </div>
-        <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main); margin-bottom: 15px;" id="add-success-title">代理帳戶建立成功</h3>
+        <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main); margin-bottom: 15px;" id="add-success-title">代理账户建立成功</h3>
         <p id="add-success-desc" style="color:var(--text-dim); font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
             <span id="add-success-type">代理</span> <b id="new-agent-id-display" style="color: #f59e0b;"></b> 已成功建立。<br>
-            您是否要現在轉帳金額到這個新的帳號？
+            您是否要现在转账金额到这个新的账号？
         </p>
         <div style="display:flex; gap:12px; justify-content:center;">
-            <button class="btn-cancel" onclick="closeSuccessModal()" style="padding: 10px 20px; font-size: 14px;">以後再說</button>
-            <button class="btn-save" onclick="confirmGoToTransfer()" style="padding: 10px 24px; font-size: 14px;">前往轉帳</button>
+            <button class="btn-cancel" onclick="closeSuccessModal()" style="padding: 10px 20px; font-size: 14px;">以后再说</button>
+            <button class="btn-save" onclick="confirmGoToTransfer()" style="padding: 10px 24px; font-size: 14px;">前往转账</button>
         </div>
     </div>
 </div>
@@ -2504,7 +2503,7 @@
                 <td class="sticky-column sticky-col-1">
                     <div class="cell-account ${isClickable ? 'clickable' : ''}" ${isClickable ? `onclick="selectNode('${row.id}')"` : ''}>
                         <span class="acc-name">${row.id}</span>
-                        <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
+                        <button class="copy-btn" title="复制" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
@@ -2512,7 +2511,7 @@
                 <td>
                     <div class="cell-account">
                          <span class="acc-name" onclick="${row.parentAgent ? `selectNode('${row.parentAgent}')` : ''}" style="${row.parentAgent ? '' : 'color: var(--text-sub); cursor: default;'}">${row.parentAgent || '—'}</span>
-                         ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
+                         ${row.parentAgent ? `<button class="copy-btn" title="复制" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
                 <td class="${parseFloat(totalWinLoss) >= 0 ? 'cell-balance' : 'cell-balance-danger'}">${totalWinLoss}</td>

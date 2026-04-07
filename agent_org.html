@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>代理線組織管理 - Casino 後臺</title>
-    <meta name="description" content="Casino 代理線組織管理後臺 - 管理代理架構與會員資訊">
+    <title>代理线组织管理 - Casino 后台</title>
+    <meta name="description" content="Casino 代理线组织管理后台 - 管理代理架构与会员信息">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1220,17 +1220,17 @@
         </div>
     </div>
     <div class="sidebar-system">
-        <div class="system-title">管理系統</div>
+        <div class="system-title">管理系统</div>
         <div class="system-time" id="sys-time">2026-03-25 16:25:10</div>
     </div>
     <div class="sidebar-nav">
-        <div class="nav-item"><i class="fas fa-home"></i><span>首頁</span></div>
-        <div class="nav-item active" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>組織管理</span></div>
-        <div class="nav-item" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>統計報表</span></div>
-        <div class="nav-item"><i class="fas fa-user"></i><span>會員管理</span></div>
-        <div class="nav-item"><i class="fas fa-wallet"></i><span>資金流向</span></div>
-        <div class="nav-item"><i class="fas fa-chart-line"></i><span>業績報表</span></div>
-        <div class="nav-item"><i class="fas fa-cog"></i><span>系統設定</span></div>
+        <div class="nav-item"><i class="fas fa-home"></i><span>首页</span></div>
+        <div class="nav-item active" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>组织管理</span></div>
+        <div class="nav-item" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>统计报表</span></div>
+        <div class="nav-item"><i class="fas fa-user"></i><span>会员管理</span></div>
+        <div class="nav-item"><i class="fas fa-wallet"></i><span>资金流向</span></div>
+        <div class="nav-item"><i class="fas fa-chart-line"></i><span>业绩报表</span></div>
+        <div class="nav-item"><i class="fas fa-cog"></i><span>系统设定</span></div>
     </div>
     <div class="sidebar-footer">
         <!-- User Profile Mini -->
@@ -1238,7 +1238,7 @@
             <div class="user-avatar-mini">L</div>
             <div class="user-info-mini">
                 <div class="user-name-mini">leozdfl</div>
-                <div class="user-role-mini">超級管理員</div>
+                <div class="user-role-mini">超级管理员</div>
             </div>
             <button class="user-settings-btn"><i class="fas fa-cog"></i></button>
         </div>
@@ -1246,7 +1246,7 @@
         <!-- Balance Card -->
         <div class="balance-card">
             <div class="balance-card-header">
-                <span class="balance-card-title">目前餘額</span>
+                <span class="balance-card-title">目前余额</span>
                 <div class="balance-card-actions">
                     <i class="fas fa-redo-alt"></i>
                     <i class="fas fa-eye"></i>
@@ -1273,7 +1273,7 @@
         </button>
         <div class="topbar-title">
             <i class="fas fa-users-cog"></i>
-            <span>代理組織管理</span>
+            <span>代理组织管理</span>
         </div>
     </div>
     
@@ -1281,7 +1281,7 @@
     <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; align-items: center;">
         <select class="filter-select" id="global-type-filter" style="min-width: 80px; padding: 6px 12px; padding-right: 28px;">
             <option value="agent">代理</option>
-            <option value="member">會員</option>
+            <option value="member">会员</option>
         </select>
         <div class="search-wrap" style="width: 300px; max-width: 100%;">
             <i class="fas fa-search" style="left: 10px;"></i>
@@ -1301,9 +1301,9 @@
         <div class="tree-panel" id="tree-panel">
             <div class="tree-panel-header">
                 <i class="fas fa-network-wired"></i>
-                <span>代理組織架構</span>
+                <span>代理组织架构</span>
                 <div class="tree-actions">
-                    <button id="btn-tree-toggle">全部展開</button>
+                    <button id="btn-tree-toggle">全部展开</button>
                 </div>
             </div>
 
@@ -1326,11 +1326,11 @@
                     </div>
                     <div class="mt-info">
                         <div class="mt-info-stack">
-                            <div class="mt-label">目前節點</div>
+                            <div class="mt-label">目前节点</div>
                             <div class="mt-value-wrap">
                                 <span id="mt-current-id">leozdfl</span>
                                 <i class="fas fa-chevron-right mt-sep"></i>
-                                <span id="mt-current-type" style="color:var(--text-sub);opacity:0.8;">直屬類型</span>
+                                <span id="mt-current-type" style="color:var(--text-sub);opacity:0.8;">直属类型</span>
                             </div>
                         </div>
                     </div>
@@ -1341,10 +1341,10 @@
             <!-- Data Tabs -->
             <div class="data-tabs">
                 <div class="data-tab active" id="tab-agents" data-tab="agents">
-                    直屬代理 <span class="tab-count" id="count-agents">4</span>
+                    直属代理 <span class="tab-count" id="count-agents">4</span>
                 </div>
                 <div class="data-tab" id="tab-members" data-tab="members">
-                    直屬會員 <span class="tab-count orange" id="count-members">16</span>
+                    直属会员 <span class="tab-count orange" id="count-members">16</span>
                 </div>
             </div>
 
@@ -1355,12 +1355,12 @@
 
             <!-- Pagination -->
             <div class="pagination-row">
-                <div class="pagination-info">共 <b id="total-records">20</b> 筆</div>
+                <div class="pagination-info">共 <b id="total-records">20</b> 笔</div>
                 <div class="pagination-nav">
                     <select class="pg-size-select" id="pg-size">
-                        <option>20 筆/頁</option>
-                        <option>50 筆/頁</option>
-                        <option>100 筆/頁</option>
+                        <option>20 笔/页</option>
+                        <option>50 笔/页</option>
+                        <option>100 笔/页</option>
                     </select>
                     <button class="pg-btn" disabled><i class="fas fa-chevron-left"></i></button>
                     <div class="pg-num active">1</div>
@@ -1375,14 +1375,14 @@
 
 <!-- Context / Settings Menu -->
 <div class="ctx-menu" id="ctx-menu">
-    <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶</div>
-    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下級</div>
-    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增會員</div>
-    <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重設密碼</div>
-    <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密碼錯誤次數 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
-    <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>轉帳</div>
+    <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑账户</div>
+    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下级</div>
+    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增会员</div>
+    <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重设密码</div>
+    <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密码错误次数 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
+    <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>转账</div>
     <div class="ctx-sep" id="ctx-logout-sep"></div>
-    <div class="ctx-item danger" id="ctx-logout" onclick="openLogoutMemberModal()"><i class="fas fa-power-off" style="margin-right:8px;"></i>登出會員</div>
+    <div class="ctx-item danger" id="ctx-logout" onclick="openLogoutMemberModal()"><i class="fas fa-power-off" style="margin-right:8px;"></i>登出会员</div>
 </div>
 
 <!-- Toast Container -->
@@ -1392,18 +1392,18 @@
 <div class="modal-overlay" id="add-type-modal">
     <div class="modal-card" style="width: 340px; text-align: center;">
         <div class="modal-header">
-            <span>選擇新增類型</span>
+            <span>选择新增类型</span>
             <button class="modal-close" onclick="closeAddTypeModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px;">
             <div style="display: flex; flex-direction: column; gap: 16px;">
                 <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, #38bdf8, #2563eb); box-shadow: 0 4px 14px rgba(56,189,248,0.3);" onclick="selectAddType('agent')">
                     <i class="fas fa-user-tie" style="margin-right:8px; font-size: 18px;"></i>
-                    新增直屬代理
+                    新增直属代理
                 </button>
                 <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); box-shadow: none;" onclick="selectAddType('member')" onmouseover="this.style.background='var(--bg-body)'" onmouseout="this.style.background='var(--bg-card)'">
                     <i class="fas fa-user" style="margin-right:8px; font-size: 18px; color: var(--text-muted);"></i>
-                    新增直屬會員
+                    新增直属会员
                 </button>
             </div>
         </div>
@@ -1414,7 +1414,7 @@
 <div class="modal-overlay" id="edit-agent-modal">
     <div class="modal-card">
         <div class="modal-header">
-            <span>編輯帳戶</span>
+            <span>编辑账户</span>
             <button class="modal-close" onclick="closeEditAgentModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
@@ -1431,7 +1431,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--text-sub);border-style:dashed;cursor:default;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-agent-parent').value, event)"></i>
@@ -1446,7 +1446,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--accent-purple);border-style:dashed;cursor:default;font-weight:600;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-agent-top').value, event)"></i>
@@ -1455,10 +1455,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>佔成比</label>
+                    <label>占成比</label>
                     <input type="number" id="edit-agent-ratio" value="41">
-                    <div class="label-hint danger">佔成比範圍0-50%</div>
-                    <div class="label-info">* 新的設定值會於下個週期生效。</div>
+                    <div class="label-hint danger">占成比范围0-50%</div>
+                    <div class="label-info">* 新的设定值会于下个周期生效。</div>
                 </div>
                 <div class="form-group">
                     <label>有效投注比</label>
@@ -1475,30 +1475,30 @@
                 <div class="form-group full" id="agent-status-warn" style="display:none; margin-top: -6px; margin-bottom: 10px;">
                     <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); padding: 10px 14px; border-radius: 8px; color: #f87171; display: flex; align-items: flex-start; gap: 8px; font-size: 12px; font-weight: 600;">
                         <i class="fas fa-exclamation-circle" style="margin-top: 3px;"></i>
-                        <span>注意：該代理的所有下級代理及會員將無法登入遊戲及後臺。</span>
+                        <span>注意：该代理的所有下级代理及会员将无法登录游戏及后台。</span>
                     </div>
                 </div>
-                <div class="form-group"><label>姓名</label><input type="text" id="edit-agent-name" placeholder="請輸入姓名"></div>
-                <div class="form-group"><label>電話</label><input type="text" id="edit-agent-phone" placeholder="請輸入電話"></div>
-                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-agent-email" placeholder="請輸入郵箱"></div>
-                <div class="form-group"><label>QQ</label><input type="text" id="edit-agent-qq" placeholder="請輸入QQ"></div>
-                <div class="form-group"><label>微信</label><input type="text" id="edit-agent-wechat" placeholder="請輸入微信"></div>
-                <div class="form-group"><label>Zalo</label><input type="text" id="edit-agent-zalo" placeholder="請輸入Zalo"></div>
-                <div class="form-group"><label>Facebook</label><input type="text" id="edit-agent-fb" placeholder="請輸入Facebook"></div>
-                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-agent-whatsapp" placeholder="請輸入Whatsapp"></div>
-                <div class="form-group"><label>Line</label><input type="text" id="edit-agent-line" placeholder="請輸入Line"></div>
-                <div class="form-group"><label>Telegram</label><input type="text" id="edit-agent-tg" placeholder="請輸入Telegram"></div>
-                <div class="form-group"><label>Viber</label><input type="text" id="edit-agent-viber" placeholder="請輸入Viber"></div>
+                <div class="form-group"><label>姓名</label><input type="text" id="edit-agent-name" placeholder="请输入姓名"></div>
+                <div class="form-group"><label>电话</label><input type="text" id="edit-agent-phone" placeholder="请输入电话"></div>
+                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-agent-email" placeholder="请输入邮箱"></div>
+                <div class="form-group"><label>QQ</label><input type="text" id="edit-agent-qq" placeholder="请输入QQ"></div>
+                <div class="form-group"><label>微信</label><input type="text" id="edit-agent-wechat" placeholder="请输入微信"></div>
+                <div class="form-group"><label>Zalo</label><input type="text" id="edit-agent-zalo" placeholder="请输入Zalo"></div>
+                <div class="form-group"><label>Facebook</label><input type="text" id="edit-agent-fb" placeholder="请输入Facebook"></div>
+                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-agent-whatsapp" placeholder="请输入Whatsapp"></div>
+                <div class="form-group"><label>Line</label><input type="text" id="edit-agent-line" placeholder="请输入Line"></div>
+                <div class="form-group"><label>Telegram</label><input type="text" id="edit-agent-tg" placeholder="请输入Telegram"></div>
+                <div class="form-group"><label>Viber</label><input type="text" id="edit-agent-viber" placeholder="请输入Viber"></div>
                 <div></div>
                 <div class="form-group full">
                     <label>備註</label>
-                    <textarea id="edit-agent-remarks" placeholder="請輸入備註" rows="3"></textarea>
+                    <textarea id="edit-agent-remarks" placeholder="请输入备注" rows="3"></textarea>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeEditAgentModal()">取消</button>
-            <button class="btn-save" onclick="saveEditAgent()">儲存</button>
+            <button class="btn-save" onclick="saveEditAgent()">保存</button>
         </div>
     </div>
 </div>
@@ -1507,7 +1507,7 @@
 <div class="modal-overlay" id="edit-member-modal">
     <div class="modal-card">
         <div class="modal-header">
-            <span>編輯會員</span>
+            <span>编辑会员</span>
             <button class="modal-close" onclick="closeEditMemberModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
@@ -1523,7 +1523,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--text-sub);border-style:dashed;cursor:default;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-member-parent').value, event)"></i>
@@ -1538,7 +1538,7 @@
                                     style="background:rgba(255,255,255,0.02);color:var(--accent-purple);border-style:dashed;cursor:default;font-weight:600;padding-right:36px;">
                                 <i class="fas fa-copy"
                                     style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);cursor:pointer;font-size:12px;transition:var(--transition);"
-                                    title="複製"
+                                    title="复制"
                                     onmouseenter="this.style.color='var(--primary)'"
                                     onmouseleave="this.style.color='var(--text-dim)'"
                                     onclick="copyText(document.getElementById('edit-member-top').value, event)"></i>
@@ -1561,30 +1561,30 @@
                 <div class="form-group full" id="member-status-warn" style="display:none; margin-top: -6px; margin-bottom: 10px;">
                     <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); padding: 10px 14px; border-radius: 8px; color: #f87171; display: flex; align-items: flex-start; gap: 8px; font-size: 12px; font-weight: 600;">
                         <i class="fas fa-exclamation-circle" style="margin-top: 3px;"></i>
-                        <span>注意：該會員將無法登入遊戲及後臺。</span>
+                        <span>注意：该会员将无法登录游戏及后台。</span>
                     </div>
                 </div>
-                <div class="form-group"><label>姓名</label><input type="text" id="edit-member-name" placeholder="請輸入姓名"></div>
-                <div class="form-group"><label>電話</label><input type="text" id="edit-member-phone" placeholder="請輸入電話"></div>
-                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-member-email" placeholder="請輸入郵箱"></div>
-                <div class="form-group"><label>QQ</label><input type="text" id="edit-member-qq" placeholder="請輸入QQ"></div>
-                <div class="form-group"><label>微信</label><input type="text" id="edit-member-wechat" placeholder="請輸入微信"></div>
-                <div class="form-group"><label>Zalo</label><input type="text" id="edit-member-zalo" placeholder="請輸入Zalo"></div>
-                <div class="form-group"><label>Facebook</label><input type="text" id="edit-member-fb" placeholder="請輸入Facebook"></div>
-                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-member-whatsapp" placeholder="請輸入Whatsapp"></div>
-                <div class="form-group"><label>Line</label><input type="text" id="edit-member-line" placeholder="請輸入Line"></div>
-                <div class="form-group"><label>Telegram</label><input type="text" id="edit-member-tg" placeholder="請輸入Telegram"></div>
-                <div class="form-group"><label>Viber</label><input type="text" id="edit-member-viber" placeholder="請輸入Viber"></div>
+                <div class="form-group"><label>姓名</label><input type="text" id="edit-member-name" placeholder="请输入姓名"></div>
+                <div class="form-group"><label>电话</label><input type="text" id="edit-member-phone" placeholder="请输入电话"></div>
+                <div class="form-group"><label>E-Mail</label><input type="text" id="edit-member-email" placeholder="请输入邮箱"></div>
+                <div class="form-group"><label>QQ</label><input type="text" id="edit-member-qq" placeholder="请输入QQ"></div>
+                <div class="form-group"><label>微信</label><input type="text" id="edit-member-wechat" placeholder="请输入微信"></div>
+                <div class="form-group"><label>Zalo</label><input type="text" id="edit-member-zalo" placeholder="请输入Zalo"></div>
+                <div class="form-group"><label>Facebook</label><input type="text" id="edit-member-fb" placeholder="请输入Facebook"></div>
+                <div class="form-group"><label>Whatsapp</label><input type="text" id="edit-member-whatsapp" placeholder="请输入Whatsapp"></div>
+                <div class="form-group"><label>Line</label><input type="text" id="edit-member-line" placeholder="请输入Line"></div>
+                <div class="form-group"><label>Telegram</label><input type="text" id="edit-member-tg" placeholder="请输入Telegram"></div>
+                <div class="form-group"><label>Viber</label><input type="text" id="edit-member-viber" placeholder="请输入Viber"></div>
                 <div></div>
                 <div class="form-group full">
                     <label>備註</label>
-                    <textarea id="edit-member-remarks" placeholder="請輸入備註" rows="3"></textarea>
+                    <textarea id="edit-member-remarks" placeholder="请输入备注" rows="3"></textarea>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeEditMemberModal()">取消</button>
-            <button class="btn-save" onclick="saveEditMember()">儲存</button>
+            <button class="btn-save" onclick="saveEditMember()">保存</button>
         </div>
     </div>
 </div>
@@ -1595,14 +1595,14 @@
         <div class="modal-header">
             <div style="display:flex;align-items:center;gap:14px">
                 <div class="pwd-icon-circle"><i class="fas fa-lock"></i></div>
-                <span>重設密碼</span>
+                <span>重设密码</span>
             </div>
             <button class="modal-close" onclick="closePwdModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
             <!-- Account Box -->
             <div class="account-box">
-                <span class="label">帳號</span>
+                <span class="label">账号</span>
                 <span class="value" id="pwd-target-id">leodl3</span>
             </div>
             
@@ -1610,24 +1610,24 @@
             
             <!-- New Pwd -->
             <div class="form-group">
-                <label>新密碼</label>
+                <label>新密码</label>
                 <div class="input-with-icon">
-                    <input type="password" placeholder="請輸入新密碼">
+                    <input type="password" placeholder="请输入新密码">
                     <i class="fas fa-eye eye"></i>
                 </div>
             </div>
             <!-- Confirm Pwd -->
             <div class="form-group">
-                <label>確認新密碼</label>
+                <label>确认新密码</label>
                 <div class="input-with-icon">
-                    <input type="password" placeholder="請再次輸入新密碼">
+                    <input type="password" placeholder="请再次输入新密码">
                     <i class="fas fa-eye eye"></i>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closePwdModal()">取消</button>
-            <button class="btn-save" style="background:#2563eb" onclick="savePwd()">確認重設</button>
+            <button class="btn-save" style="background:#2563eb" onclick="savePwd()">确认重设</button>
         </div>
     </div>
 </div>
@@ -1636,7 +1636,7 @@
 <div class="modal-overlay" id="add-agent-modal">
     <div class="modal-card" style="width:580px; max-height: 90vh;">
         <div class="modal-header">
-            <span>新增直屬代理</span>
+            <span>新增直属代理</span>
             <button class="modal-close" onclick="closeAddAgentModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px 40px;">
@@ -1671,13 +1671,13 @@
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>登入帳號</label>
-                    <input type="text" placeholder="請輸入登入帳號" id="add-agent-id">
+                    <input type="text" placeholder="请输入登录账号" id="add-agent-id">
                     <div class="form-main-hint">2-20位英數字及下劃線</div>
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>登入密碼</label>
                     <div class="input-with-icon">
-                        <input type="password" placeholder="請輸入登入密碼" id="add-agent-pwd">
+                        <input type="password" placeholder="请输入登录密码" id="add-agent-pwd">
                         <i class="fas fa-eye eye" onclick="togglePass('add-agent-pwd')"></i>
                     </div>
                     <div class="form-main-hint">8-16位英數字</div>
@@ -1685,19 +1685,19 @@
                 <div class="form-group-add">
                     <label><span>*</span>確認密碼</label>
                     <div class="input-with-icon">
-                        <input type="password" placeholder="請再次輸入密碼" id="add-agent-confirm">
+                        <input type="password" placeholder="请再次输入密码" id="add-agent-confirm">
                         <i class="fas fa-eye eye" onclick="togglePass('add-agent-confirm')"></i>
                     </div>
                     <div class="form-main-hint" style="color:#ef4444">*密碼需為8-16位英數字</div>
                 </div>
                 <div class="form-group-add">
-                    <label><span>*</span>佔成比</label>
-                    <input type="number" placeholder="請輸入佔成比" id="add-agent-ratio">
-                    <div class="form-main-hint">範圍 0 - 50 %</div>
+                    <label><span>*</span>占成比</label>
+                    <input type="number" placeholder="请输入占成比" id="add-agent-ratio">
+                    <div class="form-main-hint">范围 0 - 50 %</div>
                 </div>
                 <div class="form-group-add">
                     <label><span>*</span>有效投注比</label>
-                    <input type="number" placeholder="請輸入有效投注比" id="add-agent-bet">
+                    <input type="number" placeholder="请输入有效投注比" id="add-agent-bet">
                     <div class="form-main-hint">範圍 0 - 1 %</div>
                 </div>
             </div>
@@ -1708,16 +1708,16 @@
                     以下聯絡資訊為選填項
                 </div>
                 <div class="form-grid-2">
-                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="請輸入姓名" id="add-agent-name"></div>
-                    <div class="form-group-add"><label>電話</label><input type="text" placeholder="請輸入電話" id="add-agent-phone"></div>
-                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="請輸入郵箱" id="add-agent-email"></div>
-                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="請輸入QQ" id="add-agent-qq"></div>
-                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="請輸入微信" id="add-agent-wechat"></div>
-                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="請輸入Zalo" id="add-agent-zalo"></div>
-                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="請輸入Facebook" id="add-agent-fb"></div>
-                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="請輸入Whatsapp" id="add-agent-wa"></div>
-                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="請輸入Telegram" id="add-agent-tg"></div>
-                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="請輸入Viber" id="add-agent-viber"></div>
+                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="请输入姓名" id="add-agent-name"></div>
+                    <div class="form-group-add"><label>电话</label><input type="text" placeholder="请输入电话" id="add-agent-phone"></div>
+                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="请输入邮箱" id="add-agent-email"></div>
+                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="请输入QQ" id="add-agent-qq"></div>
+                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="请输入微信" id="add-agent-wechat"></div>
+                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="请输入Zalo" id="add-agent-zalo"></div>
+                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="请输入Facebook" id="add-agent-fb"></div>
+                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="请输入Whatsapp" id="add-agent-wa"></div>
+                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="请输入Telegram" id="add-agent-tg"></div>
+                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="请输入Viber" id="add-agent-viber"></div>
                 </div>
             </div>
 
@@ -1743,7 +1743,7 @@
                             <div class="summary-value" id="summ-pwd">dddds3455aa</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-label">佔成比</div>
+                            <div class="summary-label">占成比</div>
                             <div class="summary-value" id="summ-ratio">2%</div>
                         </div>
                         <div class="summary-item">
@@ -1765,7 +1765,7 @@
 <div class="modal-overlay" id="add-member-modal">
     <div class="modal-card" style="width:580px; max-height: 90vh;">
         <div class="modal-header">
-            <span>新增直屬會員</span>
+            <span>新增直属会员</span>
             <button class="modal-close" onclick="closeAddModal('member')"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body" style="padding: 30px 40px;">
@@ -1824,22 +1824,22 @@
             <div id="step-member-2-content" class="step-content">
                 <div class="optional-hint-box">以下聯絡資訊為選填項</div>
                 <div class="form-grid-2">
-                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="請輸入姓名" id="add-member-name"></div>
-                    <div class="form-group-add"><label>電話</label><input type="text" placeholder="請輸入電話" id="add-member-phone"></div>
-                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="請輸入郵箱" id="add-member-email"></div>
-                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="請輸入QQ" id="add-member-qq"></div>
-                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="請輸入微信" id="add-member-wechat"></div>
-                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="請輸入Zalo" id="add-member-zalo"></div>
-                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="請輸入Facebook" id="add-member-fb"></div>
-                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="請輸入Whatsapp" id="add-member-wa"></div>
-                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="請輸入Telegram" id="add-member-tg"></div>
-                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="請輸入Viber" id="add-member-viber"></div>
+                    <div class="form-group-add"><label>姓名</label><input type="text" placeholder="请输入姓名" id="add-member-name"></div>
+                    <div class="form-group-add"><label>电话</label><input type="text" placeholder="请输入电话" id="add-member-phone"></div>
+                    <div class="form-group-add"><label>E-Mail</label><input type="text" placeholder="请输入邮箱" id="add-member-email"></div>
+                    <div class="form-group-add"><label>QQ</label><input type="text" placeholder="请输入QQ" id="add-member-qq"></div>
+                    <div class="form-group-add"><label>微信</label><input type="text" placeholder="请输入微信" id="add-member-wechat"></div>
+                    <div class="form-group-add"><label>Zalo</label><input type="text" placeholder="请输入Zalo" id="add-member-zalo"></div>
+                    <div class="form-group-add"><label>Facebook</label><input type="text" placeholder="请输入Facebook" id="add-member-fb"></div>
+                    <div class="form-group-add"><label>Whatsapp</label><input type="text" placeholder="请输入Whatsapp" id="add-member-wa"></div>
+                    <div class="form-group-add"><label>Telegram</label><input type="text" placeholder="请输入Telegram" id="add-member-tg"></div>
+                    <div class="form-group-add"><label>Viber</label><input type="text" placeholder="请输入Viber" id="add-member-viber"></div>
                 </div>
             </div>
 
             <!-- Step 3 Content -->
             <div id="step-member-3-content" class="step-content">
-                <div class="confirm-hint-box">請確認以下資訊，點選"確認新增"完成建立</div>
+                <div class="confirm-hint-box">请确认以下信息，点击"确认新增"完成建立</div>
                 <div class="summary-box">
                     <div class="summary-title">基本資訊</div>
                     <div class="summary-item"><div class="summary-label">上級帳號</div><div class="summary-value" id="summ-member-parent">agent001</div></div>
@@ -1866,14 +1866,14 @@
             <!-- Warning Icon + Title -->
             <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px;">
                 <i class="fas fa-exclamation-triangle" style="font-size:26px;color:#ef4444;"></i>
-                <span style="font-size:22px;font-weight:800;color:var(--text-main);">登出會員</span>
+                <span style="font-size:22px;font-weight:800;color:var(--text-main);">登出会员</span>
             </div>
             <!-- Warning Text -->
             <p style="font-size:15px;line-height:1.75;color:#ef4444;font-weight:600;margin-bottom:8px;">
-                確認後會強制將該會員離開遊戲，若該會員有已下注的注單，依然會做結算動作。
+                确认后会强制将该会员离开游戏，若该会员有已下注的注单，依然会做结算动作。
             </p>
             <!-- Target Account -->
-            <p style="font-size:13px;color:var(--text-dim);margin-top:12px;">目標帳號：<b id="logout-member-target" style="color:var(--text-main);"></b></p>
+            <p style="font-size:13px;color:var(--text-dim);margin-top:12px;">目标账号：<b id="logout-member-target" style="color:var(--text-main);"></b></p>
         </div>
         <div class="modal-footer" style="justify-content:center;gap:16px;padding:20px 36px 28px;border-top:none;">
             <button class="btn-cancel" onclick="closeLogoutMemberModal()"
@@ -1884,7 +1884,7 @@
                        box-shadow:0 4px 14px rgba(220,38,38,0.4);"
                 onmouseover="this.style.background='#b91c1c'"
                 onmouseout="this.style.background='#dc2626'">
-                <i class="fas fa-sign-out-alt" style="margin-right:6px;"></i>確認登出
+                <i class="fas fa-sign-out-alt" style="margin-right:6px;"></i>确认登出
             </button>
         </div>
     </div>
@@ -1894,17 +1894,17 @@
 <div class="modal-overlay" id="transfer-modal">
     <div class="modal-card" style="width:400px">
         <div class="modal-header">
-            <span>轉帳</span>
+            <span>转账</span>
             <button class="modal-close" onclick="closeTransferModal()"><i class="fas fa-times"></i></button>
         </div>
         <div class="modal-body">
             <div class="transfer-account-box">
-                <span class="label">轉入帳號</span>
+                <span class="label">转入账号</span>
                 <span class="value" id="transfer-target-id">leodl3</span>
             </div>
             <div class="form-group">
-                <label><span style="color:var(--accent-red)">*</span> 轉帳金額</label>
-                <input type="number" id="transfer-amount" placeholder="請輸入轉帳金額">
+                <label><span style="color:var(--accent-red)">*</span> 转账金额</label>
+                <input type="number" id="transfer-amount" placeholder="请输入转账金额">
                 <div class="preset-group">
                     <button class="btn-preset" onclick="setTransferAmount(1000)">1K</button>
                     <button class="btn-preset" onclick="setTransferAmount(5000)">5K</button>
@@ -1912,11 +1912,11 @@
                     <button class="btn-preset" onclick="setTransferAmount(50000)">50K</button>
                 </div>
             </div>
-            <div class="balance-label">可用額度： 0.00</div>
+            <div class="balance-label">可用额度： 0.00</div>
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeTransferModal()">取消</button>
-            <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-sub);box-shadow:none" id="btn-confirm-transfer" onclick="confirmTransfer()">確認轉帳</button>
+            <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-sub);box-shadow:none" id="btn-confirm-transfer" onclick="confirmTransfer()">确认转账</button>
         </div>
     </div>
 </div>
@@ -1927,14 +1927,14 @@
         <div style="font-size: 50px; color: #10b981; margin-bottom: 20px;">
             <i class="fas fa-check-circle"></i>
         </div>
-        <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main); margin-bottom: 15px;" id="add-success-title">代理帳戶建立成功</h3>
+        <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main); margin-bottom: 15px;" id="add-success-title">代理账户建立成功</h3>
         <p id="add-success-desc" style="color:var(--text-dim); font-size: 14px; margin-bottom: 25px; line-height: 1.6;">
             <span id="add-success-type">代理</span> <b id="new-agent-id-display" style="color: #f59e0b;"></b> 已成功建立。<br>
-            您是否要現在轉帳金額到這個新的帳號？
+            您是否要现在转账金额到这个新的账号？
         </p>
         <div style="display:flex; gap:12px; justify-content:center;">
-            <button class="btn-cancel" onclick="closeSuccessModal()" style="padding: 10px 20px; font-size: 14px;">以後再說</button>
-            <button class="btn-save" onclick="confirmGoToTransfer()" style="padding: 10px 24px; font-size: 14px;">前往轉帳</button>
+            <button class="btn-cancel" onclick="closeSuccessModal()" style="padding: 10px 20px; font-size: 14px;">以后再说</button>
+            <button class="btn-save" onclick="confirmGoToTransfer()" style="padding: 10px 24px; font-size: 14px;">前往转账</button>
         </div>
     </div>
 </div>
@@ -2021,29 +2021,29 @@
 
     /* ───── TREE STRUCTURE ───── */
     // ═══════════════════════════════════════════
-    //  TREE 層級說明:
-    //  L2 = leozdfl（總代理，樹的根）
-    //  L3 = 直屬代理（往下第 1 層）
-    //  L4 = 第 2 層代理
-    //  L5 = 第 3 層代理
-    //  L6 = 第 4 層代理（最深，無下級）
+    //  TREE 层级说明:
+    //  L2 = leozdfl（总代理，树的根）
+    //  L3 = 直属代理（往下第 1 层）
+    //  L4 = 第 2 层代理
+    //  L5 = 第 3 层代理
+    //  L6 = 第 4 层代理（最深，无下级）
     // ═══════════════════════════════════════════
     const TREE = {
         id: 'leozdfl', label: 'leozdfl', icon: 'fa-users-cog', active: true,  // L2
         children: [
 
-            // ──────────── leodl3 代理線 ────────────
+            // ──────────── leodl3 代理线 ────────────
             {
                 id: 'leodl3', label: 'leodl3', icon: 'fa-user-friends', active: true,  // L3
                 children: [
-                    // L4 — 直屬下級
+                    // L4 — 直属下级
                     { id: 'ld3_sub01', label: 'ld3_sub01', icon: 'fa-user', children: [] },
                     { id: 'ld3_sub02', label: 'ld3_sub02', icon: 'fa-user', children: [] },
                     { id: 'ld3_sub03', label: 'ld3_sub03', icon: 'fa-user', children: [] },
                 ]
             },
 
-            // ──────────── vipagent01 代理線（展示完整四層）────────────
+            // ──────────── vipagent01 代理线（展示完整四层）────────────
             {
                 id: 'vipagent01', label: 'vipagent01', icon: 'fa-user-friends',  // L3
                 children: [
@@ -2053,7 +2053,7 @@
                             {
                                 id: 'vip_n_mgr1', label: 'vip_n_mgr1', icon: 'fa-user-tie',  // L5
                                 children: [
-                                    // L6 ── 最深層，無下級
+                                    // L6 ── 最深层，无下级
                                     { id: 'vip_n_m1_a', label: 'vip_n_m1_a', icon: 'fa-user', children: [] },
                                     { id: 'vip_n_m1_b', label: 'vip_n_m1_b', icon: 'fa-user', children: [] },
                                     { id: 'vip_n_m1_c', label: 'vip_n_m1_c', icon: 'fa-user', children: [] },
@@ -2091,7 +2091,7 @@
                 ]
             },
 
-            // ──────────── 其他 L3 代理（各種深度）────────────
+            // ──────────── 其他 L3 代理（各种深度）────────────
             // L3 葉節點
             { id: 'partner88',   label: 'partner88',   icon: 'fa-user', children: [] },
             { id: 'superagent9', label: 'superagent9', icon: 'fa-user', children: [] },
@@ -2243,7 +2243,7 @@
         
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `組織架構 - ${id}`;
+        if (titleEl) titleEl.textContent = `组织架构 - ${id}`;
         
         // Update Mobile Tree Bar
         const mtCurrentId = document.getElementById('mt-current-id');
@@ -2252,7 +2252,7 @@
             mtCurrentId.textContent = id;
             if (mtCurrentType) {
                 const isAgents = activeTab === 'agents';
-                mtCurrentType.textContent = isAgents ? '直屬代理' : '直屬會員';
+                mtCurrentType.textContent = isAgents ? '直属代理' : '直属会员';
             }
         }
 
@@ -2340,7 +2340,7 @@
         let rowsHTML = filtered.map(row => {
             const [openDate, openTime] = row.openTime.split('\n');
             const [loginDate, loginTime] = row.lastLogin.split('\n');
-            const statusLabel = row.status === 'normal' ? '正常' : '停權';
+            const statusLabel = row.status === 'normal' ? '正常' : '停权';
             const statusClass = row.status === 'normal' ? 'status-normal' : 'status-suspended';
             
             const windowCell = isAgents ? '' : `<td><span class="cell-window">${row.window}</span></td>`;
@@ -2350,7 +2350,7 @@
                 <td class="sticky-column sticky-col-1">
                     <div class="cell-account ${isAgents ? 'clickable' : ''}" ${isAgents ? `onclick="selectNode('${row.id}')"` : ''}>
                         <span class="acc-name">${row.id}</span>
-                        <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
+                        <button class="copy-btn" title="复制" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
@@ -2363,13 +2363,13 @@
                 <td>
                     <div class="cell-account ${row.parentAgent ? 'clickable' : ''}">
                         <span class="acc-name" onclick="selectNode('${row.parentAgent}')">${row.parentAgent || '—'}</span>
-                        ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
+                        ${row.parentAgent ? `<button class="copy-btn" title="复制" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
                 <td>
                     <div class="cell-account ${row.topAgent ? 'clickable' : ''}">
                         <span class="acc-name" onclick="selectNode('${row.topAgent}')" style="color:var(--accent-purple);font-size:12px;font-weight:600;">${row.topAgent || '—'}</span>
-                        ${row.topAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.topAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
+                        ${row.topAgent ? `<button class="copy-btn" title="复制" onclick="copyText('${row.topAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
                 <td>
@@ -2389,7 +2389,7 @@
                 </td>
                 <td>
                     <div class="action-cell">
-                        <button class="icon-btn" title="設定" onclick="openCtxMenu(event, '${row.id}')">
+                        <button class="icon-btn" title="设定" onclick="openCtxMenu(event, '${row.id}')">
                             <i class="fas fa-cog"></i>
                         </button>
                     </div>
@@ -2397,9 +2397,9 @@
             </tr>`;
         }).join('');
 
-        const windowHeader = isAgents ? '' : '<th>盤口</th>';
+        const windowHeader = isAgents ? '' : '<th>盘口</th>';
         const ratioHeader = isAgents 
-            ? `<th style="cursor:pointer" onclick="sortBy('ratio')">佔成比 <i class="fas ${getSortIcon('ratio')} sort-icon" style="${sortColumn === 'ratio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+            ? `<th style="cursor:pointer" onclick="sortBy('ratio')">占成比 <i class="fas ${getSortIcon('ratio')} sort-icon" style="${sortColumn === 'ratio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
                <th style="cursor:pointer" onclick="sortBy('effRatio')">有效投注比 <i class="fas ${getSortIcon('effRatio')} sort-icon" style="${sortColumn === 'effRatio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>` 
             : `<th style="cursor:pointer" onclick="sortBy('ratio')">有效投注比 <i class="fas ${getSortIcon('ratio')} sort-icon" style="${sortColumn === 'ratio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>`;
         const colCount = isAgents ? 11 : 11;
@@ -2408,16 +2408,16 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th class="sticky-column sticky-col-1">帳號</th>
+                    <th class="sticky-column sticky-col-1">账号</th>
                     <th class="sticky-column sticky-col-2">姓名</th>
-                    <th style="cursor:pointer" onclick="sortBy('balance')">當前餘額 (CNY) <i class="fas ${getSortIcon('balance')} sort-icon" style="${sortColumn === 'balance' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('balance')">当前余额 (CNY) <i class="fas ${getSortIcon('balance')} sort-icon" style="${sortColumn === 'balance' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
                     ${ratioHeader}
                     ${windowHeader}
-                    <th>上級代理</th>
-                    <th>總代理</th>
-                    <th style="cursor:pointer" onclick="sortBy('openTime')">開戶時間 <i class="fas ${getSortIcon('openTime')} sort-icon" style="${sortColumn === 'openTime' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
-                    <th style="cursor:pointer" onclick="sortBy('lastLogin')">最後登入 <i class="fas ${getSortIcon('lastLogin')} sort-icon" style="${sortColumn === 'lastLogin' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
-                    <th class="center">狀態</th>
+                    <th>上级代理</th>
+                    <th>总代理</th>
+                    <th style="cursor:pointer" onclick="sortBy('openTime')">开户时间 <i class="fas ${getSortIcon('openTime')} sort-icon" style="${sortColumn === 'openTime' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('lastLogin')">最后登录 <i class="fas ${getSortIcon('lastLogin')} sort-icon" style="${sortColumn === 'lastLogin' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th class="center">状态</th>
                     <th class="right">操作</th>
                 </tr>
             </thead>
@@ -2460,7 +2460,7 @@
 
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `全局搜索結果 - ${query}`;
+        if (titleEl) titleEl.textContent = `全局搜索结果 - ${query}`;
         
         // Scenario 2: No data
         if (query === 'none' || query === '無' || query === 'null' || query === '0') {
@@ -2470,7 +2470,7 @@
             globalSearchResults = [
                 {
                     id: query,
-                    name: type === 'agent' ? '全局代理測試' : '全局會員測試',
+                    name: type === 'agent' ? '全局代理测试' : '全局会员测试',
                     parentAgent: 'vipagent01',
                     topAgent: 'leozdfl',
                     balance: '8,888.880',
@@ -2483,7 +2483,7 @@
                 },
                 {
                     id: query + '02',
-                    name: type === 'agent' ? '代理測試號2' : '會員測試號2',
+                    name: type === 'agent' ? '代理测试号2' : '会员测试号2',
                     parentAgent: 'regional02',
                     topAgent: 'leozdfl',
                     balance: '1,234.560',
@@ -2523,13 +2523,13 @@
         if (activeTab === 'members') {
             if (logoutItem) logoutItem.style.display = 'flex';
             if (logoutSep) logoutSep.style.display = 'block';
-            if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯會員`;
+            if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑会员`;
             if (addSubItem) addSubItem.style.display = 'none';
             if (addMemberItem) addMemberItem.style.display = 'flex';
         } else {
             if (logoutItem) logoutItem.style.display = 'none';
             if (logoutSep) logoutSep.style.display = 'none';
-            if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>編輯帳戶`;
+            if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑账户`;
             if (addSubItem) addSubItem.style.display = 'flex';
             if (addMemberItem) addMemberItem.style.display = 'none';
         }
@@ -2548,7 +2548,7 @@
     window.copyText = function (text, e) {
         e.stopPropagation();
         navigator.clipboard.writeText(text).then(() => {
-            showToast('複製成功');
+            showToast('复制成功');
         }).catch(() => {});
     };
 
@@ -2567,7 +2567,7 @@
 
         if (activeTab === 'members') {
             const headerText = editMemberModal.querySelector('.modal-header span');
-            if (headerText) headerText.textContent = `編輯會員 - ${lastClickedId}`;
+            if (headerText) headerText.textContent = `编辑会员 - ${lastClickedId}`;
 
             // Pre-fill member modal fields from row data
             const parentEl = document.getElementById('edit-member-parent');
@@ -2588,7 +2588,7 @@
             if (nameEl) nameEl.value = rowData.name || '';
             if (phoneEl) phoneEl.value = '09' + (String(lastClickedId.length * 999).slice(-8));
             if (emailEl) emailEl.value = lastClickedId + '@example.com';
-            if (remarksEl) remarksEl.value = '優質會員，投注穩定。';
+            if (remarksEl) remarksEl.value = '优质会员，投注稳定。';
 
             // Fill other social dummy data
             ['qq','wechat','zalo','fb','whatsapp','line','tg','viber'].forEach(sns => {
@@ -2600,7 +2600,7 @@
             editMemberModal.classList.add('open');
         } else {
             const headerText = editAgentModal.querySelector('.modal-header span');
-            if (headerText) headerText.textContent = `編輯帳戶 - ${lastClickedId}`;
+            if (headerText) headerText.textContent = `编辑账户 - ${lastClickedId}`;
 
             // Pre-fill agent modal fields from row data
             const parentEl = document.getElementById('edit-agent-parent');
@@ -2622,7 +2622,7 @@
             if (nameEl) nameEl.value = rowData.name || '';
             if (phoneEl) phoneEl.value = '09' + (String(lastClickedId.length * 888).slice(-8));
             if (emailEl) emailEl.value = lastClickedId + '@agent-sys.net';
-            if (remarksEl) remarksEl.value = '該代理業績良好，維護中。';
+            if (remarksEl) remarksEl.value = '该代理业绩良好，维护中。';
 
             // Fill other social dummy data
             ['qq','wechat','zalo','fb','whatsapp','line','tg','viber'].forEach(sns => {
@@ -2647,11 +2647,11 @@
     window.closeEditMemberModal = function() { editMemberModal.classList.remove('open'); };
 
     window.saveEditAgent = function() {
-        showToast('代理資料儲存成功');
+        showToast('代理资料保存成功');
         closeEditAgentModal();
     };
     window.saveEditMember = function() {
-        showToast('會員資料儲存成功');
+        showToast('会员资料保存成功');
         closeEditMemberModal();
     };
 
@@ -2666,7 +2666,7 @@
         pwdModal.classList.remove('open');
     };
     window.savePwd = function() {
-        alert('密碼重設成功');
+        alert('密码重设成功');
         closePwdModal();
     };
 
@@ -2686,7 +2686,7 @@
         document.getElementById('transfer-amount').value = val;
     };
     window.confirmTransfer = function() {
-        showToast('轉帳成功');
+        showToast('转账成功');
         closeTransferModal();
     };
 
@@ -2872,12 +2872,12 @@
     };
     window.confirmLogoutMember = function() {
         closeLogoutMemberModal();
-        showToast(`會員 ${lastClickedId} 已強制登出`);
+        showToast(`会员 ${lastClickedId} 已强制登出`);
     };
 
     /* ───── SYSTEM LOGOUT ───── */
     document.getElementById('btn-logout').addEventListener('click', () => {
-        if (confirm('確定要登出嗎？')) alert('已登出');
+        if (confirm('确定要登出吗？')) alert('已登出');
     });
 
     /* ───── RESIZE LOGIC ───── */
@@ -2932,7 +2932,7 @@
             // Collapse all
             document.querySelectorAll('.t-children').forEach(el => el.classList.add('collapsed'));
             document.querySelectorAll('.t-toggle').forEach(el => el.classList.remove('open'));
-            btn.textContent = '全部展開';
+            btn.textContent = '全部展开';
         }
     });
 
