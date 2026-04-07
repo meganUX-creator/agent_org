@@ -2394,6 +2394,29 @@
 
     /* ───── RENDER TABLE ───── */
     let activeTab = 'agents';
+    let sortColumn = null;
+    let sortOrder = 'asc'; // 'asc' or 'desc'
+
+    window.sortBy = function(col) {
+        if (sortColumn === col) {
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortColumn = col;
+            sortOrder = 'asc';
+        }
+        renderTable();
+    };
+
+    function getSortIcon(col) {
+        if (sortColumn !== col) return 'fa-sort';
+        return sortOrder === 'asc' ? 'fa-sort-up' : 'fa-sort-down';
+    }
+
+    function parseNumeric(val) {
+        if (!val) return 0;
+        // handles '276,828.671' or '76%' or negative '-1,234.56'
+        return parseFloat(val.toString().replace(/,/g, '').replace(/%/g, '')) || 0;
+    }
 
     function renderTable() {
         const area = document.getElementById('table-area');
@@ -2414,7 +2437,45 @@
         }
         
         const isAgents = activeTab === 'agents';
-        const filtered = isAgents ? currentAgents : currentMembers;
+        let filtered = isAgents ? currentAgents : currentMembers;
+
+        // Stability: Generate mock data once per node if missing
+        filtered.forEach(row => {
+            if (row.totalWinLoss === undefined) {
+                row.totalWinLoss = (Math.random() * 20000 - 10000).toFixed(2);
+                row.betCount = Math.floor(Math.random() * 500);
+                row.betAmount = (Math.random() * 50000).toFixed(2);
+                row.payoutWithPrincipal = (Math.random() * 45000).toFixed(2);
+                row.payoutExclPrincipal = (parseFloat(row.payoutWithPrincipal) - parseFloat(row.betAmount)).toFixed(2);
+                row.profitBetAmount = (row.betAmount * 0.95).toFixed(2);
+                row.validBet = (row.betAmount * 0.98).toFixed(2);
+                row.validBetRatio = "1.0%";
+                row.validBetCommission = (row.validBet * 0.01).toFixed(2);
+                row.transferIn = (Math.random() * 10000).toFixed(2);
+                row.transferOut = (Math.random() * 8000).toFixed(2);
+                row.dealerTip = (Math.random() * 200).toFixed(2);
+            }
+        });
+
+        // Apply Sorting
+        if (sortColumn) {
+            filtered.sort((a, b) => {
+                let vA = a[sortColumn];
+                let vB = b[sortColumn];
+
+                // All these are numeric
+                if (['totalWinLoss', 'betCount', 'betAmount', 'payoutWithPrincipal', 'payoutExclPrincipal', 
+                     'profitBetAmount', 'validBet', 'validBetRatio', 'validBetCommission', 
+                     'transferIn', 'transferOut', 'dealerTip'].includes(sortColumn)) {
+                    vA = parseNumeric(vA);
+                    vB = parseNumeric(vB);
+                }
+                
+                if (vA < vB) return sortOrder === 'asc' ? -1 : 1;
+                if (vA > vB) return sortOrder === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
 
         const countAgentsEl = document.getElementById('count-agents');
         const countMembersEl = document.getElementById('count-members');
@@ -2424,25 +2485,19 @@
         if (totalRecordsEl) totalRecordsEl.textContent = filtered.length;
 
         let rowsHTML = filtered.map(row => {
-            // Mock data for the new report columns
-            const totalWinLoss = (Math.random() * 2000 - 1000).toFixed(2);
-            const betCount = Math.floor(Math.random() * 500);
-            const betAmount = (Math.random() * 50000).toFixed(2);
-            const payoutWithPrincipal = (Math.random() * 45000).toFixed(2);
-            const payoutExclPrincipal = (payoutWithPrincipal - betAmount).toFixed(2);
-            const profitBetAmount = (betAmount * 0.95).toFixed(2);
-            const validBet = (betAmount * 0.98).toFixed(2);
-            const validBetRatio = "1.0%";
-            const validBetCommission = (validBet * 0.01).toFixed(2);
-            const ratioPercent = row.ratio || "40%";
-            const ratioWinLoss = (totalWinLoss * 0.4).toFixed(2);
-            const dueCommission = (validBetCommission * 0.5).toFixed(2);
-            const transferIn = (Math.random() * 10000).toFixed(2);
-            const transferOut = (Math.random() * 8000).toFixed(2);
-            const dealerTip = (Math.random() * 200).toFixed(2);
-            const topLevelAmount = (totalWinLoss * 0.1).toFixed(2);
-
             const isClickable = isAgents;
+            const totalWinLoss = row.totalWinLoss;
+            const betCount = row.betCount;
+            const betAmount = row.betAmount;
+            const payoutWithPrincipal = row.payoutWithPrincipal;
+            const payoutExclPrincipal = row.payoutExclPrincipal;
+            const profitBetAmount = row.profitBetAmount;
+            const validBet = row.validBet;
+            const validBetRatio = row.validBetRatio;
+            const validBetCommission = row.validBetCommission;
+            const transferIn = row.transferIn;
+            const transferOut = row.transferOut;
+            const dealerTip = row.dealerTip;
 
             return `
             <tr>
@@ -2485,18 +2540,18 @@
                 <tr>
                     <th class="sticky-column sticky-col-1">帳號</th>
                     <th>上級代理</th>
-                    <th>總輸贏</th>
-                    <th>投注數</th>
-                    <th>投注金額</th>
-                    <th>派彩金額(含本金)</th>
-                    <th>派彩金額(扣除本金)</th>
-                    <th>盈利投注金額</th>
-                    <th>有效投注</th>
-                    <th>有效投注比</th>
-                    <th>有效投注佣金</th>
-                    <th>额度转入金額</th>
-                    <th>额度转出金額</th>
-                    <th>荷官打赏</th>
+                    <th style="cursor:pointer" onclick="sortBy('totalWinLoss')">總輸贏 <i class="fas ${getSortIcon('totalWinLoss')} sort-icon" style="${sortColumn === 'totalWinLoss' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('betCount')">投注數 <i class="fas ${getSortIcon('betCount')} sort-icon" style="${sortColumn === 'betCount' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('betAmount')">投注金額 <i class="fas ${getSortIcon('betAmount')} sort-icon" style="${sortColumn === 'betAmount' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('payoutWithPrincipal')">派彩金額(含本金) <i class="fas ${getSortIcon('payoutWithPrincipal')} sort-icon" style="${sortColumn === 'payoutWithPrincipal' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('payoutExclPrincipal')">派彩金額(扣除本金) <i class="fas ${getSortIcon('payoutExclPrincipal')} sort-icon" style="${sortColumn === 'payoutExclPrincipal' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('profitBetAmount')">盈利投注金額 <i class="fas ${getSortIcon('profitBetAmount')} sort-icon" style="${sortColumn === 'profitBetAmount' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('validBet')">有效投注 <i class="fas ${getSortIcon('validBet')} sort-icon" style="${sortColumn === 'validBet' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('validBetRatio')">有效投注比 <i class="fas ${getSortIcon('validBetRatio')} sort-icon" style="${sortColumn === 'validBetRatio' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('validBetCommission')">有效投注佣金 <i class="fas ${getSortIcon('validBetCommission')} sort-icon" style="${sortColumn === 'validBetCommission' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('transferIn')">额度转入金額 <i class="fas ${getSortIcon('transferIn')} sort-icon" style="${sortColumn === 'transferIn' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('transferOut')">额度转出金額 <i class="fas ${getSortIcon('transferOut')} sort-icon" style="${sortColumn === 'transferOut' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
+                    <th style="cursor:pointer" onclick="sortBy('dealerTip')">荷官打赏 <i class="fas ${getSortIcon('dealerTip')} sort-icon" style="${sortColumn === 'dealerTip' ? 'opacity:1;color:var(--primary)' : ''}"></i></th>
                 </tr>
             </thead>
             <tbody>
