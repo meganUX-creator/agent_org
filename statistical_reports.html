@@ -1498,10 +1498,10 @@
                     <option value="agent">代理</option>
                     <option value="member">會員</option>
                 </select>
-                <input type="text" class="search-input" id="global-search-input" placeholder="搜尋帳號" style="width: 150px;">
+                <input type="text" class="search-input" id="global-search-input" placeholder="搜索帳號" style="width: 150px;">
             </div>
             
-            <button class="btn-query" id="btn-global-search">查詢</button>
+            <button class="btn-query" id="btn-global-search">搜索</button>
             
             <button class="btn-export" title="匯出報表">
                 <i class="fas fa-download" style="font-size: 14px;"></i>
@@ -2606,7 +2606,7 @@
         activeTab = typeFilter === 'agent' ? 'agents' : 'members';
 
         const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `搜尋報表結果：${query} (${typeFilter === 'agent' ? '代理' : '會員'})`;
+        if (titleEl) titleEl.textContent = `搜索報表結果：${query} (${typeFilter === 'agent' ? '代理' : '會員'})`;
         
         renderTable();
         

@@ -602,11 +602,15 @@
         .cell-account { display: flex; align-items: center; gap: 8px; }
         .cell-account .acc-name { 
             font-weight: 600; font-size: 13px; 
-            color: var(--primary); 
-            cursor: pointer; 
+            color: var(--text-main); 
+            cursor: default; 
             transition: var(--transition);
         }
-        .cell-account .acc-name:hover { 
+        .cell-account.clickable .acc-name { 
+            color: var(--primary); 
+            cursor: pointer; 
+        }
+        .cell-account.clickable .acc-name:hover { 
             color: #7dd3fc; 
             text-decoration: underline; 
         }
@@ -1281,9 +1285,9 @@
         </select>
         <div class="search-wrap" style="width: 300px; max-width: 100%;">
             <i class="fas fa-search" style="left: 10px;"></i>
-            <input type="text" class="search-input" id="global-search-input" placeholder="全局搜尋..." style="padding-left: 32px;">
+            <input type="text" class="search-input" id="global-search-input" placeholder="全局搜索..." style="padding-left: 32px;">
         </div>
-        <button class="btn-search" id="btn-global-search">搜尋</button>
+        <button class="btn-search" id="btn-global-search">搜索</button>
         <div class="spacer" style="flex:1;"></div>
         <button class="btn-add" onclick="openAddTypeModal()">
             <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增</span>
@@ -2207,12 +2211,35 @@
     let globalSearchResults = null;
 
     function selectNode(id) {
+        if (!id || id === '—') return;
         isGlobalSearchMode = false;
         globalSearchResults = null;
         currentSelectedId = id;
         document.querySelectorAll('.t-header').forEach(h => h.classList.remove('active-node'));
-        const target = document.querySelector(`[data-id="${id}"] > .t-header`);
-        if (target) target.classList.add('active-node');
+        
+        const wrap = document.querySelector(`[data-id="${id}"]`);
+        if (wrap) {
+            const targetHeader = wrap.querySelector('.t-header');
+            if (targetHeader) targetHeader.classList.add('active-node');
+            
+            // Expand all parents
+            let parent = wrap.parentElement;
+            while (parent && parent.id !== 'agent-tree') {
+                if (parent.classList.contains('t-children')) {
+                    parent.classList.remove('collapsed');
+                    // Also update the toggle icon of the header preceding this container
+                    const parentWrap = parent.parentElement;
+                    if (parentWrap) {
+                        const toggle = parentWrap.querySelector(':scope > .t-header .t-toggle');
+                        if (toggle) toggle.classList.add('open');
+                    }
+                }
+                parent = parent.parentElement;
+            }
+            
+            // Scroll tree to view
+            wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
         
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
@@ -2234,6 +2261,7 @@
         
         renderTable();
     }
+    window.selectNode = selectNode;
 
     const treeRoot = document.getElementById('agent-tree');
     treeRoot.appendChild(buildTreeNode(TREE, 0));
@@ -2321,7 +2349,7 @@
             <tr>
                 <td class="sticky-column sticky-col-1">
                     <div class="cell-account ${isAgents ? 'clickable' : ''}" ${isAgents ? `onclick="selectNode('${row.id}')"` : ''}>
-                        <span class="acc-name" style="${isAgents ? '' : 'color: var(--text-main); cursor: default;'}" onmouseover="${isAgents ? '' : 'this.style.textDecoration=\'none\''}">${row.id}</span>
+                        <span class="acc-name">${row.id}</span>
                         <button class="copy-btn" title="複製" onclick="copyText('${row.id}',event)">
                             <i class="fas fa-copy"></i>
                         </button>
@@ -2333,14 +2361,14 @@
                 ${isAgents ? `<td class="cell-ratio">${row.effRatio || '0.0%'}</td>` : ''}
                 ${windowCell}
                 <td>
-                    <div class="cell-account">
-                        <span class="acc-name" onclick="${row.parentAgent ? `selectNode('${row.parentAgent}')` : ''}" style="${row.parentAgent ? 'cursor: pointer;' : 'color: var(--text-sub); cursor: default;'}">${row.parentAgent || '—'}</span>
+                    <div class="cell-account ${row.parentAgent ? 'clickable' : ''}">
+                        <span class="acc-name" onclick="selectNode('${row.parentAgent}')">${row.parentAgent || '—'}</span>
                         ${row.parentAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.parentAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
                 <td>
-                    <div class="cell-account">
-                        <span style="color:var(--accent-purple);font-size:12px;font-weight:600;">${row.topAgent || '—'}</span>
+                    <div class="cell-account ${row.topAgent ? 'clickable' : ''}">
+                        <span class="acc-name" onclick="selectNode('${row.topAgent}')" style="color:var(--accent-purple);font-size:12px;font-weight:600;">${row.topAgent || '—'}</span>
                         ${row.topAgent ? `<button class="copy-btn" title="複製" onclick="copyText('${row.topAgent}',event)"><i class="fas fa-copy"></i></button>` : ''}
                     </div>
                 </td>
@@ -2432,7 +2460,7 @@
 
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
-        if (titleEl) titleEl.textContent = `全局搜尋結果 - ${query}`;
+        if (titleEl) titleEl.textContent = `全局搜索結果 - ${query}`;
         
         // Scenario 2: No data
         if (query === 'none' || query === '無' || query === 'null' || query === '0') {
