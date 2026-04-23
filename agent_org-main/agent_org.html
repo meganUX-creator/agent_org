@@ -1945,6 +1945,7 @@
 
     /* ───── DATA GENERATION ───── */
     let currentSelectedId = 'leozdfl';
+    window.currentSelectedId = currentSelectedId;
 
     function getSubAgentsFor(id) {
         if (id === 'leozdfl') {
@@ -2216,6 +2217,7 @@
         isGlobalSearchMode = false;
         globalSearchResults = null;
         currentSelectedId = id;
+        window.currentSelectedId = id;
         document.querySelectorAll('.t-header').forEach(h => h.classList.remove('active-node'));
         
         const wrap = document.querySelector(`[data-id="${id}"]`);
@@ -2287,6 +2289,18 @@
     function syncAddBtnVisibility() {
         const btn = document.getElementById('btn-open-add');
         if (!btn) return;
+        
+        if (activeTab === 'agents') {
+            btn.innerHTML = `<i class="fas fa-user-plus"></i> <span style="margin-left:8px;">新增我的下級</span>`;
+            btn.style.background = 'linear-gradient(135deg, #38bdf8, #2563eb)';
+            btn.style.boxShadow = '0 4px 15px rgba(37,99,235,0.3)';
+            btn.onclick = () => openAddModal('agent', currentSelectedId);
+        } else {
+            btn.innerHTML = `<i class="fas fa-plus"></i> <span style="margin-left:8px;">新增我的下級</span>`;
+            btn.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+            btn.style.boxShadow = 'var(--shadow-md)';
+            btn.onclick = () => openAddTypeModal();
+        }
         btn.style.display = 'flex';
     }
 
