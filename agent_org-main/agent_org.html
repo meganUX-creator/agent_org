@@ -2291,9 +2291,14 @@
         if (!btn) return;
         
         btn.innerHTML = `<i class="fas fa-plus"></i> <span style="margin-left:8px;">新增我的下級</span>`;
-        btn.style.background = 'linear-gradient(135deg, #a855f7, #7c3aed)';
-        btn.style.boxShadow = '0 4px 15px rgba(168,85,247,0.3)';
+        btn.style.background = 'transparent';
+        btn.style.color = '#38bdf8';
+        btn.style.border = '2px solid #38bdf8';
+        btn.style.boxShadow = 'none';
         btn.style.display = 'flex';
+        
+        btn.onmouseover = () => btn.style.background = 'rgba(56,189,248,0.1)';
+        btn.onmouseout = () => btn.style.background = 'transparent';
         
         btn.onclick = () => openAddTypeModal();
         btn.style.display = 'flex';
@@ -2459,7 +2464,7 @@
                     <td colspan="${colCount}" style="text-align:center;padding:60px 40px;color:var(--text-dim);">
                         <div style="margin-bottom:16px;font-size:15px;opacity:0.8;">\u7121\u8cc7\u6599</div>
                         ${isAgents ? `
-                        <button class="btn-add" onclick="openAddTypeModal()" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, #a855f7, #7c3aed);box-shadow:0 4px 15px rgba(168,85,247,0.3);border:none;">
+                        <button class="btn-add" onclick="openAddTypeModal()" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:transparent;color:#38bdf8;border:2px solid #38bdf8;box-shadow:none;" onmouseover="this.style.background='rgba(56,189,248,0.1)'" onmouseout="this.style.background='transparent'">
                             <i class="fas fa-plus"></i> <span style="margin-left:10px;font-size:15px;">新增我的下級</span>
                         </button>
                         ` : ''}
