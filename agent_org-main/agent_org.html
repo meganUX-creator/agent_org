@@ -2295,11 +2295,7 @@
         btn.style.boxShadow = 'var(--shadow-md)';
         btn.style.display = 'flex';
         
-        if (activeTab === 'agents') {
-            btn.onclick = () => openAddModal('agent', currentSelectedId);
-        } else {
-            btn.onclick = () => openAddTypeModal();
-        }
+        btn.onclick = () => openAddTypeModal();
         btn.style.display = 'flex';
     }
 
@@ -2463,7 +2459,7 @@
                     <td colspan="${colCount}" style="text-align:center;padding:60px 40px;color:var(--text-dim);">
                         <div style="margin-bottom:16px;font-size:15px;opacity:0.8;">\u7121\u8cc7\u6599</div>
                         ${isAgents ? `
-                        <button class="btn-add" onclick="openAddModal('agent', currentSelectedId)" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, var(--primary), var(--primary-dark));box-shadow:var(--shadow-md);border:none;">
+                        <button class="btn-add" onclick="openAddTypeModal()" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, var(--primary), var(--primary-dark));box-shadow:var(--shadow-md);border:none;">
                             <i class="fas fa-plus"></i> <span style="margin-left:10px;font-size:15px;">新增我的下級</span>
                         </button>
                         ` : ''}
