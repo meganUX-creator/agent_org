@@ -1397,11 +1397,11 @@
         </div>
         <div class="modal-body" style="padding: 30px;">
             <div style="display: flex; flex-direction: column; gap: 16px;">
-                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: var(--shadow-md); border: none;" onclick="selectAddType('agent')">
+                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 4px 14px rgba(168,85,247,0.3); border: none;" onclick="selectAddType('agent')">
                     <i class="fas fa-user-tie" style="margin-right:8px; font-size: 18px;"></i>
                     新增直属代理
                 </button>
-                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: var(--shadow-md); border: none;" onclick="selectAddType('member')" >
+                <button class="btn-add" style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 4px 14px rgba(168,85,247,0.3); border: none;" onclick="selectAddType('member')" >
                     <i class="fas fa-user" style="margin-right:8px; font-size: 18px;"></i>
                     新增直属会员
                 </button>
@@ -2291,8 +2291,8 @@
         if (!btn) return;
         
         btn.innerHTML = `<i class="fas fa-plus"></i> <span style="margin-left:8px;">新增我的下級</span>`;
-        btn.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
-        btn.style.boxShadow = 'var(--shadow-md)';
+        btn.style.background = 'linear-gradient(135deg, #a855f7, #7c3aed)';
+        btn.style.boxShadow = '0 4px 15px rgba(168,85,247,0.3)';
         btn.style.display = 'flex';
         
         btn.onclick = () => openAddTypeModal();
@@ -2459,7 +2459,7 @@
                     <td colspan="${colCount}" style="text-align:center;padding:60px 40px;color:var(--text-dim);">
                         <div style="margin-bottom:16px;font-size:15px;opacity:0.8;">\u7121\u8cc7\u6599</div>
                         ${isAgents ? `
-                        <button class="btn-add" onclick="openAddTypeModal()" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, var(--primary), var(--primary-dark));box-shadow:var(--shadow-md);border:none;">
+                        <button class="btn-add" onclick="openAddTypeModal()" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, #a855f7, #7c3aed);box-shadow:0 4px 15px rgba(168,85,247,0.3);border:none;">
                             <i class="fas fa-plus"></i> <span style="margin-left:10px;font-size:15px;">新增我的下級</span>
                         </button>
                         ` : ''}
