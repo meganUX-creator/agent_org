@@ -1224,7 +1224,7 @@
         <div class="system-time" id="sys-time">2026-03-25 16:25:10</div>
     </div>
     <div class="sidebar-nav">
-        <div class="nav-item"><i class="fas fa-home"></i><span>首页</span></div>
+        <div class="nav-item" onclick="window.location.href='index_1.html'"><i class="fas fa-home"></i><span>首页</span></div>
         <div class="nav-item active" onclick="window.location.href='agent_org.html'"><i class="fas fa-sitemap"></i><span>组织管理</span></div>
         <div class="nav-item" onclick="window.location.href='statistical_reports.html'"><i class="fas fa-chart-bar"></i><span>统计报表</span></div>
         <div class="nav-item"><i class="fas fa-user"></i><span>会员管理</span></div>
@@ -1289,8 +1289,8 @@
         </div>
         <button class="btn-search" id="btn-global-search">搜索</button>
         <div class="spacer" style="flex:1;"></div>
-        <button class="btn-add" onclick="openAddTypeModal()">
-            <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增</span>
+        <button class="btn-add" id="btn-open-add" onclick="openAddTypeModal()">
+            <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增我的下級</span>
         </button>
     </div>
 
@@ -1376,8 +1376,8 @@
 <!-- Context / Settings Menu -->
 <div class="ctx-menu" id="ctx-menu">
     <div class="ctx-item" id="ctx-edit-item" onclick="openEditModal()"><i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑账户</div>
-    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下级</div>
-    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增会员</div>
+    <div class="ctx-item" id="ctx-add-sub" onclick="openAddSubFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下级代理</div>
+    <div class="ctx-item" id="ctx-add-member" onclick="openAddMemberFromCtx()"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.6"></i>新增下级会员</div>
     <div class="ctx-item" onclick="openPwdModal()"><i class="fas fa-key" style="margin-right:8px;opacity:.6"></i>重设密码</div>
     <div class="ctx-item" onclick="clearPwdErrors()"><i class="fas fa-eraser" style="margin-right:8px;opacity:.6"></i>清除密码错误次数 <span style="color:#f87171;font-size:11px;">(目前5次)</span></div>
     <div class="ctx-item" onclick="openTransferModal()"><i class="fas fa-exchange-alt" style="margin-right:8px;opacity:.6"></i>转账</div>
@@ -2157,6 +2157,7 @@
         const wrap = document.createElement('div');
         wrap.className = 't-node';
         wrap.dataset.id = node.id;
+        wrap.dataset.level = depth;
 
         const header = document.createElement('div');
         header.className = 't-header' + (node.active ? ' active-node' : '');
@@ -2244,7 +2245,24 @@
         // Update Topbar Title
         const titleEl = document.querySelector('.topbar-title span');
         if (titleEl) titleEl.textContent = `组织架构 - ${id}`;
+
+        // Tab Visibility Logic: Only apply "hide agents tab" logic for Layer 5 (level 4)
+        const nodeWrap = document.querySelector(`[data-id="${id}"]`);
+        const depth = nodeWrap ? parseInt(nodeWrap.dataset.level || "0") : 0;
+        const subAgents = getSubAgentsFor(id);
+        const tabAgents = document.getElementById('tab-agents');
+        const tabMembers = document.getElementById('tab-members');
         
+        // Layer 5 is depth 4 (starting from root at 0). This is the deepest layer.
+        if (depth >= 4 && subAgents.length === 0) {
+            if (tabAgents) tabAgents.style.display = 'none';
+            activeTab = 'members';
+            if (tabAgents) tabAgents.classList.remove('active');
+            if (tabMembers) tabMembers.classList.add('active');
+        } else {
+            if (tabAgents) tabAgents.style.display = 'flex';
+        }
+
         // Update Mobile Tree Bar
         const mtCurrentId = document.getElementById('mt-current-id');
         const mtCurrentType = document.getElementById('mt-current-type');
@@ -2265,6 +2283,12 @@
 
     const treeRoot = document.getElementById('agent-tree');
     treeRoot.appendChild(buildTreeNode(TREE, 0));
+
+    function syncAddBtnVisibility() {
+        const btn = document.getElementById('btn-open-add');
+        if (!btn) return;
+        btn.style.display = 'flex';
+    }
 
     /* ───── RENDER TABLE ───── */
     let activeTab = 'agents';
@@ -2421,8 +2445,19 @@
                     <th class="right">操作</th>
                 </tr>
             </thead>
-            <tbody>${rowsHTML || `<tr><td colspan="${colCount}" style="text-align:center;padding:40px;color:var(--text-dim);">\u7121\u8cc7\u6599</td></tr>`}</tbody>
+            <tbody>${rowsHTML || `
+                <tr>
+                    <td colspan="${colCount}" style="text-align:center;padding:60px 40px;color:var(--text-dim);">
+                        <div style="margin-bottom:16px;font-size:15px;opacity:0.8;">\u7121\u8cc7\u6599</div>
+                        ${isAgents ? `
+                        <button class="btn-add" onclick="openAddModal('agent', currentSelectedId)" style="display:inline-flex;margin:0 auto;padding:12px 32px;border-radius:12px;background:linear-gradient(135deg, #38bdf8, #2563eb);box-shadow:0 4px 15px rgba(37,99,235,0.3);border:none;">
+                            <i class="fas fa-user-tie"></i> <span style="margin-left:10px;font-size:15px;">新增直属代理</span>
+                        </button>
+                        ` : ''}
+                    </td>
+                </tr>`}</tbody>
         </table>`;
+        syncAddBtnVisibility();
     }
 
     /* ───── TABS ───── */
@@ -2432,6 +2467,7 @@
             tab.classList.add('active');
             activeTab = tab.dataset.tab;
             renderTable();
+            syncAddBtnVisibility();
         });
     });
 
@@ -2499,6 +2535,7 @@
         
         // Render with new global data
         renderTable();
+        syncAddBtnVisibility();
     });
 
     document.getElementById('global-search-input').addEventListener('keydown', e => {
@@ -2525,13 +2562,13 @@
             if (logoutSep) logoutSep.style.display = 'block';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑会员`;
             if (addSubItem) addSubItem.style.display = 'none';
-            if (addMemberItem) addMemberItem.style.display = 'flex';
+            if (addMemberItem) addMemberItem.style.display = 'none';
         } else {
             if (logoutItem) logoutItem.style.display = 'none';
             if (logoutSep) logoutSep.style.display = 'none';
             if (editItem) editItem.innerHTML = `<i class="fas fa-edit" style="margin-right:8px;opacity:.6"></i>编辑账户`;
             if (addSubItem) addSubItem.style.display = 'flex';
-            if (addMemberItem) addMemberItem.style.display = 'none';
+            if (addMemberItem) addMemberItem.style.display = 'flex';
         }
 
         ctxMenu.classList.add('open');
