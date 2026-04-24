@@ -1482,6 +1482,23 @@
             <span>首页</span>
         </div>
     </div>
+
+    <!-- Global Search Row (Unified) -->
+    <div class="global-search-row" style="padding: 12px 28px; background: var(--bg-header); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; align-items: center;">
+        <select class="filter-select" id="global-type-filter" style="min-width: 80px; padding: 6px 12px; padding-right: 28px;">
+            <option value="agent">代理</option>
+            <option value="member">会员</option>
+        </select>
+        <div class="search-wrap" style="width: 300px; max-width: 100%;">
+            <i class="fas fa-search" style="left: 10px;"></i>
+            <input type="text" class="search-input" id="global-search-input" placeholder="全局搜索..." style="padding-left: 32px;">
+        </div>
+        <button class="btn-search" id="btn-global-search">搜索</button>
+        <div class="spacer" style="flex:1;"></div>
+        <button class="btn-add" id="btn-open-add" onclick="openAddTypeModal()" style="background: transparent; color: #38bdf8; border: 2px solid #38bdf8; box-shadow: none; display: flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.2s;">
+            <i class="fas fa-plus"></i> <span style="margin-left:4px;">新增我的下級</span>
+        </button>
+    </div>
     <div class="content-area" style="overflow-y: auto; flex-direction: column;">
 
     <style>
@@ -1956,4 +1973,43 @@
 </script>
 <script src="script.js"></script>
 </body>
-</html>
+</html>    <!-- ═══════════ ADD TYPE SELECT MODAL ═══════════ -->
+    <div class="modal-overlay" id="add-type-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+        <div class="modal-card" style="width: 340px; text-align: center; background: #111e33; border-radius: 12px; border: 1px solid #1e3050; overflow: hidden;">
+            <div class="modal-header" style="padding: 16px 20px; background: #0d1729; border-bottom: 1px solid #1e3050; display: flex; justify-content: space-between; align-items: center; color: #e2eaf5; font-weight: 600;">
+                <span>选择新增类型</span>
+                <button class="modal-close" onclick="closeAddTypeModal()" style="background:none; border:none; color:#7a9cc0; cursor:pointer;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 30px;">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <button class="btn-add"
+                        style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: transparent; color: #38bdf8; border: 2px solid #38bdf8; box-shadow: none; display: flex; align-items: center; border-radius: 8px; cursor: pointer; transition: all 0.2s;"
+                        onclick="selectAddType('agent')" onmouseover="this.style.background='rgba(56,189,248,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        <i class="fas fa-user-tie" style="margin-right:8px; font-size: 18px; color: #38bdf8;"></i>
+                        新增直屬代理
+                    </button>
+                    <button class="btn-add"
+                        style="width: 100%; padding: 16px; font-size: 16px; justify-content: center; background: transparent; color: #38bdf8; border: 2px solid #38bdf8; box-shadow: none; display: flex; align-items: center; border-radius: 8px; cursor: pointer; transition: all 0.2s;"
+                        onclick="selectAddType('member')" onmouseover="this.style.background='rgba(56,189,248,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        <i class="fas fa-user" style="margin-right:8px; font-size: 18px; color: #38bdf8;"></i>
+                        新增直屬會員
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openAddTypeModal() {
+            document.getElementById('add-type-modal').style.display = 'flex';
+        }
+        function closeAddTypeModal() {
+            document.getElementById('add-type-modal').style.display = 'none';
+        }
+        function selectAddType(type) {
+            closeAddTypeModal();
+            window.location.href = 'agent_org.html?action=add&type=' + type;
+        }
+    </script>
