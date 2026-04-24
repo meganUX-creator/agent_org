@@ -3144,13 +3144,8 @@
                 btn.onmouseover = () => btn.style.background = 'rgba(56,189,248,0.1)';
                 btn.onmouseout = () => btn.style.background = 'transparent';
 
-                if (activeTab === 'agents') {
-                    btn.innerHTML = `<i class="fas fa-user-plus"></i> <span style="margin-left:8px;">新增直属代理</span>`;
-                    btn.onclick = () => openAddModal('agent', currentSelectedId);
-                } else {
-                    btn.innerHTML = `<i class="fas fa-plus"></i> <span style="margin-left:8px;">新增直属会员</span>`;
-                    btn.onclick = () => openAddModal('member', currentSelectedId);
-                }
+                btn.innerHTML = `<i class="fas fa-plus"></i> <span style="margin-left:8px;">新增我的下級</span>`;
+                btn.onclick = () => openAddTypeModal();
                 btn.style.display = 'flex';
             }
 
